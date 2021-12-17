@@ -1,6 +1,5 @@
-﻿@page "/"
-@page "/pages/authentication/login"
-@layout LoginLayout
+﻿@page "/pages/authentication/login"
+@layout MainLayout
 @attribute [AllowAnonymous]
 
 <EditForm Model="@_tokenModel" OnValidSubmit="SubmitAsync">
