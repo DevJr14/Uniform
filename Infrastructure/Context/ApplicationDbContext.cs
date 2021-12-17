@@ -1,4 +1,5 @@
-﻿using Infrastructure.Models.Identity;
+﻿using Domain.Entities.Partners;
+using Infrastructure.Models.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,13 @@ namespace Infrastructure.Context
         {
 
         }
+
+        public DbSet<Partner> Partners { get; set; }
+        public DbSet<BankAccount> BankAccounts { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
+        public DbSet<Vehicle> Vehicles { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
