@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Pages\Content\**" />
+    <Content Remove="Pages\Content\**" />
+    <EmbeddedResource Remove="Pages\Content\**" />
+    <None Remove="Pages\Content\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="5.0.13" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.12" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.9" PrivateAssets="all" />
@@ -18,10 +25,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Clients.Infrastructure\Clients.Infrastructure.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Pages\Content\" />
   </ItemGroup>
 
 </Project>
