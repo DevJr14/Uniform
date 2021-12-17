@@ -113,6 +113,12 @@ namespace Api.Extensions
             return services;
         }
 
+        internal static IServiceCollection AddDatetimeService(this IServiceCollection services)
+        {
+            services.AddTransient<IDateTimeService, DatetimeService>();
+            return services;
+        }
+
         internal static IServiceCollection AddDatabase(
             this IServiceCollection services,
             IConfiguration configuration)
