@@ -28,6 +28,7 @@ namespace Api
                 builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
             }));
             services.AddCurrentUserService();
+            services.AddDatetimeService();
             services.AddDatabase(Configuration);
             services.AddIdentity();
             services.AddJwtAuthentication(services.GetApplicationSettings(Configuration));
@@ -37,6 +38,7 @@ namespace Api
             services.AddApplicationLayer();
             services.AddInfrastructureMappings();
             services.AddInfrastructure(Configuration);
+            services.AddRepositories();
             services.AddHangfire(x => x.UseSqlServerStorage(Configuration.GetConnectionString("DefaultConnection")));
             services.AddHangfireServer();
             services.AddApiVersioning(config =>
