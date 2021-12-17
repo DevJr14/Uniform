@@ -1,17 +1,25 @@
-﻿using Domain.Entities.Partners;
+﻿using Application.Identity.Interfaces;
+using Application.Interfaces.Services;
+using Domain.Entities.Partners;
 using Infrastructure.Models.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Threading;
+using Domain.Contracts;
 
 namespace Infrastructure.Context
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string, IdentityUserClaim<string>, IdentityUserRole<string>, IdentityUserLogin<string>, ApplicationRoleClaim, IdentityUserToken<string>>
     {
-        public ApplicationDbContext(DbContextOptions options) : base(options)
+        private readonly ICurrentUserService _currentUserService;
+        private readonly IDateTimeService _dateTimeService;
+        public ApplicationDbContext(DbContextOptions options, ICurrentUserService currentUserService, IDateTimeService dateTimeService) : base(options)
         {
-
+            _currentUserService = currentUserService;
+            _dateTimeService = dateTimeService;
         }
 
         public DbSet<Partner> Partners { get; set; }
@@ -20,7 +28,26 @@ namespace Infrastructure.Context
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
 
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new()) 
+        {
+            foreach (var entry in ChangeTracker.Entries<IAuditableEntity>().ToList())
+            {
+                switch (entry.State)
+                {
+                    case EntityState.Added:
+                        entry.Entity.CreatedOn = _dateTimeService.NowUtc;
+                        entry.Entity.CreatedBy = _currentUserService.UserId;
+                        break;
 
+                    case EntityState.Modified:
+                        entry.Entity.LastModifiedOn = _dateTimeService.NowUtc;
+                        entry.Entity.LastModifiedBy = _currentUserService.UserId;
+                        break;
+                }
+            }
+
+            return await base.SaveChangesAsync(cancellationToken);
+        }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             foreach (var property in builder.Model.GetEntityTypes()
