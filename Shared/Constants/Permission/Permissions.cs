@@ -26,14 +26,14 @@ namespace Shared.Permission
             public const string Search = "Permissions.Brands.Search";
         }
 
-        public static class Companies
+        public static class Partners
         {
-            public const string View = "Permissions.Companies.View";
-            public const string Create = "Permissions.Companies.Create";
-            public const string Edit = "Permissions.Companies.Edit";
-            public const string Delete = "Permissions.Companies.Delete";
-            public const string Export = "Permissions.Companies.Export";
-            public const string Search = "Permissions.Companies.Search";
+            public const string View = "Permissions.Partners.View";
+            public const string Create = "Permissions.Partners.Create";
+            public const string Edit = "Permissions.Partners.Edit";
+            public const string Delete = "Permissions.Partners.Delete";
+            public const string Export = "Permissions.Partners.Export";
+            public const string Search = "Permissions.Partners.Search";
         }
         public static class Sites
         {
