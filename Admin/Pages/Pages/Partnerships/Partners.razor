@@ -19,7 +19,7 @@ else
         <div class="justify-center mud-text-align-center">
             @if (_canCreatePartners)
             {
-                <MudFab Color="Color.Success" Icon="@Icons.Material.Filled.Add" Size="Size.Small" IconSize="Size.Medium" Class="mr-2" OnClick="(() => InvokeModal())" DisableElevation="true" aria-label="add" />
+                <MudFab Color="Color.Success" Icon="@Icons.Material.Filled.Add" Size="Size.Small" IconSize="Size.Medium" Class="mr-2" OnClick="(() => InvokeModal(Guid.Empty))" DisableElevation="true" aria-label="add" />
                 @if (_canExportPartners)
                 {
                     <MudFab Color="Color.Secondary" Icon="@Icons.Material.Filled.Download" Size="Size.Small" IconSize="Size.Medium" DisableElevation="true" aria-label="export" />
@@ -69,7 +69,7 @@ else
                 <MudMenu Label="Actions" Variant="Variant.Filled" DisableElevation="true" EndIcon="@Icons.Filled.KeyboardArrowDown" Size="Size.Small" IconColor="Color.Secondary" Direction="Direction.Left" OffsetX="true">
                     @if (_canEditPartners)
                         {
-                        <MudMenuItem>Edit</MudMenuItem>
+                        <MudMenuItem OnClick="(() => InvokeModal(context.Id))">Edit</MudMenuItem>
                         }
                     @if (_canDeletePartners)
                         {
