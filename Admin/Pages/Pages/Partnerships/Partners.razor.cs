@@ -78,7 +78,7 @@ namespace Admin.Pages.Pages.Partnerships
             return false;
         }
 
-        private async Task InvokeModal(Guid id = new Guid())
+        private async Task InvokeModal(Guid id)
         {
             var parameters = new DialogParameters();
             if (id != Guid.Empty)
