@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using Shared.Permission;
+using SharedR.Requests.Partners;
 using SharedR.Responses.Partners;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace Admin.Pages.Pages.Partnerships
 
         public List<PartnerResponse> _partners { get; set; } = new();
         public PartnerResponse _partner { get; set; } = new();
+        public PartnerRequest _partnerRequest { get; set; } = new();
 
         private ClaimsPrincipal _currentUser;
         private bool _canCreatePartners;
@@ -74,6 +76,37 @@ namespace Admin.Pages.Pages.Partnerships
                 return true;
             }
             return false;
+        }
+
+        private async Task InvokeModal(Guid id = new Guid())
+        {
+            var parameters = new DialogParameters();
+            if (id != Guid.Empty)
+            {
+                var partner = _partners.FirstOrDefault(c => c.Id == id);
+                if (partner != null)
+                {
+                    parameters.Add(nameof(AddEditPartnerModal.PartnerRequest), new PartnerRequest
+                    {
+                        Id = partner.Id,
+                        Name = partner.Name,
+                        Description = partner.Description,
+                        IsVerified = partner.IsVerified,
+                        Type = partner.Type,
+                        RegistrationDate = partner.RegistrationDate,
+                        RegistrationNo = partner.RegistrationNo,
+                        TaxNo = partner.TaxNo,
+                        UserId = partner.UserId
+                    });
+                }
+            }
+            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
+            var dialog = _dialogService.Show<AddEditPartnerModal>(id == Guid.Empty ? "Create" : "Edit", parameters, options);
+            var result = await dialog.Result;
+            if (!result.Cancelled)
+            {
+                await GetPartners();
+            }
         }
 
         private void Cancel()

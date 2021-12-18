@@ -14,85 +14,83 @@
 }
 else
 {
-    <MudTable Hover="true" Elevation="25" Items="_partners" Dense="true" Bordered="false" Striped="false"  Filter="new Func<PartnerResponse, bool>(Search)" @bind-partner="_partner">
-        <ToolBarContent>
-            <div class="justify-center mud-text-align-center">
-                @if (_canCreatePartners)
+<MudTable Hover="true" Elevation="25" Items="_partners" Dense="true" Bordered="false" Striped="false" Filter="new Func<PartnerResponse, bool>(Search)" @bind-partner="_partner">
+    <ToolBarContent>
+        <div class="justify-center mud-text-align-center">
+            @if (_canCreatePartners)
+            {
+                <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Primary" OnClick="(() => InvokeModal())" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">Create</MudButton>
+                <MudButton DisableElevation Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">Reload</MudButton>
+                @if (_canExportPartners)
                 {
-                    <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add" IconColor="Color.Surface">Create</MudButton>
-                    <MudButton DisableElevation Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">Reload</MudButton>
-                    @if (_canExportPartners)
-                    {
-                        <MudButton DisableElevation Variant="Variant.Filled" StartIcon="@Icons.Custom.FileFormats.FileExcel" IconColor="Color.Secondary" Color="Color.Surface" Style="margin-left: 5px;">Export</MudButton>
-                    }
+                    <MudButton DisableElevation Variant="Variant.Filled" StartIcon="@Icons.Custom.FileFormats.FileExcel" IconColor="Color.Secondary" Color="Color.Surface" Style="margin-left: 5px;">Export</MudButton>
+                }
+            }
+            else
+            {
+                <MudButton DisableElevation Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">Reload</MudButton>
+                @if (_canExportPartners)
+                {
+                    <MudButton DisableElevation Variant="Variant.Filled" StartIcon="@Icons.Custom.FileFormats.FileExcel" IconColor="Color.Secondary" Color="Color.Surface" Style="margin-left: 5px;">Export</MudButton>
+                }
+            }
+        </div>
+        <MudToolBarSpacer />
+        @if (_canSearchPartners)
+        {
+            <MudTextField @bind-Value="_searchString" Immediate="true" Placeholder="Search for clients" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0 mb-3"></MudTextField>
+        }
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh><MudTableSortLabel SortBy="new Func<PartnerResponse, object>(x => x.Name)">Name</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<PartnerResponse, object>(x => x.Type)">Type</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<PartnerResponse, object>(x => x.RegistrationNo)">Registration No</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<PartnerResponse, object>(x => x.RegistrationDate)">Registration Date</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<PartnerResponse, object>(x => x.TaxNo)">Tax No</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<PartnerResponse, object>(x => x.Description)">Description</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<PartnerResponse, object>(x => x.IsVerified)">Is Verified</MudTableSortLabel></MudTh>
+        <MudTh Style="text-align:right">Actions</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Name">
+            <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
+        </MudTd>
+        <MudTd DataLabel="Type">@context.Type</MudTd>
+        <MudTd DataLabel="RegistrationNo">
+            <MudHighlighter Text="@context.RegistrationNo" HighlightedText="@_searchString" />
+        </MudTd>
+        <MudTd DataLabel="RegistrationDate">@context.RegistrationDate</MudTd>
+        <MudTd DataLabel="TaxNo">@context.TaxNo</MudTd>
+        <MudTd DataLabel="Description">
+            <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
+        </MudTd>
+        <MudTd DataLabel="IsVerified"><MudCheckBox @bind-Checked="@context.IsVerified" Size="Size.Small" ReadOnly Color="Color.Secondary" /></MudTd>
+        <MudTd DataLabel="Actions" Style="text-align: right">
+            @if (_canEditPartners || _canDeletePartners)
+                {
+                <MudMenu Label="Actions" Variant="Variant.Filled" DisableElevation="true" EndIcon="@Icons.Filled.KeyboardArrowDown" Size="Size.Small" IconColor="Color.Secondary" Direction="Direction.Left" OffsetX="true">
+                    @if (_canEditPartners)
+                        {
+                        <MudMenuItem>Edit</MudMenuItem>
+                        }
+                    @if (_canDeletePartners)
+                        {
+                        <MudMenuItem>Delete</MudMenuItem>
+                        }
+                </MudMenu>
                 }
                 else
                 {
-                    <MudButton DisableElevation Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Refresh" IconColor="Color.Surface" Color="Color.Secondary">Reload</MudButton>
-                    @if (_canExportPartners)
-                    {
-                        <MudButton DisableElevation Variant="Variant.Filled" StartIcon="@Icons.Custom.FileFormats.FileExcel" IconColor="Color.Secondary" Color="Color.Surface" Style="margin-left: 5px;">Export</MudButton>
-                    }
+                <MudButton Variant="Variant.Filled"
+                           DisableElevation="true"
+                           StartIcon="@Icons.Material.Filled.DoNotTouch"
+                           IconColor="Color.Secondary"
+                           Size="Size.Small"
+                           Color="Color.Surface">
+                    No Allowed Actions
+                </MudButton>
                 }
-            </div>
-            <MudToolBarSpacer />
-            @if (_canSearchPartners)
-            {
-                <MudTextField @bind-Value="_searchString" Immediate="true" Placeholder="Search for clients" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0 mb-3"></MudTextField>
-            }
-        </ToolBarContent>
-        <HeaderContent>
-            <MudTh><MudTableSortLabel SortBy="new Func<PartnerResponse, object>(x => x.Name)">Name</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel SortBy="new Func<PartnerResponse, object>(x => x.Type)">Type</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel SortBy="new Func<PartnerResponse, object>(x => x.RegistrationNo)">Registration No</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel SortBy="new Func<PartnerResponse, object>(x => x.RegistrationDate)">Registration Date</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel SortBy="new Func<PartnerResponse, object>(x => x.UserId)">User Id</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel SortBy="new Func<PartnerResponse, object>(x => x.TaxNo)">Tax No</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel SortBy="new Func<PartnerResponse, object>(x => x.Description)">Description</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel SortBy="new Func<PartnerResponse, object>(x => x.IsVerified)">Is Verified</MudTableSortLabel></MudTh>
-            <MudTh Style="text-align:right">Actions</MudTh>
-        </HeaderContent>
-        <RowTemplate>
-            <MudTd DataLabel="Name">
-                <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
-            </MudTd>
-            <MudTd DataLabel="Type">@context.Type</MudTd>
-            <MudTd DataLabel="RegistrationNo">
-                <MudHighlighter Text="@context.RegistrationNo" HighlightedText="@_searchString" />
-            </MudTd>
-            <MudTd DataLabel="RegistrationDate">@context.RegistrationDate</MudTd>
-            <MudTd DataLabel="UserId">@context.UserId</MudTd>
-            <MudTd DataLabel="TaxNo">@context.TaxNo</MudTd>
-            <MudTd DataLabel="Description">
-                <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
-            </MudTd>
-            <MudTd DataLabel="IsVerified"><MudCheckBox @bind-Checked="@context.IsVerified" Size="Size.Small" ReadOnly Color="Color.Secondary" /></MudTd>
-            <MudTd DataLabel="Actions" Style="text-align: right">
-                @if (_canEditPartners || _canDeletePartners)
-                    {
-                    <MudMenu Label="Actions" Variant="Variant.Filled" DisableElevation="true" EndIcon="@Icons.Filled.KeyboardArrowDown" Size="Size.Small" IconColor="Color.Secondary" Direction="Direction.Left" OffsetX="true">
-                        @if (_canEditPartners)
-                            {
-                            <MudMenuItem>Edit</MudMenuItem>
-                            }
-                        @if (_canDeletePartners)
-                            {
-                            <MudMenuItem>Delete</MudMenuItem>
-                            }
-                    </MudMenu>
-                    }
-                    else
-                    {
-                    <MudButton Variant="Variant.Filled"
-                               DisableElevation="true"
-                               StartIcon="@Icons.Material.Filled.DoNotTouch"
-                               IconColor="Color.Secondary"
-                               Size="Size.Small"
-                               Color="Color.Surface">
-                        No Allowed Actions
-                    </MudButton>
-                    }
-            </MudTd>
-        </RowTemplate>
-    </MudTable>
+        </MudTd>
+    </RowTemplate>
+</MudTable>
 }
