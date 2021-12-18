@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Shared.Requests
+namespace SharedR.Requests
 {
     public enum UploadType : byte
     {

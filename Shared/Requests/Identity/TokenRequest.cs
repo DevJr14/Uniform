@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Shared.Requests.Identity
+namespace SharedR.Requests.Identity
 {
     public class TokenRequest
     {

@@ -1,6 +1,7 @@
 ﻿using Blazored.LocalStorage;
 using Clients.Infrastructure.Authentication;
 using Clients.Infrastructure.Managers;
+using Clients.Infrastructure.Managers.Partnerships.Partner;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -62,6 +63,7 @@ namespace Admin.Extensions
                 })
                 .AddHttpMessageHandler<AuthenticationHeaderHandler>();
             builder.Services.AddHttpClientInterceptor();
+            builder.Services.AddTransient<IPartnerManger, PartnerManager>();
             return builder;
         }
 

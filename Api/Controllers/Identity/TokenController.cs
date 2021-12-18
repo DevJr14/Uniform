@@ -1,6 +1,6 @@
 ﻿using Application.Identity.Queries.RoleClaim;
 using Microsoft.AspNetCore.Mvc;
-using Shared.Requests.Identity;
+using SharedR.Requests.Identity;
 using System.Threading.Tasks;
 
 namespace Api.Controllers.Identity

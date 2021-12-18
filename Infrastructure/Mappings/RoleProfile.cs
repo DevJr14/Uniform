@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Infrastructure.Models.Identity;
-using Shared.Responses.Identity;
+using SharedR.Responses.Identity;
 
 namespace Infrastructure.Mappings
 {

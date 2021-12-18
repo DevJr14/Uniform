@@ -3,7 +3,7 @@ using Application.Identity.Queries.RoleClaim;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Permission;
-using Shared.Requests.Identity;
+using SharedR.Requests.Identity;
 using System.Threading.Tasks;
 
 namespace Api.Controllers.Identity

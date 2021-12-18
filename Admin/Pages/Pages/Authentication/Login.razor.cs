@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor;
-using Shared.Requests.Identity;
+using SharedR.Requests.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;

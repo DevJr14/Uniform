@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Shared.Requests.Identity
+namespace SharedR.Requests.Identity
 {
     public class RoleClaimRequest
     {
