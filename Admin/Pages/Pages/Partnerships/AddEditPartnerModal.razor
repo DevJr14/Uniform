@@ -1,0 +1,79 @@
+﻿<EditForm Model="PartnerRequest" OnValidSubmit="SaveAsync">
+    <MudDialog>
+        <TitleContent>
+            @{
+                if (PartnerRequest.Id == Guid.Empty)
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.AddBusiness" Class="mr-3 mb-n1" />
+                        Add Partner
+                    </MudText>
+                }
+                else
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Update" Class="mr-3 mb-n1" />
+                        Update Partner
+                    </MudText>
+                }
+            }
+        </TitleContent>
+        <DialogContent>
+            <MudGrid>
+                <MudItem xs="12" sm="6" md="6">
+                    <MudTextField @bind-Value="@PartnerRequest.Name"
+                                  Label="Name"
+                                  Variant="Variant.Outlined"
+                                  Margin="Margin.Dense" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="6">
+                    <MudSelect T="string" Label="Type" @bind-Value="@PartnerRequest.Type" 
+                               Variant="Variant.Text" 
+                               OffsetY="true" 
+                               Margin="Margin.Dense" 
+                               Dense="true">
+                        <MudSelectItem Value="@("Seller")" />
+                        <MudSelectItem Value="@("Tailor")" />
+                        <MudSelectItem Value="@("Deliver")" />
+                    </MudSelect>
+                </MudItem>
+                <MudItem xs="12" sm="6" md="6">
+                    <MudTextField @bind-Value="@PartnerRequest.RegistrationNo"
+                                  Label="Registration No"
+                                  Variant="Variant.Outlined"
+                                  Margin="Margin.Dense" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="6">
+                    <MudDatePicker @ref="_picker" @bind-Date="@PartnerRequest.RegistrationDate"
+                                   Label="Registration Date"
+                                   Variant="Variant.Outlined"
+                                   Margin="Margin.Dense" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="6">
+                    <MudTextField @bind-Value="@PartnerRequest.TaxNo"
+                                  Label="Tax No"
+                                  Variant="Variant.Outlined"
+                                  Margin="Margin.Dense" />
+                </MudItem>
+                <MudItem xs="12" sm="12" md="12">
+                    <MudTextField Lines="2" @bind-Value="@PartnerRequest.Description"
+                                  Label="Description"
+                                  Variant="Variant.Outlined"
+                                  Margin="Margin.Dense" />
+                </MudItem>
+            </MudGrid>
+        </DialogContent>
+        <DialogActions>
+            <MudButton DisableElevation Variant="Variant.Filled" OnClick="Cancel">Cancel</MudButton>
+            <MudSpacer />
+            @if (PartnerRequest.Id != Guid.Empty)
+            {
+                <MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Secondary">Update</MudButton>
+            }
+            else
+            {
+                <MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Success">Save</MudButton>
+            }
+        </DialogActions>
+    </MudDialog>
+</EditForm>
