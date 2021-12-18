@@ -1,5 +1,5 @@
-﻿using Shared.Requests.Identity;
-using Shared.Responses.Identity;
+﻿using SharedR.Requests.Identity;
+using SharedR.Responses.Identity;
 using Shared.Wrapper;
 using System.Collections.Generic;
 using System.Threading.Tasks;

@@ -1,9 +1,10 @@
 ﻿using System;
 
-namespace Shared.Responses.Partners
+namespace SharedR.Responses.Partners
 {
     public class PartnerResponse
     {
+        public Guid Id { get; set; }
         public Guid UserId { get; set; }
         public string Name { get; set; }
         //To Do: Change from enum to string

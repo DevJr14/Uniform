@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Infrastructure.Models.Identity;
-using Shared.Requests.Identity;
-using Shared.Responses.Identity;
+using SharedR.Requests.Identity;
+using SharedR.Responses.Identity;
 
 namespace Infrastructure.Mappings
 {

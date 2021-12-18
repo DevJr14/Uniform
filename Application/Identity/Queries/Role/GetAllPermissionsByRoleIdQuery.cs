@@ -1,6 +1,6 @@
 ﻿using Application.Identity.Interfaces;
 using MediatR;
-using Shared.Responses.Identity;
+using SharedR.Responses.Identity;
 using Shared.Wrapper;
 using System;
 using System.Collections.Generic;

@@ -1,4 +1,4 @@
-﻿namespace Shared.Requests
+﻿namespace SharedR.Requests
 {
     public class MailRequest
     {

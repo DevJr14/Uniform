@@ -1,5 +1,5 @@
 ﻿using Application.Interfaces.Services;
-using Shared.Requests;
+using SharedR.Requests;
 using System;
 
 namespace Infrastructure.Services.Identity

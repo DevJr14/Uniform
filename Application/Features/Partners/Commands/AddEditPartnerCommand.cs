@@ -3,7 +3,7 @@ using Application.Interfaces.Repositories;
 using AutoMapper;
 using Domain.Entities.Partners;
 using MediatR;
-using Shared.Requests.Partners;
+using SharedR.Requests.Partners;
 using Shared.Wrapper;
 using System;
 using System.Threading;

@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using Shared.Requests.Partners;
+using SharedR.Requests.Partners;
 
 namespace Application.Validators.Features.Partners.Commands
 {

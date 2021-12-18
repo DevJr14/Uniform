@@ -2,7 +2,7 @@
 using AutoMapper;
 using Domain.Entities.Partners;
 using MediatR;
-using Shared.Responses.Partners;
+using SharedR.Responses.Partners;
 using Shared.Wrapper;
 using System;
 using System.Collections.Generic;
