@@ -40,7 +40,7 @@ namespace Api.Controllers.Partners
         }
 
         [Authorize(Policy = Permissions.Partners.Create)]
-        [HttpPost("partnership[controller]/add-edit")]
+        [HttpPost("partnership/[controller]/add-edit")]
         public async Task<IActionResult> AddOrEdit(PartnerRequest request)
         {
             return Ok(await _mediator.Send(new AddEditPartnerCommand() { PartnerRequest = request }));
