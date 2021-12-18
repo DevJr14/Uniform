@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Shared.Responses.Partners
+namespace SharedR.Responses.Partners
 {
     public class BankAccountResponse
     {

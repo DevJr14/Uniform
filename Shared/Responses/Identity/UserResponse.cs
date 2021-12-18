@@ -1,4 +1,4 @@
-﻿namespace Shared.Responses.Identity
+﻿namespace SharedR.Responses.Identity
 {
     public class UserResponse
     {

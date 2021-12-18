@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Infrastructure.Models.Identity;
 using Shared.Permission;
-using Shared.Responses.Identity;
+using SharedR.Responses.Identity;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;

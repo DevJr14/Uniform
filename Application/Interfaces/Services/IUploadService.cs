@@ -1,4 +1,4 @@
-﻿using Shared.Requests;
+﻿using SharedR.Requests;
 
 namespace Application.Interfaces.Services
 {

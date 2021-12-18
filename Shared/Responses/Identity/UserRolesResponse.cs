@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Shared.Responses.Identity
+namespace SharedR.Responses.Identity
 {
     public class UserRolesResponse
     {

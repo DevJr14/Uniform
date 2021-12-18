@@ -1,7 +1,7 @@
-﻿using Shared.Responses.Identity;
+﻿using SharedR.Responses.Identity;
 using System.Collections.Generic;
 
-namespace Shared.Requests.Identity
+namespace SharedR.Requests.Identity
 {
     public class UpdateUserRolesRequest
     {

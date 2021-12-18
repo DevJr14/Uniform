@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Domain.Entities.Partners;
-using Shared.Requests.Partners;
-using Shared.Responses.Partners;
+using SharedR.Requests.Partners;
+using SharedR.Responses.Partners;
 
 namespace Application.Mappings.Partners
 {

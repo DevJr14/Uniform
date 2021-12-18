@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Shared.Requests.Partners
+namespace SharedR.Requests.Partners
 {
     public class PartnerRequest
     {

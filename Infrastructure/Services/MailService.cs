@@ -4,7 +4,7 @@ using Microsoft.Extensions.Options;
 using MimeKit;
 using MailKit.Net.Smtp;
 using MailKit.Security;
-using Shared.Requests;
+using SharedR.Requests;
 using System;
 using System.IO;
 using System.Threading.Tasks;

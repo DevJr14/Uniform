@@ -11,8 +11,21 @@
     <MudNavLink Href="application/todo" Icon="@Icons.Custom.Uncategorized.AlertSuccess" Disabled="true">Todo</MudNavLink>
     <MudNavLink Href="application/users" Icon="@Icons.Material.Outlined.PeopleAlt" Disabled="true">Users</MudNavLink>
 
+    <MudText Typo="Typo.subtitle2" Color="Color.Inherit" Class="ml-4 my-3">Stakeholders</MudText>
+    <MudNavGroup Title="Partnerships" Icon="@Icons.Material.Outlined.AssignmentInd" HideExpandIcon="false">
+        <MudNavLink Href="pages/partnerships/partners" Icon="@Icons.Material.Outlined.InsertDriveFile">All Partners</MudNavLink>
+        <MudNavLink Href="pages/partnerships/verified-partners" Icon="@Icons.Material.Outlined.InsertDriveFile">Verified Partners</MudNavLink>
+        <MudNavLink Href="pages/partnerships/un-verified-partners" Icon="@Icons.Material.Outlined.InsertDriveFile">Un-Verified Partners</MudNavLink>
+    </MudNavGroup>
+
+    <MudText Typo="Typo.subtitle2" Color="Color.Inherit" Class="ml-4 my-3">Configurations</MudText>
+    <MudNavGroup Title="Settings" Icon="@Icons.Material.Outlined.Settings" HideExpandIcon="false">
+        <MudNavLink Href="pages/settings/categories" Icon="@Icons.Material.Outlined.Category">Categories</MudNavLink>
+        <MudNavLink Href="pages/settings/statuses" Icon="@Icons.Material.Outlined.Timeline">Statuses</MudNavLink>
+    </MudNavGroup>
+
     <MudText Typo="Typo.subtitle2" Color="Color.Inherit" Class="ml-4 my-3">Pages</MudText>
-    <MudNavGroup Title="Authentication" Icon="@Icons.Material.Outlined.AssignmentInd" HideExpandIcon="true">
+    <MudNavGroup Title="Authentication" Icon="@Icons.Material.Outlined.AssignmentInd" HideExpandIcon="false">
         <MudNavLink Href="pages/authentication/login" Icon="@Icons.Material.Outlined.InsertDriveFile">Login</MudNavLink>
         <MudNavLink Href="pages/authentication/register" Icon="@Icons.Material.Outlined.InsertDriveFile">Register</MudNavLink>
         <MudNavLink Href="pages/authentication/forgot-password" Icon="@Icons.Material.Outlined.InsertDriveFile">Forgot Password</MudNavLink>

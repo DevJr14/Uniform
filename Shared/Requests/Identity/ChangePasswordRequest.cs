@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Shared.Requests.Identity
+namespace SharedR.Requests.Identity
 {
     public class ChangePasswordRequest
     {

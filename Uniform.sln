@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31911.196
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Api\Api.csproj", "{F3F10DFA-5ADA-40E1-AED6-90D2D68FF907}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Shared\Shared.csproj", "{DA396E15-4AAF-432C-9ED0-F2C231A20AD6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharedR", "Shared\SharedR.csproj", "{DA396E15-4AAF-432C-9ED0-F2C231A20AD6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{078CC02D-0B36-4A7A-A0F1-326AF28C7B50}"
 EndProject
