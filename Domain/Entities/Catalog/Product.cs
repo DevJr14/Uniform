@@ -1,4 +1,5 @@
 ﻿using Domain.Contracts;
+using Domain.Entities.Partners;
 using System;
 using System.Collections.Generic;
 
@@ -15,7 +16,9 @@ namespace Domain.Entities.Catalog
         public DateTime? AvailableTo { get; set; }
         public bool IsNew { get; set; }
         public Guid BrandId { get; set; }
+        public Guid PartnerId { get; set; }
 
+        public Partner Partner { get; set; }
         public Brand Brand { get; set; }
         public List<ProductCategories> ProductCategories { get; set; }
         public List<ProductTags> ProductTags { get; set; }
