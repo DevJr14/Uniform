@@ -66,16 +66,27 @@ else
         <MudTd DataLabel="Actions" Style="text-align: right">
             @if (_canEditPartners || _canDeletePartners)
                 {
-                <MudMenu Label="Actions" Variant="Variant.Filled" DisableElevation="true" EndIcon="@Icons.Filled.KeyboardArrowDown" Size="Size.Small" IconColor="Color.Secondary" Direction="Direction.Left" OffsetX="true">
-                    @if (_canEditPartners)
-                        {
+            <MudMenu Label="Actions" Variant="Variant.Filled" DisableElevation="true" EndIcon="@Icons.Filled.KeyboardArrowDown" Size="Size.Small" IconColor="Color.Secondary" Direction="Direction.Left" OffsetX="true">
+                @if (_canEditPartners)
+                    {
                         <MudMenuItem OnClick="(() => InvokeModal(context.Id))">Edit</MudMenuItem>
-                        }
-                    @if (_canDeletePartners)
+                    }
+                @if (_canDeletePartners)
+                    {
+                        <MudMenuItem OnClick="(() => Delete(context.Id))">Delete</MudMenuItem>
+                    }
+                @if(_canActivatePartners)
+                    {
+                        if (context.IsVerified)
                         {
-                        <MudMenuItem>Delete</MudMenuItem>
+                            <MudMenuItem OnClick="(() => Activator(context.Id))">De-Activate</MudMenuItem>
                         }
-                </MudMenu>
+                        else
+                        {
+                            <MudMenuItem OnClick="(() => Activator(context.Id))">Activate</MudMenuItem>
+                        }
+                    }
+            </MudMenu>
                 }
                 else
                 {
