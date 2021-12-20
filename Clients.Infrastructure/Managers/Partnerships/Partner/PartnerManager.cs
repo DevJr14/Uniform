@@ -20,9 +20,15 @@ namespace Clients.Infrastructure.Managers.Partnerships.Partner
             _httpClient = httpClient;
         }
 
+        public async Task<IResult<Guid>> ActivateDeActiate(Guid partnerId)
+        {
+            var response = await _httpClient.GetAsync($"{PartnerEndpoints.Activate}{partnerId}");
+            return await response.ToResult<Guid>();
+        }
+
         public async Task<IResult<Guid>> Delete(Guid partnerId)
         {
-            var response = await _httpClient.DeleteAsync($"{PartnerEndpoints.Delete}/{partnerId}");
+            var response = await _httpClient.DeleteAsync($"{PartnerEndpoints.Delete}{partnerId}");
             return await response.ToResult<Guid>();
         }
 

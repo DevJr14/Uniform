@@ -53,5 +53,12 @@ namespace Api.Controllers.Partners
             return Ok(await _mediator.Send(new DeletePartnerCommand() { Id = id }));
         }
 
+        [Authorize(Policy = Permissions.Partners.Activate)]
+        [HttpGet("partnership/[controller]/activate-de-activate")]
+        public async Task<IActionResult> ActivateDeActivate(Guid id)
+        {
+            return Ok(await _mediator.Send(new ActivateDeActivatePartnerCommand() { Id = id }));
+        }
+
     }
 }

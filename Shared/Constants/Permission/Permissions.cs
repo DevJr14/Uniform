@@ -34,6 +34,7 @@ namespace Shared.Permission
             public const string Delete = "Permissions.Partners.Delete";
             public const string Export = "Permissions.Partners.Export";
             public const string Search = "Permissions.Partners.Search";
+            public const string Activate = "Permissions.Partners.Activate";
         }
         public static class Sites
         {

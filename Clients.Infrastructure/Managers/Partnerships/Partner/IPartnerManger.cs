@@ -15,5 +15,6 @@ namespace Clients.Infrastructure.Managers.Partnerships.Partner
         Task<IResult<List<PartnerResponse>>> GetForUser(Guid userId);
         Task<IResult<Guid>> Save(PartnerRequest partnerRequest);
         Task<IResult<Guid>> Delete(Guid partnerId);
+        Task<IResult<Guid>> ActivateDeActiate(Guid partnerId);
     }
 }

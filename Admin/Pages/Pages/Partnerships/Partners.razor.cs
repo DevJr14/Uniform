@@ -27,6 +27,7 @@ namespace Admin.Pages.Pages.Partnerships
         private bool _canDeletePartners;
         private bool _canExportPartners;
         private bool _canSearchPartners;
+        private bool _canActivatePartners;
         private bool _loaded;
 
         private string _searchString = "";
@@ -39,6 +40,7 @@ namespace Admin.Pages.Pages.Partnerships
             _canDeletePartners = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Partners.Delete)).Succeeded;
             _canExportPartners = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Partners.Export)).Succeeded;
             _canSearchPartners = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Partners.Search)).Succeeded;
+            _canActivatePartners = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Partners.Activate)).Succeeded;
 
             await GetPartners();
             _loaded = true;
@@ -106,6 +108,70 @@ namespace Admin.Pages.Pages.Partnerships
             if (!result.Cancelled)
             {
                 await GetPartners();
+            }
+        }
+
+        private async Task Activator(Guid id)
+        {
+            var parameters = new DialogParameters();
+            var partner = _partners.FirstOrDefault(p => p.Id == id);
+            if (partner.IsVerified)
+            {
+                parameters.Add(nameof(ActivateDeActivateModal.ContentText), "Are you sure you want to de-activate partner?");
+                parameters.Add(nameof(ActivateDeActivateModal.Title), "De-Activate");
+            }
+            else
+            {
+                parameters.Add(nameof(ActivateDeActivateModal.ContentText), "Are you sure you want to activate partner?");
+                parameters.Add(nameof(ActivateDeActivateModal.Title), "Activate");
+            }
+            
+            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
+            var dialog = _dialogService.Show<ActivateDeActivateModal>("", parameters, options);
+            var result = await dialog.Result;
+            if (!result.Cancelled)
+            {
+                var response = await PartnerManger.ActivateDeActiate(id);
+                if (response.Succeeded)
+                {
+                    _snackBar.Add(response.Messages[0], Severity.Success);
+                    await GetPartners();
+                }
+                else
+                {
+                    foreach (var message in response.Messages)
+                    {
+                        _snackBar.Add(message, Severity.Error);
+                    }
+                }
+            }
+        }
+
+        private async Task Delete(Guid id)
+        {
+            string deleteContent = "Are you sure you want to delete partner?";
+            var parameters = new DialogParameters
+            {
+                {nameof(Shared.Dialogs.DeleteConfirmation.ContentText), string.Format(deleteContent, id)}
+            };
+            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
+            var dialog = _dialogService.Show<Shared.Dialogs.DeleteConfirmation>("Delete", parameters, options);
+            var result = await dialog.Result;
+            if (!result.Cancelled)
+            {
+                var response = await PartnerManger.Delete(id);
+                if (response.Succeeded)
+                {
+                    _snackBar.Add(response.Messages[0], Severity.Success);
+                    await GetPartners();
+                }
+                else
+                {
+                    foreach (var message in response.Messages)
+                    {
+                        _snackBar.Add(message, Severity.Error);
+                    }
+                }
             }
         }
 
