@@ -1,16 +1,15 @@
-﻿using Domain.Contracts;
-using Domain.Entities.Partners;
+﻿using SharedR.Responses.Partners;
 using System;
 
-namespace Domain.Entities.Catalog
+namespace SharedR.Responses.Catalogs
 {
-    public class Category : AuditableEntity<Guid>
+    public class CategoryResponse
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public bool IsActive { get; set; }
         public Guid PartnerId { get; set; }
-
-        public Partner Partner { get; set; }
+        public PartnerResponse Partner { get; set; } = new();
     }
 }

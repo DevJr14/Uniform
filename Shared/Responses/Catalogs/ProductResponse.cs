@@ -1,12 +1,12 @@
-﻿using Domain.Contracts;
-using Domain.Entities.Partners;
+﻿using SharedR.Responses.Partners;
 using System;
 using System.Collections.Generic;
 
-namespace Domain.Entities.Catalog
+namespace SharedR.Responses.Catalogs
 {
-    public class Product : AuditableEntity<Guid>
+    public class ProductResponse
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string Barcode { get; set; }
@@ -17,12 +17,10 @@ namespace Domain.Entities.Catalog
         public bool IsNew { get; set; }
         public Guid BrandId { get; set; }
         public Guid PartnerId { get; set; }
-
-        public Partner Partner { get; set; }
-        public Brand Brand { get; set; }
-        public List<ProductCategories> ProductCategories { get; set; }
-        public List<ProductTags> ProductTags { get; set; }
-        public List<ProductReviews> ProductReviews { get; set; }
-
+        public PartnerResponse Partner { get; set; } = new();
+        public BrandResponse Brand { get; set; } = new();
+        public List<ProductCategoriesResponse> ProductCategories { get; set; } = new();
+        public List<ProductTagsResponse> ProductTags { get; set; } = new();
+        public List<ProductReviewsResponse> ProductReviews { get; set; } = new();
     }
 }
