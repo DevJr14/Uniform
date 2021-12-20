@@ -9,6 +9,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Threading;
 using Domain.Contracts;
+using Domain.Entities.Catalog;
+using Domain.Entities.Promotions;
 
 namespace Infrastructure.Context
 {
@@ -22,12 +24,23 @@ namespace Infrastructure.Context
             _dateTimeService = dateTimeService;
         }
 
+        #region Db Models
         public DbSet<Partner> Partners { get; set; }
         public DbSet<BankAccount> BankAccounts { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
+        public DbSet<Brand> Brands { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<ProductCategories> ProductCategories { get; set; }
+        public DbSet<ProductPrice> ProductPrices { get; set; }
+        public DbSet<ProductReviews> ProductReviews { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<ProductTags> ProductTags { get; set; }
+        public DbSet<Discount> Discounts { get; set; }
 
+        #endregion
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new()) 
         {
             foreach (var entry in ChangeTracker.Entries<IAuditableEntity>().ToList())
@@ -95,6 +108,51 @@ namespace Infrastructure.Context
             builder.Entity<IdentityUserToken<string>>(entity =>
             {
                 entity.ToTable("UserTokens", "Identity");
+            });
+
+            builder.Entity<Brand>(entity =>
+            {
+                entity.ToTable(name: "Brands", "catalog");
+            });
+
+            builder.Entity<Product>(entity =>
+            {
+                entity.ToTable(name: "Products", "catalog");
+            });
+
+            builder.Entity<Category>(entity =>
+            {
+                entity.ToTable(name: "Categories", "catalog");
+            });
+
+            builder.Entity<ProductCategories>(entity =>
+            {
+                entity.ToTable(name: "ProductCategories", "catalog");
+            });
+
+            builder.Entity<ProductPrice>(entity =>
+            {
+                entity.ToTable(name: "ProductPrices", "catalog");
+            });
+
+            builder.Entity<ProductReviews>(entity =>
+            {
+                entity.ToTable(name: "ProductReviews", "catalog");
+            });
+
+            builder.Entity<ProductTags>(entity =>
+            {
+                entity.ToTable(name: "ProductTags", "catalog");
+            });
+
+            builder.Entity<Tag>(entity =>
+            {
+                entity.ToTable(name: "Tags", "catalog");
+            });
+
+            builder.Entity<Discount>(entity =>
+            {
+                entity.ToTable(name: "Discounts", "promotion");
             });
         }
     }
