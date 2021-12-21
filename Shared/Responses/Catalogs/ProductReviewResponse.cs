@@ -2,7 +2,7 @@
 
 namespace SharedR.Responses.Catalogs
 {
-    public class ProductReviewsResponse
+    public class ProductReviewResponse
     {
         public Guid Id { get; set; }
         public Guid ProductId { get; set; }
