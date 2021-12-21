@@ -12,11 +12,11 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Catalogs.Brands.Queries
 {
-    public class GetAllBrandsQueries : IRequest<Result<List<BrandResponse>>>
+    public class GetAllBrandsQuery : IRequest<Result<List<BrandResponse>>>
     {
     }
 
-    internal class GetAllBrandsQueryHandler : IRequestHandler<GetAllBrandsQueries, Result<List<BrandResponse>>>
+    internal class GetAllBrandsQueryHandler : IRequestHandler<GetAllBrandsQuery, Result<List<BrandResponse>>>
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork<Guid> _unitOfWork;
@@ -27,12 +27,14 @@ namespace Application.Features.Catalogs.Brands.Queries
             _mapper = mapper;
         }
 
-        public async Task<Result<List<BrandResponse>>> Handle(GetAllBrandsQueries query, CancellationToken cancellationToken)
+        public async Task<Result<List<BrandResponse>>> Handle(GetAllBrandsQuery query, CancellationToken cancellationToken)
         {
-            var brands = await _unitOfWork.RepositoryFor<Brand>().GetAllAsync();
-            if (brands.Where(a => a.DeletedBy == null).Count() > 0)
+            var brands = _unitOfWork.RepositoryFor<Brand>().Entities
+                .Where(b => b.DeletedBy == null)
+                .ToList();
+            if (brands.Count > 0)
             {
-                var mappedBrands = _mapper.Map<List<BrandResponse>>(brands.Where(a => a.DeletedBy == null));
+                var mappedBrands = _mapper.Map<List<BrandResponse>>(brands);
                 return await Result<List<BrandResponse>>.SuccessAsync(mappedBrands);
             }
             return await Result<List<BrandResponse>>.FailAsync("No Records Found.");
