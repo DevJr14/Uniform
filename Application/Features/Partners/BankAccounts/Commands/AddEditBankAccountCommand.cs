@@ -1,10 +1,12 @@
-﻿using Application.Interfaces.Repositories;
+﻿using Application.Identity.Interfaces;
+using Application.Interfaces.Repositories;
 using AutoMapper;
 using Domain.Entities.Partners;
 using MediatR;
 using Shared.Wrapper;
 using SharedR.Requests.Partners;
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -19,20 +21,29 @@ namespace Application.Features.Partners.BankAccounts.Commands
     {
         private readonly IUnitOfWork<Guid> _unitOfWork;
         private readonly IMapper _mapper;
-        public AddEditBankAccountCommandHandler(IUnitOfWork<Guid> unitOfWork, IMapper mapper)
+        private readonly ICurrentUserService _currentUser;
+        public AddEditBankAccountCommandHandler(IUnitOfWork<Guid> unitOfWork, IMapper mapper, ICurrentUserService currentUser)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _currentUser = currentUser;
         }
 
         public async Task<Result<Guid>> Handle(AddEditBankAccountCommand command, CancellationToken cancellationToken)
         {
             if (command.BankAccountRequest.Id == Guid.Empty)
             {
-                var address = _mapper.Map<BankAccount>(command.BankAccountRequest);
-                await _unitOfWork.RepositoryFor<BankAccount>().AddAsync(address);
-                await _unitOfWork.Commit(cancellationToken);
-                return await Result<Guid>.SuccessAsync(address.Id, "Bank Account Saved Successfully.");
+                var partner = _unitOfWork.RepositoryFor<Partner>().Entities
+                    .Where(p => p.UserId == new Guid(_currentUser.UserId) && p.IsVerified)
+                    .FirstOrDefault();
+                if (partner != null)
+                {
+                    var address = _mapper.Map<BankAccount>(command.BankAccountRequest);
+                    await _unitOfWork.RepositoryFor<BankAccount>().AddAsync(address);
+                    await _unitOfWork.Commit(cancellationToken);
+                    return await Result<Guid>.SuccessAsync(address.Id, "Bank Account Saved Successfully.");
+                }
+                return await Result<Guid>.FailAsync("Partner Profile Not Verified.");
             }
             else
             {
