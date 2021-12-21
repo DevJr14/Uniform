@@ -18,8 +18,4 @@
     <ProjectReference Include="..\Shared\SharedR.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\Catalogs\ProductCategories\Queries\" />
-  </ItemGroup>
-
 </Project>
