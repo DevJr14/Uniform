@@ -21,6 +21,6 @@ namespace SharedR.Responses.Catalogs
         public BrandResponse Brand { get; set; } = new();
         public List<ProductCategoriesResponse> ProductCategories { get; set; } = new();
         public List<ProductTagsResponse> ProductTags { get; set; } = new();
-        public List<ProductReviewsResponse> ProductReviews { get; set; } = new();
+        public List<ProductReviewResponse> ProductReviews { get; set; } = new();
     }
 }
