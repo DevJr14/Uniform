@@ -36,24 +36,24 @@ namespace Shared.Permission
             public const string Search = "Permissions.Partners.Search";
             public const string Activate = "Permissions.Partners.Activate";
         }
-        public static class Sites
+        public static class ProductCategories
         {
-            public const string View = "Permissions.Sites.View";
-            public const string Create = "Permissions.Sites.Create";
-            public const string Edit = "Permissions.Sites.Edit";
-            public const string Delete = "Permissions.Sites.Delete";
-            public const string Export = "Permissions.Sites.Export";
-            public const string Search = "Permissions.Sites.Search";
+            public const string View = "Permissions.ProductCategories.View";
+            public const string Create = "Permissions.ProductCategories.Create";
+            public const string Edit = "Permissions.ProductCategories.Edit";
+            public const string Delete = "Permissions.ProductCategories.Delete";
+            public const string Export = "Permissions.ProductCategories.Export";
+            public const string Search = "Permissions.ProductCategories.Search";
         }
 
-        public static class Employees
+        public static class ProductPrices
         {
-            public const string View = "Permissions.Employees.View";
-            public const string Create = "Permissions.Employees.Create";
-            public const string Edit = "Permissions.Employees.Edit";
-            public const string Delete = "Permissions.Employees.Delete";
-            public const string Export = "Permissions.Employees.Export";
-            public const string Search = "Permissions.Employees.Search";
+            public const string View = "Permissions.ProductPrices.View";
+            public const string Create = "Permissions.ProductPrices.Create";
+            public const string Edit = "Permissions.ProductPrices.Edit";
+            public const string Delete = "Permissions.ProductPrices.Delete";
+            public const string Export = "Permissions.ProductPrices.Export";
+            public const string Search = "Permissions.ProductPrices.Search";
         }
 
         public static class Priorities
@@ -86,34 +86,34 @@ namespace Shared.Permission
             public const string Search = "Permissions.Categories.Search";
         }
 
-        public static class Clients
+        public static class ProductReviews
         {
-            public const string View = "Permissions.Clients.View";
-            public const string Create = "Permissions.Clients.Create";
-            public const string Edit = "Permissions.Clients.Edit";
-            public const string Delete = "Permissions.Clients.Delete";
-            public const string Export = "Permissions.Clients.Export";
-            public const string Search = "Permissions.Clients.Search";
+            public const string View = "Permissions.ProductReviews.View";
+            public const string Create = "Permissions.ProductReviews.Create";
+            public const string Edit = "Permissions.ProductReviews.Edit";
+            public const string Delete = "Permissions.ProductReviews.Delete";
+            public const string Export = "Permissions.ProductReviews.Export";
+            public const string Search = "Permissions.ProductReviews.Search";
         }
 
-        public static class Projects
+        public static class ProductTags
         {
-            public const string View = "Permissions.Projects.View";
-            public const string Create = "Permissions.Projects.Create";
-            public const string Edit = "Permissions.Projects.Edit";
-            public const string Delete = "Permissions.Projects.Delete";
-            public const string Export = "Permissions.Projects.Export";
-            public const string Search = "Permissions.Projects.Search";
+            public const string View = "Permissions.ProductTags.View";
+            public const string Create = "Permissions.ProductTags.Create";
+            public const string Edit = "Permissions.ProductTags.Edit";
+            public const string Delete = "Permissions.ProductTags.Delete";
+            public const string Export = "Permissions.ProductTags.Export";
+            public const string Search = "Permissions.ProductTags.Search";
         }
 
-        public static class Tasks
+        public static class Tags
         {
-            public const string View = "Permissions.Tasks.View";
-            public const string Create = "Permissions.Tasks.Create";
-            public const string Edit = "Permissions.Tasks.Edit";
-            public const string Delete = "Permissions.Tasks.Delete";
-            public const string Export = "Permissions.Tasks.Export";
-            public const string Search = "Permissions.Tasks.Search";
+            public const string View = "Permissions.Tags.View";
+            public const string Create = "Permissions.Tags.Create";
+            public const string Edit = "Permissions.Tags.Edit";
+            public const string Delete = "Permissions.Tags.Delete";
+            public const string Export = "Permissions.Tags.Export";
+            public const string Search = "Permissions.Tags.Search";
         }
 
         public static class Teams

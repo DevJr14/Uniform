@@ -1,14 +1,13 @@
 ﻿using System;
 
-namespace SharedR.Responses.Catalogs
+namespace SharedR.Requests.Catalogs
 {
-    public class ProductReviewsResponse
+    public class ProductReviewRequest
     {
         public Guid Id { get; set; }
         public Guid ProductId { get; set; }
         public int Rating { get; set; }
         public string ReviewText { get; set; }
         public string ReplyText { get; set; }
-        public ProductResponse Product { get; set; } = new();
     }
 }

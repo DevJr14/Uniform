@@ -25,12 +25,10 @@ namespace Application.Features.Catalogs.ProductPrices.Commands
     {
         private readonly IUnitOfWork<Guid> _unitOfWork;
         private readonly IMapper _mapper;
-        private readonly ICurrentUserService _currentUser;
-        public AddEditProductPriceCommandHandler(IUnitOfWork<Guid> unitOfWork, IMapper mapper, ICurrentUserService currentUser)
+        public AddEditProductPriceCommandHandler(IUnitOfWork<Guid> unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
-            _currentUser = currentUser;
         }
 
         public async Task<Result<Guid>> Handle(AddEditProductPriceCommand command, CancellationToken cancellationToken)
