@@ -3,7 +3,7 @@ using System;
 
 namespace Domain.Entities.Catalog
 {
-    public class ProductReviews : AuditableEntity<Guid>
+    public class ProductReview : AuditableEntity<Guid>
     {
         public Guid ProductId { get; set; }
         public int Rating { get; set; }
