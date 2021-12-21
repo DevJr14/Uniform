@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Catalogs\Products\" />
+    <Folder Include="Features\Catalogs\ProductCategories\Queries\" />
   </ItemGroup>
 
 </Project>

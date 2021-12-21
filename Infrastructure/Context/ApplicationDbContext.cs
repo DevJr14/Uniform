@@ -33,11 +33,11 @@ namespace Infrastructure.Context
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<ProductCategories> ProductCategories { get; set; }
+        public DbSet<ProductCategory> ProductCategories { get; set; }
         public DbSet<ProductPrice> ProductPrices { get; set; }
-        public DbSet<ProductReviews> ProductReviews { get; set; }
+        public DbSet<ProductReview> ProductReviews { get; set; }
         public DbSet<Tag> Tags { get; set; }
-        public DbSet<ProductTags> ProductTags { get; set; }
+        public DbSet<ProductTag> ProductTags { get; set; }
         public DbSet<Discount> Discounts { get; set; }
 
         #endregion
@@ -125,7 +125,7 @@ namespace Infrastructure.Context
                 entity.ToTable(name: "Categories", "catalog");
             });
 
-            builder.Entity<ProductCategories>(entity =>
+            builder.Entity<ProductCategory>(entity =>
             {
                 entity.ToTable(name: "ProductCategories", "catalog");
             });
@@ -135,12 +135,12 @@ namespace Infrastructure.Context
                 entity.ToTable(name: "ProductPrices", "catalog");
             });
 
-            builder.Entity<ProductReviews>(entity =>
+            builder.Entity<ProductReview>(entity =>
             {
                 entity.ToTable(name: "ProductReviews", "catalog");
             });
 
-            builder.Entity<ProductTags>(entity =>
+            builder.Entity<ProductTag>(entity =>
             {
                 entity.ToTable(name: "ProductTags", "catalog");
             });

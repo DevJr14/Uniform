@@ -20,9 +20,9 @@ namespace Domain.Entities.Catalog
 
         public Partner Partner { get; set; }
         public Brand Brand { get; set; }
-        public List<ProductCategories> ProductCategories { get; set; }
-        public List<ProductTags> ProductTags { get; set; }
-        public List<ProductReviews> ProductReviews { get; set; }
+        public List<ProductCategory> ProductCategories { get; set; }
+        public List<ProductTag> ProductTags { get; set; }
+        public List<ProductReview> ProductReviews { get; set; }
 
     }
 }

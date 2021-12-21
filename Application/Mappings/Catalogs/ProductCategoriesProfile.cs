@@ -9,8 +9,8 @@ namespace Application.Mappings.Catalogs
     {
         public ProductCategoriesProfile()
         {
-            CreateMap<ProductCategoriesRequest, ProductCategories>();
-            CreateMap<ProductCategories, ProductCategoriesResponse>();
+            CreateMap<ProductCategoriesRequest, ProductCategory>();
+            CreateMap<ProductCategory, ProductCategoriesResponse>();
         }
     }
 }

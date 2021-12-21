@@ -12,43 +12,43 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Application.Features.Catalogs.Brands.Queries
+namespace Application.Features.Catalogs.Products.Queries
 {
-    public class GetAllBrandsForPartnerQuery : IRequest<Result<List<BrandResponse>>>
+    public class GetAllProductsForPartnerQuery : IRequest<Result<List<ProductResponse>>>
     {
     }
 
-    internal class GetAllBrandsForPartnerQueryHandler : IRequestHandler<GetAllBrandsForPartnerQuery, Result<List<BrandResponse>>>
+    internal class GetAllProductsForPartnerQueryHandler : IRequestHandler<GetAllProductsForPartnerQuery, Result<List<ProductResponse>>>
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork<Guid> _unitOfWork;
         private readonly ICurrentUserService _currentUser;
 
-        public GetAllBrandsForPartnerQueryHandler(IUnitOfWork<Guid> unitOfWork, IMapper mapper, ICurrentUserService currentUser)
+        public GetAllProductsForPartnerQueryHandler(IUnitOfWork<Guid> unitOfWork, IMapper mapper, ICurrentUserService currentUser)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _currentUser = currentUser;
         }
 
-        public async Task<Result<List<BrandResponse>>> Handle(GetAllBrandsForPartnerQuery query, CancellationToken cancellationToken)
+        public async Task<Result<List<ProductResponse>>> Handle(GetAllProductsForPartnerQuery query, CancellationToken cancellationToken)
         {
             var partner = _unitOfWork.RepositoryFor<Partner>().Entities
                           .Where(p => p.UserId == new Guid(_currentUser.UserId) && p.IsVerified)
                           .FirstOrDefault();
             if (partner != null)
             {
-                var brands = _unitOfWork.RepositoryFor<Brand>().Entities
+                var brands = _unitOfWork.RepositoryFor<Product>().Entities
                     .Where(a => a.PartnerId == partner.Id && a.DeletedBy == null)
                     .ToList();
                 if (brands.Count > 0)
                 {
-                    var mappedBrands = _mapper.Map<List<BrandResponse>>(brands);
-                    return await Result<List<BrandResponse>>.SuccessAsync(mappedBrands);
+                    var mappedBrands = _mapper.Map<List<ProductResponse>>(brands);
+                    return await Result<List<ProductResponse>>.SuccessAsync(mappedBrands);
                 }
-                return await Result<List<BrandResponse>>.FailAsync("No Records Found.");
+                return await Result<List<ProductResponse>>.FailAsync("No Records Found.");
             }
-            return await Result<List<BrandResponse>>.FailAsync("Partner Profile Not Verified.");
+            return await Result<List<ProductResponse>>.FailAsync("Partner Profile Not Verified.");
         }
     }
 }

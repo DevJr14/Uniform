@@ -10,7 +10,9 @@ namespace Domain.Entities.Catalog
         public decimal OldPrice { get; set; }
         public decimal Cost { get; set; }
         public Guid? DiscountId { get; set; }
+        public Guid ProductId { get; set; }
 
         public Discount Discount { get; set; }
+        public Product Product { get; set; }
     }
 }

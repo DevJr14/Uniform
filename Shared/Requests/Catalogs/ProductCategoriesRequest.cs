@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace SharedR.Requests.Catalogs
 {
@@ -6,6 +7,6 @@ namespace SharedR.Requests.Catalogs
     {
         public Guid Id { get; set; }
         public Guid ProductId { get; set; }
-        public Guid CategoryId { get; set; }
+        public List<Guid> CategoryIds { get; set; }
     }
 }

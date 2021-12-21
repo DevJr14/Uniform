@@ -9,8 +9,8 @@ namespace Application.Mappings.Catalogs
     {
         public ProductTagsProfile()
         {
-            CreateMap<ProductTagsRequest, ProductTags>();
-            CreateMap<ProductTags, ProductTagsResponse>();
+            CreateMap<ProductTagsRequest, ProductTag>();
+            CreateMap<ProductTag, ProductTagsResponse>();
         }
     }
 }
