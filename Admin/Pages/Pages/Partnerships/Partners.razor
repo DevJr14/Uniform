@@ -40,6 +40,7 @@ else
         }
     </ToolBarContent>
     <HeaderContent>
+        <MudTh Style="text-align:left">Manage</MudTh>
         <MudTh><MudTableSortLabel SortBy="new Func<PartnerResponse, object>(x => x.Name)">Name</MudTableSortLabel></MudTh>
         <MudTh><MudTableSortLabel SortBy="new Func<PartnerResponse, object>(x => x.Type)">Type</MudTableSortLabel></MudTh>
         <MudTh><MudTableSortLabel SortBy="new Func<PartnerResponse, object>(x => x.RegistrationNo)">Registration No</MudTableSortLabel></MudTh>
@@ -50,6 +51,11 @@ else
         <MudTh Style="text-align:right">Actions</MudTh>
     </HeaderContent>
     <RowTemplate>
+        <MudTd DataLabel="Manage">
+            <MudTooltip Text="View Details" Delay="0" Placement="Placement.Top">
+                <MudButton Color="Color.Secondary" Variant="Variant.Text" EndIcon="@Icons.Material.Filled.Settings" OnClick="@(()=>GoToDetails(context.Id))" Size="Size.Small" Class="ma-2"> Manage Partner</MudButton>
+            </MudTooltip>
+        </MudTd>
         <MudTd DataLabel="Name">
             <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
         </MudTd>
@@ -66,27 +72,27 @@ else
         <MudTd DataLabel="Actions" Style="text-align: right">
             @if (_canEditPartners || _canDeletePartners)
                 {
-            <MudMenu Label="Actions" Variant="Variant.Filled" DisableElevation="true" EndIcon="@Icons.Filled.KeyboardArrowDown" Size="Size.Small" IconColor="Color.Secondary" Direction="Direction.Left" OffsetX="true">
-                @if (_canEditPartners)
-                    {
+                <MudMenu Label="Actions" Variant="Variant.Filled" DisableElevation="true" EndIcon="@Icons.Filled.KeyboardArrowDown" Size="Size.Small" IconColor="Color.Secondary" Direction="Direction.Left" OffsetX="true">
+                    @if (_canEditPartners)
+                        {
                         <MudMenuItem OnClick="(() => InvokeModal(context.Id))">Edit</MudMenuItem>
-                    }
-                @if (_canDeletePartners)
-                    {
+                        }
+                    @if (_canDeletePartners)
+                        {
                         <MudMenuItem OnClick="(() => Delete(context.Id))">Delete</MudMenuItem>
-                    }
-                @if(_canActivatePartners)
-                    {
-                        if (context.IsVerified)
+                        }
+                    @if (_canActivatePartners)
                         {
+                            if (context.IsVerified)
+                            {
                             <MudMenuItem OnClick="(() => Activator(context.Id))">De-Activate</MudMenuItem>
-                        }
-                        else
-                        {
+                            }
+                            else
+                            {
                             <MudMenuItem OnClick="(() => Activator(context.Id))">Activate</MudMenuItem>
+                            }
                         }
-                    }
-            </MudMenu>
+                </MudMenu>
                 }
                 else
                 {
