@@ -39,6 +39,7 @@ namespace Application.Features.Partners.Vehicles.Commands
                 if (partner != null)
                 {
                     var vehicle = _mapper.Map<Vehicle>(command.VehicleRequest);
+                    vehicle.PartnerId = partner.Id;
                     await _unitOfWork.RepositoryFor<Vehicle>().AddAsync(vehicle);
                     await _unitOfWork.Commit(cancellationToken);
                     return await Result<Guid>.SuccessAsync(vehicle.Id, "Vehicle Saved Successfully.");

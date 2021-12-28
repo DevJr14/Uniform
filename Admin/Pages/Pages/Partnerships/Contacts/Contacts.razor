@@ -8,20 +8,20 @@
 <MudCard Elevation="25">
     <MudCardHeader>
         <CardHeaderContent>
-            <MudText Typo="Typo.h6">My Addresses</MudText>
+            <MudText Typo="Typo.h6">My Contacts</MudText>
         </CardHeaderContent>
         <CardHeaderActions>
             <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Default" />
         </CardHeaderActions>
     </MudCardHeader>
-    <MudCardContent>        
+    <MudCardContent>
         @if (!_loaded)
         {
             <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
         }
         else
         {
-            <MudTable Hover="true" Elevation="25" Items="AddressResponses" Dense="true" Bordered="false" Striped="false" Filter="new Func<AddressResponse, bool>(Search)" @bind-partner="Address">
+            <MudTable Hover="true" Elevation="25" Items="ContactResponses" Dense="true" Bordered="false" Striped="false" Filter="new Func<ContactResponse, bool>(Search)" @bind-contact="Contact">
                 <ToolBarContent>
                     <div class="justify-center mud-text-align-center">
                         @if (_canCreatePartners)
@@ -47,28 +47,22 @@
                     }
                 </ToolBarContent>
                 <HeaderContent>
-                    <MudTh><MudTableSortLabel SortBy="new Func<AddressResponse, object>(x => x.StreetName)">Street Name</MudTableSortLabel></MudTh>
-                    <MudTh><MudTableSortLabel SortBy="new Func<AddressResponse, object>(x => x.Suburb)">Suburb</MudTableSortLabel></MudTh>
-                    <MudTh><MudTableSortLabel SortBy="new Func<AddressResponse, object>(x => x.City)">City</MudTableSortLabel></MudTh>
-                    <MudTh><MudTableSortLabel SortBy="new Func<AddressResponse, object>(x => x.Province)">Province</MudTableSortLabel></MudTh>
-                    <MudTh><MudTableSortLabel SortBy="new Func<AddressResponse, object>(x => x.Country)">Country</MudTableSortLabel></MudTh>
-                    <MudTh><MudTableSortLabel SortBy="new Func<AddressResponse, object>(x => x.PostalCode)">Postal Code</MudTableSortLabel></MudTh>
-                    <MudTh><MudTableSortLabel SortBy="new Func<AddressResponse, object>(x => x.IsActive)">Is Active</MudTableSortLabel></MudTh>
+                    <MudTh><MudTableSortLabel SortBy="new Func<ContactResponse, object>(x => x.Title)">Title</MudTableSortLabel></MudTh>
+                    <MudTh><MudTableSortLabel SortBy="new Func<ContactResponse, object>(x => x.CellphoneNo)">Cellphone No</MudTableSortLabel></MudTh>
+                    <MudTh><MudTableSortLabel SortBy="new Func<ContactResponse, object>(x => x.TelephoneNo)">Telephone No</MudTableSortLabel></MudTh>
+                    <MudTh><MudTableSortLabel SortBy="new Func<ContactResponse, object>(x => x.Email)">Email</MudTableSortLabel></MudTh>
+                    <MudTh><MudTableSortLabel SortBy="new Func<ContactResponse, object>(x => x.IsActive)">Is Active</MudTableSortLabel></MudTh>
                     <MudTh Style="text-align:right">Actions</MudTh>
                 </HeaderContent>
                 <RowTemplate>
-                    <MudTd DataLabel="StreetName">
-                        <MudHighlighter Text="@context.StreetName" HighlightedText="@_searchString" />
+                    <MudTd DataLabel="Title">
+                        <MudHighlighter Text="@context.Title" HighlightedText="@_searchString" />
                     </MudTd>
-                    <MudTd DataLabel="Suburb">@context.Suburb</MudTd>
-                    <MudTd DataLabel="City">
-                        <MudHighlighter Text="@context.City" HighlightedText="@_searchString" />
+                    <MudTd DataLabel="CellphoneNo">@context.CellphoneNo</MudTd>
+                    <MudTd DataLabel="TelephoneNo">
+                        <MudHighlighter Text="@context.TelephoneNo" HighlightedText="@_searchString" />
                     </MudTd>
-                    <MudTd DataLabel="Province">@context.Province</MudTd>
-                    <MudTd DataLabel="Country">@context.Country</MudTd>
-                    <MudTd DataLabel="PostalCode">
-                        <MudHighlighter Text="@context.PostalCode" HighlightedText="@_searchString" />
-                    </MudTd>
+                    <MudTd DataLabel="Email">@context.Email</MudTd>
                     <MudTd DataLabel="IsVerified"><MudCheckBox @bind-Checked="@context.IsActive" Size="Size.Small" ReadOnly Color="Color.Secondary" /></MudTd>
                     <MudTd DataLabel="Actions" Style="text-align: right">
                         @if (_canEditPartners || _canDeletePartners)

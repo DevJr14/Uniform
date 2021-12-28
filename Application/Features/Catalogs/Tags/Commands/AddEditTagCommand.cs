@@ -43,6 +43,7 @@ namespace Application.Features.Catalogs.Tags.Commands
                 if (partner != null)
                 {
                     var tag = _mapper.Map<Tag>(command.TagRequest);
+                    tag.PartnerId = partner.Id;
                     await _unitOfWork.RepositoryFor<Tag>().AddAsync(tag);
                     await _unitOfWork.Commit(cancellationToken);
                     return await Result<Guid>.SuccessAsync(tag.Id, "Tag Saved Successfully.");

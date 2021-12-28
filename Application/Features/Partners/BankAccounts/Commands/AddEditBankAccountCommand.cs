@@ -38,10 +38,11 @@ namespace Application.Features.Partners.BankAccounts.Commands
                     .FirstOrDefault();
                 if (partner != null)
                 {
-                    var address = _mapper.Map<BankAccount>(command.BankAccountRequest);
-                    await _unitOfWork.RepositoryFor<BankAccount>().AddAsync(address);
+                    var bank = _mapper.Map<BankAccount>(command.BankAccountRequest);
+                    bank.PartnerId = partner.Id;
+                    await _unitOfWork.RepositoryFor<BankAccount>().AddAsync(bank);
                     await _unitOfWork.Commit(cancellationToken);
-                    return await Result<Guid>.SuccessAsync(address.Id, "Bank Account Saved Successfully.");
+                    return await Result<Guid>.SuccessAsync(bank.Id, "Bank Account Saved Successfully.");
                 }
                 return await Result<Guid>.FailAsync("Partner Profile Not Verified.");
             }

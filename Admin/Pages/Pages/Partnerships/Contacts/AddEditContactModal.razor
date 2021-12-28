@@ -1,0 +1,66 @@
+﻿<EditForm Model="ContactRequest" OnValidSubmit="SaveAsync">
+    <MudDialog>
+        <TitleContent>
+            @{
+                if (ContactRequest.Id == Guid.Empty)
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.ContactPhone" Class="mr-3 mb-n1" />
+                        Add Contact
+                    </MudText>
+                }
+                else
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Update" Class="mr-3 mb-n1" />
+                        Update Contact
+                    </MudText>
+                }
+            }
+        </TitleContent>
+        <DialogContent>
+            <MudGrid>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudTextField @bind-Value="@ContactRequest.Title"
+                                  Label="Title"
+                                  Variant="Variant.Outlined"
+                                  Margin="Margin.Dense" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudTextField @bind-Value="@ContactRequest.CellphoneNo"
+                                  Label="Cellphone No"
+                                  Variant="Variant.Outlined"
+                                  Margin="Margin.Dense" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudTextField @bind-Value="@ContactRequest.TelephoneNo"
+                                  Label="Telephone No"
+                                  Variant="Variant.Outlined"
+                                  Margin="Margin.Dense" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="6">
+                    <MudTextField @bind-Value="@ContactRequest.Email"
+                                  Label="Email Address"
+                                  Variant="Variant.Outlined"
+                                  Margin="Margin.Dense" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="2">
+                    <MudCheckBox @bind-Checked="@ContactRequest.IsActive"
+                                 Label="Active" Dense="false" Color="Color.Primary" />
+                </MudItem>
+            </MudGrid>
+        </DialogContent>
+        <DialogActions>
+            <MudButton DisableElevation Variant="Variant.Filled" OnClick="Cancel">Cancel</MudButton>
+            <MudSpacer />
+            @if (ContactRequest.Id != Guid.Empty)
+            {
+                <MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Secondary">Update</MudButton>
+            }
+            else
+            {
+                <MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Success">Save</MudButton>
+            }
+        </DialogActions>
+    </MudDialog>
+</EditForm>

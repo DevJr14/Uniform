@@ -4,6 +4,7 @@ namespace SharedR.Responses.Partners
 {
     public class BankAccountResponse
     {
+        public Guid Id { get; set; }
         public Guid PartnerId { get; set; }
         public string BankName { get; set; }
         public string AccountType { get; set; }
