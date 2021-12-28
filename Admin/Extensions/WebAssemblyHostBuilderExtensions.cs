@@ -1,6 +1,8 @@
 ﻿using Blazored.LocalStorage;
 using Clients.Infrastructure.Authentication;
 using Clients.Infrastructure.Managers;
+using Clients.Infrastructure.Managers.Catalogs.Categories;
+using Clients.Infrastructure.Managers.Catalogs.Tags;
 using Clients.Infrastructure.Managers.Partnerships.Address;
 using Clients.Infrastructure.Managers.Partnerships.BankAccount;
 using Clients.Infrastructure.Managers.Partnerships.Contact;
@@ -70,6 +72,8 @@ namespace Admin.Extensions
             builder.Services.AddTransient<IAddressManager, AddressManager>();
             builder.Services.AddTransient<IContactManager, ContactManager>();
             builder.Services.AddTransient<IBankAccountManager, BankAccountManager>();
+            builder.Services.AddTransient<ITagManager, TagManager>();
+            builder.Services.AddTransient<ICategoryManager, CategoryManager>();
             return builder;
         }
 
