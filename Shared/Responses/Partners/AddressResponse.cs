@@ -4,6 +4,7 @@ namespace SharedR.Responses.Partners
 {
     public class AddressResponse
     {
+        public Guid Id { get; set; }
         public Guid PartnerId { get; set; }
         public string StreetName { get; set; }
         public string Suburb { get; set; }
