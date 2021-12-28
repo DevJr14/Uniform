@@ -30,7 +30,7 @@ namespace Application.Features.Partners.BankAccounts.Queries
 
         public async Task<Result<List<BankAccountResponse>>> Handle(GetAllBankAccountsForPartnerQuery query, CancellationToken cancellationToken)
         {
-            var bankAccounts = _unitOfWork.RepositoryFor<Address>().Entities
+            var bankAccounts = _unitOfWork.RepositoryFor<BankAccount>().Entities
                 .Where(ba => ba.PartnerId == query.PartnerId && ba.DeletedBy == null)
                 .ToList();
             if (bankAccounts.Count > 0)
