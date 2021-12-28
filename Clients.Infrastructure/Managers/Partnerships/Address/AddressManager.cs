@@ -32,7 +32,7 @@ namespace Clients.Infrastructure.Managers.Partnerships.Address
         }
 
         public async Task<IResult<AddressResponse>> GetById(Guid addressId)
-{
+        {
             var response = await _httpClient.GetAsync(AddressEndpoints.GetById(addressId));
             return await response.ToResult<AddressResponse>();
         }
