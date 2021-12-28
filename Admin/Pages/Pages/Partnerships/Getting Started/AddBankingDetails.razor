@@ -1,0 +1,64 @@
+﻿@page "/partnership/add-banking-details/{PartnerId:guid}"
+
+<Header OnClose="Cancel" Title="Partnership" Description="Add Address Details" />
+<MudTimeline TimelinePosition="TimelinePosition.Start" TimelineOrientation="TimelineOrientation.Horizontal">
+    <MudTimelineItem Color="Color.Success" Size="Size.Small">
+    </MudTimelineItem>
+    <MudTimelineItem Color="Color.Success" Size="Size.Small">
+    </MudTimelineItem>
+    <MudTimelineItem Color="Color.Success" Size="Size.Small">
+    </MudTimelineItem>
+    <MudTimelineItem Color="Color.Primary" Size="Size.Small">
+    </MudTimelineItem>
+    <MudTimelineItem Size="Size.Small">
+    </MudTimelineItem>
+</MudTimeline>
+<EditForm Model="BankAccountRequest" OnValidSubmit="SaveAsync">
+    <MudCard Elevation="25">
+        <MudCardContent>
+            <MudGrid>
+                <MudItem xs="12" sm="6" md="6">
+                    <MudTextField @bind-Value="@BankAccountRequest.BankName"
+                                  Label="Bank Name"
+                                  Variant="Variant.Outlined"
+                                  Margin="Margin.Dense" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="6">
+                    <MudTextField @bind-Value="@BankAccountRequest.AccountType"
+                                  Label="Account Type"
+                                  Variant="Variant.Outlined"
+                                  Margin="Margin.Dense" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="6">
+                    <MudTextField @bind-Value="@BankAccountRequest.AccountNo"
+                                  Label="Account No"
+                                  Variant="Variant.Outlined"
+                                  Margin="Margin.Dense" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="6">
+                    <MudDatePicker @ref="_picker" @bind-Date="@_expiryDate"
+                                  Label="Expiry Date"
+                                  Variant="Variant.Outlined"
+                                  Margin="Margin.Dense" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="6">
+                    <MudNumericField @bind-Value="@BankAccountRequest.CVV"
+                                  Label="CVV"
+                                  Variant="Variant.Outlined"
+                                  Margin="Margin.Dense" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="2">
+                    <MudCheckBox @bind-Checked="@BankAccountRequest.IsActive"
+                                 Label="Active" Dense="false" Color="Color.Primary" />
+                </MudItem>
+            </MudGrid>
+        </MudCardContent>
+        <MudCardActions Class="mx-2">
+            <MudButton DisableElevation Variant="Variant.Filled" OnClick="Cancel">Cancel</MudButton>
+            <MudSpacer />
+            @*<MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Class="mr-2" Color="Color.Secondary">Save</MudButton>*@
+            <MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Success">Save And Continue</MudButton>
+        </MudCardActions>
+    </MudCard>
+
+</EditForm>

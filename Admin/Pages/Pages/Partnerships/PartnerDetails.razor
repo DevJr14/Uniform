@@ -1,0 +1,70 @@
+﻿@page "/partnership/partner-details/{PartnerId:guid}"
+
+<Header OnClose="Cancel" Title="Partnership" Description="Manage Partnership Details" />
+
+<MudCard Elevation="25">
+    <MudCardContent>
+        <MudGrid>
+            <MudItem xs="12" sm="6" md="4">
+                <MudTextField @bind-Value="@PartnerResponse.Name"
+                              Label="Name"
+                                ReadOnly="true"
+                              Variant="Variant.Outlined"
+                              Margin="Margin.Dense" />
+            </MudItem>
+            <MudItem xs="12" sm="6" md="4">
+                <MudSelect T="string" Label="Type" @bind-Value="@PartnerResponse.Type"
+                           Variant="Variant.Outlined"
+                           OffsetY="true"
+                                ReadOnly="true"
+                           Margin="Margin.Dense"
+                           Dense="true">
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="12" sm="6" md="4">
+                <MudTextField @bind-Value="@PartnerResponse.RegistrationNo"
+                              Label="Registration No"
+                                ReadOnly="true"
+                              Variant="Variant.Outlined"
+                              Margin="Margin.Dense" />
+            </MudItem>
+            <MudItem xs="12" sm="6" md="4">
+                <MudDatePicker @ref="_picker" @bind-Date="@PartnerResponse.RegistrationDate"
+                               Label="Registration Date"
+                                ReadOnly="true"
+                               Variant="Variant.Outlined"
+                               Margin="Margin.Dense" />
+            </MudItem>
+            <MudItem xs="12" sm="6" md="4">
+                <MudTextField @bind-Value="@PartnerResponse.TaxNo"
+                              Label="Tax No"
+                                ReadOnly="true"
+                              Variant="Variant.Outlined"
+                              Margin="Margin.Dense" />
+            </MudItem>
+            <MudItem xs="12" sm="12" md="12">
+                <MudTextField Lines="2" @bind-Value="@PartnerResponse.Description"
+                              Label="Description"
+                                ReadOnly="true"
+                              Variant="Variant.Outlined"
+                              Margin="Margin.Dense" />
+            </MudItem>
+        </MudGrid>
+    </MudCardContent>
+</MudCard>
+
+<MudTabs Elevation="2" Rounded="false" Centered="false" Class="my-2">
+    <MudTabPanel Icon="@Icons.Material.Filled.LocationCity" Text="Addresses" BadgeData='"!"' BadgeColor="Color.Error">
+        <Addresses PartnerId="PartnerId"/>
+    </MudTabPanel>
+    <MudTabPanel Icon="@Icons.Material.Filled.Contacts" Text="Contacts" BadgeData="1" BadgeColor="Color.Success" >
+
+    </MudTabPanel>
+    <MudTabPanel Icon="@Icons.Material.Filled.Payments" Text="Bank Accounts" BadgeData="0" >
+
+    </MudTabPanel>
+    <MudTabPanel Icon="@Icons.Material.Filled.CarRental" Text="Vehicles" BadgeDot="true" BadgeColor="Color.Error" >
+
+    </MudTabPanel>
+</MudTabs>
+

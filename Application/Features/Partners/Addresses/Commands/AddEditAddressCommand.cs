@@ -39,6 +39,7 @@ namespace Application.Features.Partners.Addresses.Commands
                 if (partner != null)
                 {
                     var address = _mapper.Map<Address>(command.AddressRequest);
+                    address.PartnerId = partner.Id;
                     await _unitOfWork.RepositoryFor<Address>().AddAsync(address);
                     await _unitOfWork.Commit(cancellationToken);
                     return await Result<Guid>.SuccessAsync(address.Id, "Address Saved Successfully.");

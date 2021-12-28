@@ -1,0 +1,58 @@
+﻿@page "/partnership/add-contact/{PartnerId:guid}"
+
+<Header OnClose="Cancel" Title="Partnership" Description="Add Contact Details" />
+<MudTimeline TimelinePosition="TimelinePosition.Start" TimelineOrientation="TimelineOrientation.Horizontal">
+    <MudTimelineItem Color="Color.Success" Size="Size.Small">
+    </MudTimelineItem>
+    <MudTimelineItem Color="Color.Success" Size="Size.Small">
+    </MudTimelineItem>
+    <MudTimelineItem Color="Color.Primary" Size="Size.Small">
+    </MudTimelineItem>
+    <MudTimelineItem Size="Size.Small">
+    </MudTimelineItem>
+    <MudTimelineItem Size="Size.Small">
+    </MudTimelineItem>
+</MudTimeline>
+<EditForm Model="ContactRequest" OnValidSubmit="SaveAsync">
+    <MudCard Elevation="25">
+        <MudCardContent>
+            <MudGrid>
+                <MudItem xs="12" sm="6" md="6">
+                    <MudTextField @bind-Value="@ContactRequest.Title"
+                                  Label="Title"
+                                  Variant="Variant.Outlined"
+                                  Margin="Margin.Dense" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="6">
+                    <MudTextField @bind-Value="@ContactRequest.Email"
+                                  Label="Email"
+                                  Variant="Variant.Outlined"
+                                  Margin="Margin.Dense" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudTextField @bind-Value="@ContactRequest.CellphoneNo"
+                                  Label="Cellphone No"
+                                  Variant="Variant.Outlined"
+                                  Margin="Margin.Dense" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudTextField @bind-Value="@ContactRequest.TelephoneNo"
+                                  Label="Telephone No"
+                                  Variant="Variant.Outlined"
+                                  Margin="Margin.Dense" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudCheckBox @bind-Checked="@ContactRequest.IsActive"
+                                 Label="Active" Dense="false" Color="Color.Primary" />
+                </MudItem>
+            </MudGrid>
+        </MudCardContent>
+        <MudCardActions Class="mx-2">
+            <MudButton DisableElevation Variant="Variant.Filled" OnClick="Cancel">Cancel</MudButton>
+            <MudSpacer />
+            @*<MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Class="mr-2" Color="Color.Secondary">Save</MudButton>*@
+            <MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Success">Save And Continue</MudButton>
+        </MudCardActions>
+    </MudCard>
+
+</EditForm>
