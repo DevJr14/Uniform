@@ -1,16 +1,16 @@
 ﻿<PersonCard Style="background-color: var(--mud-palette-drawer-background);color: var(--mud-palette-drawer-text);"/>
-@*<MudDivider Class="mb-4" />*@
+<MudDivider Class="mb-0" />
 <MudNavMenu>
     <MudNavLink Href="/getting-started" Class="my-1" Icon="@Icons.Material.Outlined.AddBusiness" Match="NavLinkMatch.All">Getting Started</MudNavLink>
     <MudText Typo="Typo.subtitle2" Color="Color.Inherit" Class="ml-4 my-3">Personal</MudText>
     <MudNavLink Href="/personal/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Dashboard">Dashboard</MudNavLink>
     <MudNavLink Href="/personal/account" Icon="@Icons.Material.Outlined.Person">Account</MudNavLink>
 
-    <MudText Typo="Typo.subtitle2" Color="Color.Inherit" Class="ml-4 my-3">App Examples</MudText>
+    @*<MudText Typo="Typo.subtitle2" Color="Color.Inherit" Class="ml-4 my-3">App Examples</MudText>
     <MudNavLink Href="application/email" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Outlined.Email">Email</MudNavLink>
     <MudNavLink Href="application/chat" Icon="@Icons.Material.Outlined.Forum">Chat</MudNavLink>
     <MudNavLink Href="application/todo" Icon="@Icons.Custom.Uncategorized.AlertSuccess" Disabled="true">Todo</MudNavLink>
-    <MudNavLink Href="application/users" Icon="@Icons.Material.Outlined.PeopleAlt" Disabled="true">Users</MudNavLink>
+    <MudNavLink Href="application/users" Icon="@Icons.Material.Outlined.PeopleAlt" Disabled="true">Users</MudNavLink>*@
 
     <MudText Typo="Typo.subtitle2" Color="Color.Inherit" Class="ml-4 my-3">Stakeholders</MudText>
     <MudNavGroup Title="Partnerships" Icon="@Icons.Material.Outlined.AssignmentInd" HideExpandIcon="false">
@@ -18,14 +18,18 @@
         <MudNavLink Href="pages/partnerships/verified-partners" Icon="@Icons.Material.Outlined.InsertDriveFile">Verified Partners</MudNavLink>
         <MudNavLink Href="pages/partnerships/un-verified-partners" Icon="@Icons.Material.Outlined.InsertDriveFile">Un-Verified Partners</MudNavLink>
     </MudNavGroup>
+    <MudNavGroup Title="Catalogs" Icon="@Icons.Material.Outlined.Storefront" HideExpandIcon="false">
+        <MudNavLink Href="pages/catalogs/categories" Icon="@Icons.Material.Outlined.Category">Categories</MudNavLink>
+        <MudNavLink Href="pages/catalogs/tags" Icon="@Icons.Material.Outlined.Tag">Tags</MudNavLink>
+    </MudNavGroup>
 
-    <MudText Typo="Typo.subtitle2" Color="Color.Inherit" Class="ml-4 my-3">Configurations</MudText>
+    @*<MudText Typo="Typo.subtitle2" Color="Color.Inherit" Class="ml-4 my-3">Configurations</MudText>
     <MudNavGroup Title="Settings" Icon="@Icons.Material.Outlined.Settings" HideExpandIcon="false">
         <MudNavLink Href="pages/settings/categories" Icon="@Icons.Material.Outlined.Category">Categories</MudNavLink>
         <MudNavLink Href="pages/settings/statuses" Icon="@Icons.Material.Outlined.Timeline">Statuses</MudNavLink>
-    </MudNavGroup>
+    </MudNavGroup>*@
 
-    <MudText Typo="Typo.subtitle2" Color="Color.Inherit" Class="ml-4 my-3">Pages</MudText>
+    @*<MudText Typo="Typo.subtitle2" Color="Color.Inherit" Class="ml-4 my-3">Pages</MudText>
     <MudNavGroup Title="Authentication" Icon="@Icons.Material.Outlined.AssignmentInd" HideExpandIcon="false">
         <MudNavLink Href="pages/authentication/login" Icon="@Icons.Material.Outlined.InsertDriveFile">Login</MudNavLink>
         <MudNavLink Href="pages/authentication/register" Icon="@Icons.Material.Outlined.InsertDriveFile">Register</MudNavLink>
@@ -37,7 +41,7 @@
     </MudNavGroup>
     <MudNavGroup Title="Utility" Icon="@Icons.Material.Outlined.Assignment" HideExpandIcon="true">
         <MudNavLink Href="pages/utility/faq" Icon="@Icons.Material.Outlined.InsertDriveFile">Faq</MudNavLink>
-    </MudNavGroup>
+    </MudNavGroup>*@
 </MudNavMenu>
 
 @code {
