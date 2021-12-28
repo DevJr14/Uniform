@@ -1,0 +1,98 @@
+﻿@using SharedR.Responses.Partners
+<style>
+    .mud-table-container {
+        overflow: auto;
+    }
+</style>
+
+<MudCard Elevation="25">
+    <MudCardHeader>
+        <CardHeaderContent>
+            <MudText Typo="Typo.h6">My Contacts</MudText>
+        </CardHeaderContent>
+        <CardHeaderActions>
+            <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Default" />
+        </CardHeaderActions>
+    </MudCardHeader>
+    <MudCardContent>
+        @if (!_loaded)
+        {
+            <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+        }
+        else
+        {
+            <MudTable Hover="true" Elevation="25" Items="ContactResponses" Dense="true" Bordered="false" Striped="false" Filter="new Func<ContactResponse, bool>(Search)" @bind-contact="Contact">
+                <ToolBarContent>
+                    <div class="justify-center mud-text-align-center">
+                        @if (_canCreatePartners)
+                        {
+                            <MudFab Color="Color.Success" Icon="@Icons.Material.Filled.Add" Size="Size.Small" IconSize="Size.Medium" Class="mr-2" OnClick="(() => InvokeModal(Guid.Empty))" DisableElevation="true" aria-label="add" />
+                            @if (_canExportPartners)
+                            {
+                                <MudFab Color="Color.Secondary" Icon="@Icons.Material.Filled.Download" Size="Size.Small" IconSize="Size.Medium" DisableElevation="true" aria-label="export" />
+                            }
+                        }
+                        else
+                        {
+                            @if (_canExportPartners)
+                            {
+                                <MudFab Color="Color.Secondary" Icon="@Icons.Material.Filled.Download" Size="Size.Small" IconSize="Size.Medium" DisableElevation="true" aria-label="export" />
+                            }
+                        }
+                    </div>
+                    <MudToolBarSpacer />
+                    @if (_canSearchPartners)
+                    {
+                        <MudTextField @bind-Value="_searchString" Immediate="true" Placeholder="Search for clients" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0 mb-3"></MudTextField>
+                    }
+                </ToolBarContent>
+                <HeaderContent>
+                    <MudTh><MudTableSortLabel SortBy="new Func<ContactResponse, object>(x => x.Title)">Title</MudTableSortLabel></MudTh>
+                    <MudTh><MudTableSortLabel SortBy="new Func<ContactResponse, object>(x => x.CellphoneNo)">Cellphone No</MudTableSortLabel></MudTh>
+                    <MudTh><MudTableSortLabel SortBy="new Func<ContactResponse, object>(x => x.TelephoneNo)">Telephone No</MudTableSortLabel></MudTh>
+                    <MudTh><MudTableSortLabel SortBy="new Func<ContactResponse, object>(x => x.Email)">Email</MudTableSortLabel></MudTh>
+                    <MudTh><MudTableSortLabel SortBy="new Func<ContactResponse, object>(x => x.IsActive)">Is Active</MudTableSortLabel></MudTh>
+                    <MudTh Style="text-align:right">Actions</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel="Title">
+                        <MudHighlighter Text="@context.Title" HighlightedText="@_searchString" />
+                    </MudTd>
+                    <MudTd DataLabel="CellphoneNo">@context.CellphoneNo</MudTd>
+                    <MudTd DataLabel="TelephoneNo">
+                        <MudHighlighter Text="@context.TelephoneNo" HighlightedText="@_searchString" />
+                    </MudTd>
+                    <MudTd DataLabel="Email">@context.Email</MudTd>
+                    <MudTd DataLabel="IsVerified"><MudCheckBox @bind-Checked="@context.IsActive" Size="Size.Small" ReadOnly Color="Color.Secondary" /></MudTd>
+                    <MudTd DataLabel="Actions" Style="text-align: right">
+                        @if (_canEditPartners || _canDeletePartners)
+                            {
+                            <MudMenu DisableElevation="true" Dense="true" Icon="@Icons.Material.Filled.MoreVert" Color="Color.Default" Size="Size.Small" Direction="Direction.Left" OffsetX="true">
+                                @if (_canEditPartners)
+                                    {
+                                    <MudMenuItem OnClick="(() => InvokeModal(context.Id))">Edit</MudMenuItem>
+                                    }
+                                @if (_canDeletePartners)
+                                    {
+                                    <MudMenuItem OnClick="(() => Delete(context.Id))">Delete</MudMenuItem>
+                                    }
+                            </MudMenu>
+                            }
+                            else
+                            {
+                            <MudButton Variant="Variant.Filled"
+                                       DisableElevation="true"
+                                       StartIcon="@Icons.Material.Filled.DoNotTouch"
+                                       IconColor="Color.Secondary"
+                                       Size="Size.Small"
+                                       Color="Color.Surface">
+                                No Allowed Actions
+                            </MudButton>
+                            }
+                    </MudTd>
+                </RowTemplate>
+            </MudTable>
+        }
+    </MudCardContent>
+</MudCard>
+
