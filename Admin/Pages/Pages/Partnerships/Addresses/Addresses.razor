@@ -73,7 +73,7 @@
                     <MudTd DataLabel="Actions" Style="text-align: right">
                         @if (_canEditPartners || _canDeletePartners)
                             {
-                            <MudMenu Label="Actions" Variant="Variant.Filled" DisableElevation="true" EndIcon="@Icons.Filled.KeyboardArrowDown" Size="Size.Small" IconColor="Color.Secondary" Direction="Direction.Left" OffsetX="true">
+                            <MudMenu DisableElevation="true" Dense="true" Icon="@Icons.Material.Filled.MoreVert" Color="Color.Default" Size="Size.Small" Direction="Direction.Left" OffsetX="true">
                                 @if (_canEditPartners)
                                     {
                                     <MudMenuItem OnClick="(() => InvokeModal(context.Id))">Edit</MudMenuItem>
