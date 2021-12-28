@@ -1,0 +1,100 @@
+﻿@using SharedR.Responses.Partners
+<style>
+    .mud-table-container {
+        overflow: auto;
+    }
+</style>
+
+<MudCard Elevation="25">
+    <MudCardHeader>
+        <CardHeaderContent>
+            <MudText Typo="Typo.h6">My Bank Accounts</MudText>
+        </CardHeaderContent>
+        <CardHeaderActions>
+            <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Default" />
+        </CardHeaderActions>
+    </MudCardHeader>
+    <MudCardContent>
+        @if (!_loaded)
+        {
+            <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+        }
+        else
+        {
+            <MudTable Hover="true" Elevation="25" Items="BankAccountResponses" Dense="true" Bordered="false" Striped="false" Filter="new Func<BankAccountResponse, bool>(Search)" @bind-bankAccount="BankAccount">
+                <ToolBarContent>
+                    <div class="justify-center mud-text-align-center">
+                        @if (_canCreatePartners)
+                        {
+                            <MudFab Color="Color.Success" Icon="@Icons.Material.Filled.Add" Size="Size.Small" IconSize="Size.Medium" Class="mr-2" OnClick="(() => InvokeModal(Guid.Empty))" DisableElevation="true" aria-label="add" />
+                            @if (_canExportPartners)
+                            {
+                                <MudFab Color="Color.Secondary" Icon="@Icons.Material.Filled.Download" Size="Size.Small" IconSize="Size.Medium" DisableElevation="true" aria-label="export" />
+                            }
+                        }
+                        else
+                        {
+                            @if (_canExportPartners)
+                            {
+                                <MudFab Color="Color.Secondary" Icon="@Icons.Material.Filled.Download" Size="Size.Small" IconSize="Size.Medium" DisableElevation="true" aria-label="export" />
+                            }
+                        }
+                    </div>
+                    <MudToolBarSpacer />
+                    @if (_canSearchPartners)
+                    {
+                        <MudTextField @bind-Value="_searchString" Immediate="true" Placeholder="Search for bank accounts" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0 mb-3"></MudTextField>
+                    }
+                </ToolBarContent>
+                <HeaderContent>
+                    <MudTh><MudTableSortLabel SortBy="new Func<BankAccountResponse, object>(x => x.BankName)">Bank Name</MudTableSortLabel></MudTh>
+                    <MudTh><MudTableSortLabel SortBy="new Func<BankAccountResponse, object>(x => x.AccountType)">Account Type</MudTableSortLabel></MudTh>
+                    <MudTh><MudTableSortLabel SortBy="new Func<BankAccountResponse, object>(x => x.AccountNo)">Account No</MudTableSortLabel></MudTh>
+                    <MudTh><MudTableSortLabel SortBy="new Func<BankAccountResponse, object>(x => x.ExpiryDate)">Expiry Date</MudTableSortLabel></MudTh>
+                    <MudTh><MudTableSortLabel SortBy="new Func<BankAccountResponse, object>(x => x.CVV)">CVV</MudTableSortLabel></MudTh>
+                    <MudTh><MudTableSortLabel SortBy="new Func<BankAccountResponse, object>(x => x.IsActive)">Is Active</MudTableSortLabel></MudTh>
+                    <MudTh Style="text-align:right">Actions</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel="Bank Name">
+                        <MudHighlighter Text="@context.BankName" HighlightedText="@_searchString" />
+                    </MudTd>
+                    <MudTd DataLabel="AccountType">@context.AccountType</MudTd>
+                    <MudTd DataLabel="AccountNo">
+                        <MudHighlighter Text="@context.AccountNo" HighlightedText="@_searchString" />
+                    </MudTd>
+                    <MudTd DataLabel="ExpiryDate">@context.ExpiryDate</MudTd>
+                    <MudTd DataLabel="CVV">@context.CVV</MudTd>
+                    <MudTd DataLabel="Is Active"><MudCheckBox @bind-Checked="@context.IsActive" Size="Size.Small" ReadOnly Color="Color.Secondary"/></MudTd>
+                    <MudTd DataLabel="Actions" Style="text-align: right">
+                        @if (_canEditPartners || _canDeletePartners)
+                            {
+                            <MudMenu DisableElevation="true" Dense="true" Icon="@Icons.Material.Filled.MoreVert" Color="Color.Default" Size="Size.Small" Direction="Direction.Left" OffsetX="true">
+                                @if (_canEditPartners)
+                                    {
+                                    <MudMenuItem OnClick="(() => InvokeModal(context.Id))">Edit</MudMenuItem>
+                                    }
+                                @if (_canDeletePartners)
+                                    {
+                                    <MudMenuItem OnClick="(() => Delete(context.Id))">Delete</MudMenuItem>
+                                    }
+                            </MudMenu>
+                            }
+                            else
+                            {
+                            <MudButton Variant="Variant.Filled"
+                                       DisableElevation="true"
+                                       StartIcon="@Icons.Material.Filled.DoNotTouch"
+                                       IconColor="Color.Secondary"
+                                       Size="Size.Small"
+                                       Color="Color.Surface">
+                                No Allowed Actions
+                            </MudButton>
+                            }
+                    </MudTd>
+                </RowTemplate>
+            </MudTable>
+        }
+    </MudCardContent>
+</MudCard>
+
