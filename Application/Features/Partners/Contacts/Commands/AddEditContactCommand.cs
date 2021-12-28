@@ -38,10 +38,11 @@ namespace Application.Features.Partners.Contacts.Commands
                     .FirstOrDefault();
                 if (partner != null)
                 {
-                    var address = _mapper.Map<Contact>(command.ContactRequest);
-                    await _unitOfWork.RepositoryFor<Contact>().AddAsync(address);
+                    var contact = _mapper.Map<Contact>(command.ContactRequest);
+                    contact.PartnerId = partner.Id;
+                    await _unitOfWork.RepositoryFor<Contact>().AddAsync(contact);
                     await _unitOfWork.Commit(cancellationToken);
-                    return await Result<Guid>.SuccessAsync(address.Id, "Contact Saved Successfully.");
+                    return await Result<Guid>.SuccessAsync(contact.Id, "Contact Saved Successfully.");
                 }
                 return await Result<Guid>.FailAsync("Partner Profile Not Verified.");
             }
