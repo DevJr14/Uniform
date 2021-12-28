@@ -4,6 +4,7 @@ namespace SharedR.Responses.Partners
 {
     public class ContactResponse
     {
+        public Guid Id { get; set; }
         public Guid PartnerId { get; set; }
         public string Title { get; set; }
         public string CellphoneNo { get; set; }
