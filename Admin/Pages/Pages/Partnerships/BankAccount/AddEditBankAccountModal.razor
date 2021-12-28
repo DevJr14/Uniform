@@ -1,0 +1,73 @@
+﻿<EditForm Model="BankAccountRequest" OnValidSubmit="SaveAsync">
+    <MudDialog>
+        <TitleContent>
+            @{
+                if (BankAccountRequest.Id == Guid.Empty)
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.AccountBox" Class="mr-3 mb-n1" />
+                        Add Banking Details
+                    </MudText>
+                }
+                else
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Update" Class="mr-3 mb-n1" />
+                        Update Banking Details
+                    </MudText>
+                }
+            }
+        </TitleContent>
+        <DialogContent>
+            <MudGrid>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudTextField @bind-Value="@BankAccountRequest.BankName"
+                                  Label="Bank Name"
+                                  Variant="Variant.Outlined"
+                                  Margin="Margin.Dense" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudTextField @bind-Value="@BankAccountRequest.AccountType"
+                                  Label="Account Type"
+                                  Variant="Variant.Outlined"
+                                  Margin="Margin.Dense" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudTextField @bind-Value="@BankAccountRequest.AccountNo"
+                                  Label="Account No"
+                                  Variant="Variant.Outlined"
+                                  Margin="Margin.Dense" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudDatePicker @ref="_picker" @bind-Date="@_expiryDate"
+                                  Label="Expiry Date"
+                                  Variant="Variant.Outlined"
+                                  Margin="Margin.Dense" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudTextField @bind-Value="@BankAccountRequest.CVV"
+                                  Label="CVV"
+                                  Variant="Variant.Outlined"
+                                  Margin="Margin.Dense" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="2">
+                    <MudCheckBox @bind-Checked="@BankAccountRequest.IsActive"
+                                 Label="Active" Dense="false" Color="Color.Primary" />
+                </MudItem>
+            </MudGrid>
+        </DialogContent>
+        <DialogActions>
+            <MudButton DisableElevation Variant="Variant.Filled" OnClick="Cancel">Cancel</MudButton>
+            <MudSpacer />
+            @if (BankAccountRequest.Id != Guid.Empty)
+            {
+                <MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Secondary">Update</MudButton>
+            }
+            else
+            {
+                <MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Success">Save</MudButton>
+            }
+        </DialogActions>
+    </MudDialog>
+</EditForm>
+
