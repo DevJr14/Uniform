@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Permission;
 using SharedR.Requests.Catalogs;
+using System;
 using System.Threading.Tasks;
 
 namespace Api.Controllers.Catalog
@@ -11,10 +12,10 @@ namespace Api.Controllers.Catalog
     public class ProductCategoriesController : BaseApiController<ProductCategoriesController>
     {
         [Authorize(Policy = Permissions.ProductCategories.View)]
-        [HttpGet("catalog/[controller]/get-all")]
-        public async Task<IActionResult> GetAll()
+        [HttpGet("catalog/[controller]/get-all-for-product")]
+        public async Task<IActionResult> GetAll(Guid productId)
         {
-            return Ok(await _mediator.Send(new GetAllProductCategoriesQuery()));
+            return Ok(await _mediator.Send(new GetAllProductCategoriesQuery() { ProductId = productId }));
         }
 
         [Authorize(Policy = Permissions.ProductCategories.Create)]
