@@ -47,7 +47,7 @@ namespace Application.Features.Catalogs.ProductCategories.Commands
                 await _unitOfWork.RepositoryFor<ProductCategory>().MarkDeletedRangeAsync(proCategories);
             }
 
-            if(command.ProductCategoriesRequest.CategoryIds.Count > 0)//Add if any was selected
+            if(command.ProductCategoriesRequest.CategoryIds.Count() > 0)//Add if any was selected
             {
                 List<ProductCategory> productCategories = new();
                 foreach (Guid categoryId in command.ProductCategoriesRequest.CategoryIds)

@@ -1,0 +1,105 @@
+﻿@page "/pages/catalogs/products"
+
+@using SharedR.Responses.Catalogs
+<style>
+    .mud-table-container {
+        overflow: auto;
+    }
+</style>
+
+<Header OnClose="Cancel" Title="Products" Description="Manage Products." />
+@if (!_loaded)
+{
+    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+}
+else
+{
+    <MudTable Hover="true" Elevation="25" Items="ProductResponses" Dense="true" Bordered="false" Striped="false" Filter="new Func<ProductResponse, bool>(Search)" @bind-product="Product">
+        <ToolBarContent>
+            <div class="justify-center mud-text-align-center">
+                @if (_canCreateProducts)
+                {
+                    <MudFab Color="Color.Success" Icon="@Icons.Material.Filled.Add" Size="Size.Small" IconSize="Size.Medium" Class="mr-2" OnClick="(() => InvokeModal(Guid.Empty))" DisableElevation="true" aria-label="add" />
+                    @if (_canExportProducts)
+                    {
+                        <MudFab Color="Color.Secondary" Icon="@Icons.Material.Filled.Download" Size="Size.Small" IconSize="Size.Medium" DisableElevation="true" aria-label="export" />
+                    }
+                }
+                else
+                {
+                    @if (_canExportProducts)
+                    {
+                        <MudFab Color="Color.Secondary" Icon="@Icons.Material.Filled.Download" Size="Size.Small" IconSize="Size.Medium" DisableElevation="true" aria-label="export" />
+                    }
+                }
+            </div>
+            <MudToolBarSpacer />
+            @if (_canSearchProducts)
+            {
+                <MudTextField @bind-Value="_searchString" Immediate="true" Placeholder="Search for clients" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0 mb-3"></MudTextField>
+            }
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh><MudTableSortLabel SortBy="new Func<ProductResponse, object>(x => x.Name)">Name</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<ProductResponse, object>(x => x.Brand.Name)">Brand</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<ProductResponse, object>(x => x.Description)">Description</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<ProductResponse, object>(x => x.Barcode)">Barcode</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<ProductResponse, object>(x => x.Partner.Name)">Partner</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<ProductResponse, object>(x => x.AllowReview)">Revieweable</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<ProductResponse, object>(x => x.IsNew)">New</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<ProductResponse, object>(x => x.AvailableFrom)">List From</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<ProductResponse, object>(x => x.AvailableTo)">List To</MudTableSortLabel></MudTh>
+            <MudTh Style="text-align:right">Actions</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Name">
+                <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
+            </MudTd>
+            <MudTd DataLabel="BrandName">
+                <MudHighlighter Text="@context.Brand.Name" HighlightedText="@_searchString" />
+            </MudTd>
+            <MudTd DataLabel="Description">
+                <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
+            </MudTd>
+            <MudTd DataLabel="Barcode">
+                <MudHighlighter Text="@context.Barcode" HighlightedText="@_searchString" />
+            </MudTd>
+            <MudTd DataLabel="PartnerName">
+                <MudHighlighter Text="@context.Partner.Name" HighlightedText="@_searchString" />
+            </MudTd>
+            <MudTd DataLabel="AllowReview"><MudCheckBox @bind-Checked="@context.AllowReview" Size="Size.Small" ReadOnly Color="Color.Secondary" /></MudTd>
+            <MudTd DataLabel="IsNew"><MudCheckBox @bind-Checked="@context.IsNew" Size="Size.Small" ReadOnly Color="Color.Secondary" /></MudTd>
+            <MudTd DataLabel="AvailableFrom">@context.AvailableFrom.Value.ToString("dd MMMM yyyy")</MudTd>
+            <MudTd DataLabel="AvailableTo">@context.AvailableTo.Value.ToString("dd MMMM yyyy")</MudTd>
+            <MudTd DataLabel="Actions" Style="text-align: right">
+                @if (_canEditProducts || _canDeleteProducts)
+                    {
+                    <MudMenu DisableElevation="true" Dense="true" Icon="@Icons.Material.Filled.MoreVert" Color="Color.Default" Size="Size.Small" Direction="Direction.Left" OffsetX="true">
+                        @if (_canEditProducts)
+                            {
+                            <MudMenuItem OnClick="(() => InvokeModal(context.Id))">Edit</MudMenuItem>
+                            }
+                        @if (_canDeleteProducts)
+                            {
+                            <MudMenuItem OnClick="(() => Delete(context.Id))">Delete</MudMenuItem>
+                            }
+                    </MudMenu>
+                    }
+                    else
+                    {
+                    <MudButton Variant="Variant.Filled"
+                               DisableElevation="true"
+                               StartIcon="@Icons.Material.Filled.DoNotTouch"
+                               IconColor="Color.Secondary"
+                               Size="Size.Small"
+                               Color="Color.Surface">
+                        No Allowed Actions
+                    </MudButton>
+                    }
+            </MudTd>
+        </RowTemplate>
+    </MudTable>
+}
+
+
+

@@ -7,6 +7,6 @@ namespace SharedR.Requests.Catalogs
     {
         public Guid Id { get; set; }
         public Guid ProductId { get; set; }
-        public List<Guid> CategoryIds { get; set; }
+        public IEnumerable<Guid> CategoryIds { get; set; }
     }
 }

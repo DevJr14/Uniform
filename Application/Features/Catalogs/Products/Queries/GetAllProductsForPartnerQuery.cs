@@ -4,6 +4,7 @@ using AutoMapper;
 using Domain.Entities.Catalog;
 using Domain.Entities.Partners;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Shared.Wrapper;
 using SharedR.Responses.Catalogs;
 using System;
@@ -38,12 +39,14 @@ namespace Application.Features.Catalogs.Products.Queries
                           .FirstOrDefault();
             if (partner != null)
             {
-                var brands = _unitOfWork.RepositoryFor<Product>().Entities
+                var products = _unitOfWork.RepositoryFor<Product>().Entities                    
                     .Where(a => a.PartnerId == partner.Id && a.DeletedBy == null)
+                    .Include(p => p.Partner)
+                    .Include(p => p.Brand)
                     .ToList();
-                if (brands.Count > 0)
+                if (products.Count > 0)
                 {
-                    var mappedBrands = _mapper.Map<List<ProductResponse>>(brands);
+                    var mappedBrands = _mapper.Map<List<ProductResponse>>(products);
                     return await Result<List<ProductResponse>>.SuccessAsync(mappedBrands);
                 }
                 return await Result<List<ProductResponse>>.FailAsync("No Records Found.");
