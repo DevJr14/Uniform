@@ -48,7 +48,7 @@ namespace Application.Features.Catalogs.ProductTags.Commands
                 await _unitOfWork.RepositoryFor<ProductTag>().MarkDeletedRangeAsync(proTags);
             }
 
-            if (command.ProductTagsRequest.TagIds.Count > 0)//Add if any was selected
+            if (command.ProductTagsRequest.TagIds.Count() > 0)//Add if any was selected
             {
                 List<ProductTag> prodTags = new();
                 foreach (Guid tagId in command.ProductTagsRequest.TagIds)
