@@ -1,0 +1,84 @@
+﻿@page "/pages/catalogs/brands"
+
+@using SharedR.Responses.Catalogs
+<style>
+    .mud-table-container {
+        overflow: auto;
+    }
+</style>
+
+<Header OnClose="Cancel" Title="Brands" Description="Manage Brands." />
+@if (!_loaded)
+{
+    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+}
+else
+{
+    <MudTable Hover="true" Elevation="25" Items="BrandResponses" Dense="true" Bordered="false" Striped="false" Filter="new Func<BrandResponse, bool>(Search)" @bind-brnad="Brand">
+        <ToolBarContent>
+            <div class="justify-center mud-text-align-center">
+                @if (_canCreateBrands)
+                {
+                    <MudFab Color="Color.Success" Icon="@Icons.Material.Filled.Add" Size="Size.Small" IconSize="Size.Medium" Class="mr-2" OnClick="(() => InvokeModal(Guid.Empty))" DisableElevation="true" aria-label="add" />
+                    @if (_canExportBrands)
+                    {
+                        <MudFab Color="Color.Secondary" Icon="@Icons.Material.Filled.Download" Size="Size.Small" IconSize="Size.Medium" DisableElevation="true" aria-label="export" />
+                    }
+                }
+                else
+                {
+                    @if (_canExportBrands)
+                    {
+                        <MudFab Color="Color.Secondary" Icon="@Icons.Material.Filled.Download" Size="Size.Small" IconSize="Size.Medium" DisableElevation="true" aria-label="export" />
+                    }
+                }
+            </div>
+            <MudToolBarSpacer />
+            @if (_canSearchBrands)
+            {
+                <MudTextField @bind-Value="_searchString" Immediate="true" Placeholder="Search for clients" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0 mb-3"></MudTextField>
+            }
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh><MudTableSortLabel SortBy="new Func<BrandResponse, object>(x => x.Name)">Name</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<BrandResponse, object>(x => x.Description)">Description</MudTableSortLabel></MudTh>
+            <MudTh Style="text-align:right">Actions</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Name">
+                <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
+            </MudTd>
+            <MudTd DataLabel="Description">
+                <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
+            </MudTd>
+            <MudTd DataLabel="Actions" Style="text-align: right">
+                @if (_canEditBrands || _canDeleteBrands)
+                    {
+                    <MudMenu DisableElevation="true" Dense="true" Icon="@Icons.Material.Filled.MoreVert" Color="Color.Default" Size="Size.Small" Direction="Direction.Left" OffsetX="true">
+                        @if (_canEditBrands)
+                            {
+                            <MudMenuItem OnClick="(() => InvokeModal(context.Id))">Edit</MudMenuItem>
+                            }
+                        @if (_canDeleteBrands)
+                            {
+                            <MudMenuItem OnClick="(() => Delete(context.Id))">Delete</MudMenuItem>
+                            }
+                    </MudMenu>
+                    }
+                    else
+                    {
+                    <MudButton Variant="Variant.Filled"
+                               DisableElevation="true"
+                               StartIcon="@Icons.Material.Filled.DoNotTouch"
+                               IconColor="Color.Secondary"
+                               Size="Size.Small"
+                               Color="Color.Surface">
+                        No Allowed Actions
+                    </MudButton>
+                    }
+            </MudTd>
+        </RowTemplate>
+    </MudTable>
+}
+
+
