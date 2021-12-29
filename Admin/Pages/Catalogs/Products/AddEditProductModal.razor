@@ -1,0 +1,117 @@
+﻿<EditForm Model="ProductRequest" OnValidSubmit="SaveAsync">
+    <MudDialog>
+        <TitleContent>
+            @{
+                if (ProductRequest.Id == Guid.Empty)
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-3 mb-n1" />
+                        Add Product
+                    </MudText>
+                }
+                else
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Update" Class="mr-3 mb-n1" />
+                        Update Product
+                    </MudText>
+                }
+            }
+        </TitleContent>
+        <DialogContent>
+            <MudGrid>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudTextField @bind-Value="@ProductRequest.Name"
+                                  Label="Name"
+                                  Variant="Variant.Outlined"
+                                  Margin="Margin.Dense" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudTextField @bind-Value="@ProductRequest.Barcode"
+                                  Label="Barcode"
+                                  Variant="Variant.Outlined"
+                                  Margin="Margin.Dense" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudSelect T="Guid" Label="Brand" @bind-Value="@ProductRequest.BrandId"
+                               Variant="Variant.Outlined"
+                               OffsetY="true"
+                               Margin="Margin.Dense"
+                               Dense="true">
+                        @foreach (var brand in Brands)
+                        {
+                            <MudSelectItem T="Guid" Value="@(brand.Id)">@brand.Name</MudSelectItem>
+                        }
+                    </MudSelect>
+                </MudItem>
+                <MudItem xs="12" sm="12" md="12">
+                    <MudTextField @bind-Value="@ProductRequest.Description"
+                                  Label="Description"
+                                  Lines="2"
+                                  Variant="Variant.Outlined"
+                                  Margin="Margin.Dense" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="6">
+                    <MudSelect T="Guid" Label="Tags" MultiSelection="true" @bind-SelectedValues="@SeletedTagsIds"
+                               Variant="Variant.Outlined"
+                               OffsetY="true"
+                               Margin="Margin.Dense"
+                               Dense="true">
+                        @foreach (var tag in Tags)
+                        {
+                            <MudSelectItem T="Guid" Value="@(tag.Id)">@tag.Name</MudSelectItem>
+                        }
+                    </MudSelect>
+                </MudItem>
+                <MudItem xs="12" sm="6" md="6">
+                    <MudSelect T="Guid" Label="Categories" MultiSelection="true" @bind-SelectedValues="@SeletedCategoriesIds"
+                               Variant="Variant.Outlined"
+                               OffsetY="true"
+                               Margin="Margin.Dense"
+                               Dense="true">
+                        @foreach (var category in Categories)
+                        {
+                            <MudSelectItem T="Guid" Value="@(category.Id)">@category.Name</MudSelectItem>
+                        }
+                    </MudSelect>
+                </MudItem>
+                <MudItem xs="12" sm="6" md="3">
+                    <MudDatePicker @ref="_picker" @bind-Date="@ProductRequest.AvailableFrom"
+                                   Label="Available From"
+                                   Variant="Variant.Outlined"
+                                   Margin="Margin.Dense" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="3">
+                    <MudDatePicker @ref="_picker" @bind-Date="@ProductRequest.AvailableTo"
+                                   Label="Available To"
+                                   Variant="Variant.Outlined"
+                                   Margin="Margin.Dense" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="2">
+                    <MudCheckBox @bind-Checked="@ProductRequest.IsNew"
+                                 Label="Is New" Dense="false" Color="Color.Primary" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="2">
+                    <MudCheckBox @bind-Checked="@ProductRequest.AllowReview"
+                                 Label="Allow Reviews" Dense="false" Color="Color.Primary" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="2">
+                    <MudCheckBox @bind-Checked="@ProductRequest.IsActive"
+                                 Label="Is Active" Dense="false" Color="Color.Primary" />
+                </MudItem>
+            </MudGrid>
+        </DialogContent>
+        <DialogActions>
+            <MudButton DisableElevation Variant="Variant.Filled" OnClick="Cancel">Cancel</MudButton>
+            <MudSpacer />
+            @if (ProductRequest.Id != Guid.Empty)
+            {
+                <MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Secondary">Update</MudButton>
+            }
+            else
+            {
+                <MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Success">Save</MudButton>
+            }
+        </DialogActions>
+    </MudDialog>
+</EditForm>
