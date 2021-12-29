@@ -1,7 +1,9 @@
 ﻿using Blazored.LocalStorage;
 using Clients.Infrastructure.Authentication;
 using Clients.Infrastructure.Managers;
+using Clients.Infrastructure.Managers.Catalogs.Brands;
 using Clients.Infrastructure.Managers.Catalogs.Categories;
+using Clients.Infrastructure.Managers.Catalogs.Products;
 using Clients.Infrastructure.Managers.Catalogs.Tags;
 using Clients.Infrastructure.Managers.Partnerships.Address;
 using Clients.Infrastructure.Managers.Partnerships.BankAccount;
@@ -16,12 +18,10 @@ using MudBlazor;
 using MudBlazor.Services;
 using Shared.Permission;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
-using System.Threading.Tasks;
 using Toolbelt.Blazor.Extensions.DependencyInjection;
 
 namespace Admin.Extensions
@@ -74,6 +74,8 @@ namespace Admin.Extensions
             builder.Services.AddTransient<IBankAccountManager, BankAccountManager>();
             builder.Services.AddTransient<ITagManager, TagManager>();
             builder.Services.AddTransient<ICategoryManager, CategoryManager>();
+            //builder.Services.AddTransient<IBrandManager, BrandManager>();
+            builder.Services.AddTransient<IProductManager, ProductManager>();
             return builder;
         }
 
