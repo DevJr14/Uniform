@@ -5,6 +5,7 @@ namespace SharedR.Responses.Catalogs
 {
     public class ProductPriceResponse
     {
+        public Guid Id { get; set; }
         public decimal Price { get; set; }
         public decimal OldPrice { get; set; }
         public decimal Cost { get; set; }
