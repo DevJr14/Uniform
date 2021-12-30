@@ -34,8 +34,8 @@ namespace Admin.Pages.Catalogs.Products
         public List<CategoryResponse> Categories { get; set; } = new();
         public List<BrandResponse> Brands { get; set; } = new();
 
-        public HashSet<Guid> SeletedCategoriesIds { get; set; } = new();
-        public HashSet<Guid> SeletedTagsIds { get; set; } = new();
+        public HashSet<string> SeletedCategoriesIds { get; set; } = new();
+        public HashSet<string> SeletedTagsIds { get; set; } = new();
 
         [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
         MudDatePicker _picker;
@@ -99,10 +99,16 @@ namespace Admin.Pages.Catalogs.Products
 
         private async Task SaveProductTagsAsync(Guid productId)
         {
+            List<Guid> tagsIds = new();
+            foreach (var name in SeletedTagsIds)
+            {
+                tagsIds.Add(Tags.FirstOrDefault(t => t.Name == name).Id);
+
+            }
             ProductTagsRequest = new()
             {
                 ProductId = productId,
-                TagIds = SeletedTagsIds
+                TagIds = tagsIds
             };
             var response = await ProductTagsManager.Save(ProductTagsRequest);
             if (response.Succeeded)
@@ -117,10 +123,15 @@ namespace Admin.Pages.Catalogs.Products
 
         private async Task SaveProductCategoriesAsync(Guid productId)
         {
+            List<Guid> catIds = new();
+            foreach (var name in SeletedCategoriesIds)
+            {
+                catIds.Add(Categories.FirstOrDefault(c => c.Name == name).Id);
+            }
             ProductCategoriesRequest = new()
             {
                 ProductId = productId,
-                CategoryIds = SeletedCategoriesIds
+                CategoryIds = catIds
             };
             var response = await ProductCategoriesManager.Save(ProductCategoriesRequest);
             if (response.Succeeded)
