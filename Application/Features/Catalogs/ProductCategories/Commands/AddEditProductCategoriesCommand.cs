@@ -34,7 +34,7 @@ namespace Application.Features.Catalogs.ProductCategories.Commands
             //Remove existing product categories before adding new ones.
             //To Do: Don't deleted and add same ProductId and CategoryIds. Check before deleting
             var proCategories = _unitOfWork.RepositoryFor<ProductCategory>().Entities
-                .Where(pc => pc.ProductId == command.ProductCategoriesRequest.ProductId)
+                .Where(pc => pc.ProductId == command.ProductCategoriesRequest.ProductId && pc.DeletedBy == null)
                 .ToList();
             if (proCategories.Count > 0)
             {
@@ -45,6 +45,7 @@ namespace Application.Features.Catalogs.ProductCategories.Commands
                 }
 
                 await _unitOfWork.RepositoryFor<ProductCategory>().MarkDeletedRangeAsync(proCategories);
+                await _unitOfWork.Commit(cancellationToken);
             }
 
             if(command.ProductCategoriesRequest.CategoryIds.Count() > 0)//Add if any was selected
