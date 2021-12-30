@@ -45,15 +45,19 @@ else
             <MudTh><MudTableSortLabel SortBy="new Func<ProductResponse, object>(x => x.Description)">Description</MudTableSortLabel></MudTh>
             <MudTh><MudTableSortLabel SortBy="new Func<ProductResponse, object>(x => x.Barcode)">Barcode</MudTableSortLabel></MudTh>
             <MudTh><MudTableSortLabel SortBy="new Func<ProductResponse, object>(x => x.Partner.Name)">Partner</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel SortBy="new Func<ProductResponse, object>(x => x.AllowReview)">Revieweable</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel SortBy="new Func<ProductResponse, object>(x => x.IsNew)">New</MudTableSortLabel></MudTh>
             <MudTh><MudTableSortLabel SortBy="new Func<ProductResponse, object>(x => x.AvailableFrom)">List From</MudTableSortLabel></MudTh>
             <MudTh><MudTableSortLabel SortBy="new Func<ProductResponse, object>(x => x.AvailableTo)">List To</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<ProductResponse, object>(x => x.AllowReview)">Revieweable</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<ProductResponse, object>(x => x.IsNew)">New</MudTableSortLabel></MudTh>
             <MudTh Style="text-align:right">Actions</MudTh>
         </HeaderContent>
         <RowTemplate>
             <MudTd DataLabel="Name">
-                <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
+                <MudTooltip Text="@($"Manage {context.Name}")" Delay="0" Placement="Placement.Top">
+                    <MudLink Href="@($"/catalogs/product-details/{context.Id}")" Color="Color.Secondary">
+                        <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
+                    </MudLink>
+                </MudTooltip>
             </MudTd>
             <MudTd DataLabel="BrandName">
                 <MudHighlighter Text="@context.Brand.Name" HighlightedText="@_searchString" />
@@ -67,14 +71,14 @@ else
             <MudTd DataLabel="PartnerName">
                 <MudHighlighter Text="@context.Partner.Name" HighlightedText="@_searchString" />
             </MudTd>
+            <MudTd DataLabel="AvailableFrom">@context.AvailableFrom.Value.ToString("dd-MM-yyyy")</MudTd>
+            <MudTd DataLabel="AvailableTo">@context.AvailableTo.Value.ToString("dd-MM-yyyy")</MudTd>
             <MudTd DataLabel="AllowReview"><MudCheckBox @bind-Checked="@context.AllowReview" Size="Size.Small" ReadOnly Color="Color.Secondary" /></MudTd>
             <MudTd DataLabel="IsNew"><MudCheckBox @bind-Checked="@context.IsNew" Size="Size.Small" ReadOnly Color="Color.Secondary" /></MudTd>
-            <MudTd DataLabel="AvailableFrom">@context.AvailableFrom.Value.ToString("dd MMMM yyyy")</MudTd>
-            <MudTd DataLabel="AvailableTo">@context.AvailableTo.Value.ToString("dd MMMM yyyy")</MudTd>
             <MudTd DataLabel="Actions" Style="text-align: right">
                 @if (_canEditProducts || _canDeleteProducts)
                     {
-                    <MudMenu DisableElevation="true" Dense="true" Icon="@Icons.Material.Filled.MoreVert" Color="Color.Default" Size="Size.Small" Direction="Direction.Left" OffsetX="true">
+                    <MudMenu DisableElevation="true" Dense="true" Icon="@Icons.Material.Filled.MoreVert" Color="Color.Secondary" Size="Size.Small" Direction="Direction.Left" OffsetX="true">
                         @if (_canEditProducts)
                             {
                             <MudMenuItem OnClick="(() => InvokeModal(context.Id))">Edit</MudMenuItem>

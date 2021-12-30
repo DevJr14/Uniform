@@ -35,6 +35,7 @@
                 <MudItem xs="12" sm="6" md="4">
                     <MudSelect T="Guid" Label="Brand" @bind-Value="@ProductRequest.BrandId"
                                Variant="Variant.Outlined"
+                               Text="@BrandName"
                                OffsetY="true"
                                Margin="Margin.Dense"
                                Dense="true">
@@ -52,26 +53,26 @@
                                   Margin="Margin.Dense" />
                 </MudItem>
                 <MudItem xs="12" sm="6" md="6">
-                    <MudSelect T="Guid" Label="Tags" MultiSelection="true" @bind-SelectedValues="@SeletedTagsIds"
+                    <MudSelect T="string" Label="Tags" MultiSelection="true" @bind-SelectedValues="@SeletedTagsIds"
                                Variant="Variant.Outlined"
                                OffsetY="true"
                                Margin="Margin.Dense"
                                Dense="true">
                         @foreach (var tag in Tags)
                         {
-                            <MudSelectItem T="Guid" Value="@(tag.Id)">@tag.Name</MudSelectItem>
+                            <MudSelectItem T="string" Value="@(tag.Name)">@tag.Name</MudSelectItem>
                         }
                     </MudSelect>
                 </MudItem>
                 <MudItem xs="12" sm="6" md="6">
-                    <MudSelect T="Guid" Label="Categories" MultiSelection="true" @bind-SelectedValues="@SeletedCategoriesIds"
+                    <MudSelect T="string" Label="Categories" MultiSelection="true" @bind-SelectedValues="@SeletedCategoriesIds"
                                Variant="Variant.Outlined"
                                OffsetY="true"
                                Margin="Margin.Dense"
                                Dense="true">
                         @foreach (var category in Categories)
                         {
-                            <MudSelectItem T="Guid" Value="@(category.Id)">@category.Name</MudSelectItem>
+                            <MudSelectItem T="string" Value="@(category.Name)">@category.Name</MudSelectItem>
                         }
                     </MudSelect>
                 </MudItem>

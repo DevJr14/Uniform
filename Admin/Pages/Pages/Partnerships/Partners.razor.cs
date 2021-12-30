@@ -175,11 +175,6 @@ namespace Admin.Pages.Pages.Partnerships
             }
         }
 
-        private void GoToDetails(Guid partnerId)
-        {
-            _navigationManager.NavigateTo($"/partnership/partner-details/{partnerId}");
-        }
-
         private void Cancel()
         {
             _navigationManager.NavigateTo("/");

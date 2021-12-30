@@ -4,7 +4,6 @@ using Clients.Infrastructure.Managers.Catalogs.ProductCategories;
 using Clients.Infrastructure.Managers.Catalogs.Products;
 using Clients.Infrastructure.Managers.Catalogs.ProductTags;
 using Clients.Infrastructure.Managers.Catalogs.Tags;
-using Clients.Infrastructure.Managers.Partnerships.Partner;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using SharedR.Requests.Catalogs;
@@ -22,7 +21,6 @@ namespace Admin.Pages.Catalogs.Products
         [Inject] private ICategoryManager CategoryManager { get; set; }
         [Inject] private ITagManager TagManager { get; set; }
         [Inject] private IBrandManager BrandManager { get; set; }
-        [Inject] private IPartnerManger PartnerManager { get; set; }
         [Inject] private IProductCategoriesManager ProductCategoriesManager { get; set; }
         [Inject] private IProductTagsManager ProductTagsManager { get; set; }
 
@@ -34,15 +32,26 @@ namespace Admin.Pages.Catalogs.Products
         public List<CategoryResponse> Categories { get; set; } = new();
         public List<BrandResponse> Brands { get; set; } = new();
 
-        public HashSet<Guid> SeletedCategoriesIds { get; set; } = new();
-        public HashSet<Guid> SeletedTagsIds { get; set; } = new();
+        public HashSet<string> SeletedCategoriesIds { get; set; } = new();
+        public HashSet<string> SeletedTagsIds { get; set; } = new();
+        public string BrandName { get; set; }
 
         [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
         MudDatePicker _picker;
 
         protected override async Task OnInitializedAsync()
         {
-            await LoadDataAsync();
+            if (ProductRequest.Id != Guid.Empty)
+            {
+                await LoadDataAsync();
+                await LoadProductTags();
+                await LoadProductCategories();
+                BrandName = Brands.FirstOrDefault(b => b.Id == ProductRequest.BrandId).Name;
+            }
+            else
+            {
+                await LoadDataAsync();
+            }
         }
 
         private async Task LoadDataAsync()
@@ -50,6 +59,30 @@ namespace Admin.Pages.Catalogs.Products
             await LoadBrands();
             await LoadCategories();
             await LoadTags();
+        }
+
+        private async Task LoadProductTags()
+        {
+            var response = await ProductTagsManager.GetForProduct(ProductRequest.Id);
+            if (response.Succeeded)
+            {
+                foreach (var tag in response.Data)
+                {
+                    SeletedTagsIds.Add(Tags.FirstOrDefault(t => t.Id == tag.TagId).Name);
+                }
+            }
+        }
+
+        private async Task LoadProductCategories()
+        {
+            var response = await ProductCategoriesManager.GetForProduct(ProductRequest.Id);
+            if (response.Succeeded)
+            {
+                foreach (var cat in response.Data)
+                {
+                    SeletedCategoriesIds.Add(Categories.FirstOrDefault(c => c.Id == cat.CategoryId).Name);
+                }
+            }
         }
 
         private async Task LoadBrands()
@@ -99,10 +132,16 @@ namespace Admin.Pages.Catalogs.Products
 
         private async Task SaveProductTagsAsync(Guid productId)
         {
+            List<Guid> tagsIds = new();
+            foreach (var name in SeletedTagsIds)
+            {
+                tagsIds.Add(Tags.FirstOrDefault(t => t.Name == name).Id);
+
+            }
             ProductTagsRequest = new()
             {
                 ProductId = productId,
-                TagIds = SeletedTagsIds
+                TagIds = tagsIds
             };
             var response = await ProductTagsManager.Save(ProductTagsRequest);
             if (response.Succeeded)
@@ -117,10 +156,15 @@ namespace Admin.Pages.Catalogs.Products
 
         private async Task SaveProductCategoriesAsync(Guid productId)
         {
+            List<Guid> catIds = new();
+            foreach (var name in SeletedCategoriesIds)
+            {
+                catIds.Add(Categories.FirstOrDefault(c => c.Name == name).Id);
+            }
             ProductCategoriesRequest = new()
             {
                 ProductId = productId,
-                CategoryIds = SeletedCategoriesIds
+                CategoryIds = catIds
             };
             var response = await ProductCategoriesManager.Save(ProductCategoriesRequest);
             if (response.Succeeded)

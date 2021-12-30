@@ -30,8 +30,8 @@ namespace Application.Features.Catalogs.ProductTags.Queries
 
         public async Task<Result<List<ProductTagsResponse>>> Handle(GetAllProductTagsQuery query, CancellationToken cancellationToken)
         {
-            var prodTags = _unitOfWork.RepositoryFor<ProductCategory>().Entities
-                .Where(pc => pc.ProductId == query.ProductId)
+            var prodTags = _unitOfWork.RepositoryFor<ProductTag>().Entities
+                .Where(pc => pc.ProductId == query.ProductId && pc.DeletedBy == null)
                 .ToList();
             if (prodTags.Count > 0)
             {
