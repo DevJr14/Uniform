@@ -42,6 +42,11 @@ namespace Admin.Pages.Catalogs.Products
 
         protected override async Task OnInitializedAsync()
         {
+            if (ProductRequest.Id != Guid.Empty)
+            {
+                await LoadProductTags();
+                await LoadProductCategories();
+            }
             await LoadDataAsync();
         }
 
@@ -50,6 +55,30 @@ namespace Admin.Pages.Catalogs.Products
             await LoadBrands();
             await LoadCategories();
             await LoadTags();
+        }
+
+        private async Task LoadProductTags()
+        {
+            var response = await ProductTagsManager.GetForProduct(ProductRequest.Id);
+            if (response.Succeeded)
+            {
+                foreach (var tag in response.Data)
+                {
+                    SeletedTagsIds.Add(tag.TagId);
+                }
+            }
+        }
+
+        private async Task LoadProductCategories()
+        {
+            var response = await ProductCategoriesManager.GetForProduct(ProductRequest.Id);
+            if (response.Succeeded)
+            {
+                foreach (var cat in response.Data)
+                {
+                    SeletedCategoriesIds.Add(cat.CategoryId);
+                }
+            }
         }
 
         private async Task LoadBrands()
