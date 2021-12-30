@@ -4,7 +4,6 @@ using Clients.Infrastructure.Managers.Catalogs.ProductCategories;
 using Clients.Infrastructure.Managers.Catalogs.Products;
 using Clients.Infrastructure.Managers.Catalogs.ProductTags;
 using Clients.Infrastructure.Managers.Catalogs.Tags;
-using Clients.Infrastructure.Managers.Partnerships.Partner;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using SharedR.Requests.Catalogs;
@@ -22,7 +21,6 @@ namespace Admin.Pages.Catalogs.Products
         [Inject] private ICategoryManager CategoryManager { get; set; }
         [Inject] private ITagManager TagManager { get; set; }
         [Inject] private IBrandManager BrandManager { get; set; }
-        [Inject] private IPartnerManger PartnerManager { get; set; }
         [Inject] private IProductCategoriesManager ProductCategoriesManager { get; set; }
         [Inject] private IProductTagsManager ProductTagsManager { get; set; }
 
@@ -36,6 +34,7 @@ namespace Admin.Pages.Catalogs.Products
 
         public HashSet<string> SeletedCategoriesIds { get; set; } = new();
         public HashSet<string> SeletedTagsIds { get; set; } = new();
+        public string BrandName { get; set; }
 
         [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
         MudDatePicker _picker;
@@ -44,10 +43,15 @@ namespace Admin.Pages.Catalogs.Products
         {
             if (ProductRequest.Id != Guid.Empty)
             {
+                await LoadDataAsync();
                 await LoadProductTags();
                 await LoadProductCategories();
+                BrandName = Brands.FirstOrDefault(b => b.Id == ProductRequest.BrandId).Name;
             }
-            await LoadDataAsync();
+            else
+            {
+                await LoadDataAsync();
+            }
         }
 
         private async Task LoadDataAsync()
@@ -64,7 +68,7 @@ namespace Admin.Pages.Catalogs.Products
             {
                 foreach (var tag in response.Data)
                 {
-                    SeletedTagsIds.Add(tag.TagId);
+                    SeletedTagsIds.Add(Tags.FirstOrDefault(t => t.Id == tag.TagId).Name);
                 }
             }
         }
@@ -76,7 +80,7 @@ namespace Admin.Pages.Catalogs.Products
             {
                 foreach (var cat in response.Data)
                 {
-                    SeletedCategoriesIds.Add(cat.CategoryId);
+                    SeletedCategoriesIds.Add(Categories.FirstOrDefault(c => c.Id == cat.CategoryId).Name);
                 }
             }
         }
