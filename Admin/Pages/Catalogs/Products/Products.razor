@@ -40,7 +40,6 @@ else
             }
         </ToolBarContent>
         <HeaderContent>
-            <MudTh Style="text-align:left">Manage</MudTh>
             <MudTh><MudTableSortLabel SortBy="new Func<ProductResponse, object>(x => x.Name)">Name</MudTableSortLabel></MudTh>
             <MudTh><MudTableSortLabel SortBy="new Func<ProductResponse, object>(x => x.Brand.Name)">Brand</MudTableSortLabel></MudTh>
             <MudTh><MudTableSortLabel SortBy="new Func<ProductResponse, object>(x => x.Description)">Description</MudTableSortLabel></MudTh>
@@ -53,13 +52,12 @@ else
             <MudTh Style="text-align:right">Actions</MudTh>
         </HeaderContent>
         <RowTemplate>
-            <MudTd DataLabel="Manage">
-                <MudTooltip Text="View Details" Delay="0" Placement="Placement.Top">
-                    <MudButton Color="Color.Secondary" Variant="Variant.Text" EndIcon="@Icons.Material.Filled.Settings" OnClick="@(()=>GoToDetails(context.Id))" Size="Size.Small" Class="ma-2"> Manage Product</MudButton>
-                </MudTooltip>
-            </MudTd>
             <MudTd DataLabel="Name">
-                <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
+                <MudTooltip Text="@($"Manage {context.Name}")" Delay="0" Placement="Placement.Top">
+                    <MudLink Href="@($"/catalogs/product-details/{context.Id}")" Color="Color.Secondary">
+                        <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
+                    </MudLink>
+                </MudTooltip>
             </MudTd>
             <MudTd DataLabel="BrandName">
                 <MudHighlighter Text="@context.Brand.Name" HighlightedText="@_searchString" />
@@ -80,7 +78,7 @@ else
             <MudTd DataLabel="Actions" Style="text-align: right">
                 @if (_canEditProducts || _canDeleteProducts)
                     {
-                    <MudMenu DisableElevation="true" Dense="true" Icon="@Icons.Material.Filled.MoreVert" Color="Color.Default" Size="Size.Small" Direction="Direction.Left" OffsetX="true">
+                    <MudMenu DisableElevation="true" Dense="true" Icon="@Icons.Material.Filled.MoreVert" Color="Color.Secondary" Size="Size.Small" Direction="Direction.Left" OffsetX="true">
                         @if (_canEditProducts)
                             {
                             <MudMenuItem OnClick="(() => InvokeModal(context.Id))">Edit</MudMenuItem>

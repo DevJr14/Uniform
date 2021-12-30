@@ -40,7 +40,6 @@ else
         }
     </ToolBarContent>
     <HeaderContent>
-        <MudTh Style="text-align:left">Manage</MudTh>
         <MudTh><MudTableSortLabel SortBy="new Func<PartnerResponse, object>(x => x.Name)">Name</MudTableSortLabel></MudTh>
         <MudTh><MudTableSortLabel SortBy="new Func<PartnerResponse, object>(x => x.Type)">Type</MudTableSortLabel></MudTh>
         <MudTh><MudTableSortLabel SortBy="new Func<PartnerResponse, object>(x => x.RegistrationNo)">Registration No</MudTableSortLabel></MudTh>
@@ -51,19 +50,18 @@ else
         <MudTh Style="text-align:right">Actions</MudTh>
     </HeaderContent>
     <RowTemplate>
-        <MudTd DataLabel="Manage">
-            <MudTooltip Text="View Details" Delay="0" Placement="Placement.Top">
-                <MudButton Color="Color.Secondary" Variant="Variant.Text" EndIcon="@Icons.Material.Filled.Settings" OnClick="@(()=>GoToDetails(context.Id))" Size="Size.Small" Class="ma-2"> Manage Partner</MudButton>
-            </MudTooltip>
-        </MudTd>
         <MudTd DataLabel="Name">
-            <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
+            <MudTooltip Text="@($"Manage {context.Name}")" Delay="0" Placement="Placement.Top">
+                <MudLink Href="@($"/partnership/partner-details/{context.Id}")" Color="Color.Secondary">
+                    <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
+                </MudLink>
+            </MudTooltip>
         </MudTd>
         <MudTd DataLabel="Type">@context.Type</MudTd>
         <MudTd DataLabel="RegistrationNo">
             <MudHighlighter Text="@context.RegistrationNo" HighlightedText="@_searchString" />
         </MudTd>
-        <MudTd DataLabel="RegistrationDate">@context.RegistrationDate</MudTd>
+        <MudTd DataLabel="RegistrationDate">@context.RegistrationDate.Value.ToString("dd-MM-yyyy")</MudTd>
         <MudTd DataLabel="TaxNo">@context.TaxNo</MudTd>
         <MudTd DataLabel="Description">
             <MudHighlighter Text="@context.Description" HighlightedText="@_searchString" />
@@ -72,7 +70,7 @@ else
         <MudTd DataLabel="Actions" Style="text-align: right">
             @if (_canEditPartners || _canDeletePartners)
                 {
-                <MudMenu DisableElevation="true" Dense="true" Icon="@Icons.Material.Filled.MoreVert" Color="Color.Default" Direction="Direction.Left" OffsetX="true">
+                <MudMenu DisableElevation="true" Dense="true" Icon="@Icons.Material.Filled.MoreVert" Size="Size.Small" Color="Color.Secondary" Direction="Direction.Left" OffsetX="true">
                     @if (_canEditPartners)
                         {
                         <MudMenuItem OnClick="(() => InvokeModal(context.Id))">Edit</MudMenuItem>
