@@ -141,10 +141,6 @@ namespace Admin.Pages.Catalogs.Products
             }
         }
 
-        private void GoToDetails(Guid productId)
-        {
-            _navigationManager.NavigateTo($"/catalogs/product-details/{productId}");
-        }
         private void Cancel()
         {
             _navigationManager.NavigateTo("/");
