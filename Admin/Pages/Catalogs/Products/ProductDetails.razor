@@ -1,0 +1,88 @@
+﻿@page "/catalogs/product-details/{ProductId:guid}"
+
+<Header OnClose="Cancel" Title="Product" Description="Manage Product Details" />
+
+<MudCard Elevation="25">
+    <MudCardContent>
+        <MudGrid>
+            <MudItem xs="12" sm="6" md="4">
+                <MudTextField @bind-Value="@ProductResponse.Name"
+                              Label="Name"
+                              ReadOnly="true"
+                              Variant="Variant.Outlined"
+                              Margin="Margin.Dense" />
+            </MudItem>
+            <MudItem xs="12" sm="6" md="4">
+                <MudSelect T="string" Label="Brand" @bind-Value="@ProductResponse.Brand.Name"
+                           Variant="Variant.Outlined"
+                           OffsetY="true"
+                           ReadOnly="true"
+                           Margin="Margin.Dense"
+                           Dense="true">
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="12" sm="6" md="4">
+                <MudTextField @bind-Value="@ProductResponse.Partner.Name"
+                              Label="Partner"
+                              ReadOnly="true"
+                              Variant="Variant.Outlined"
+                              Margin="Margin.Dense" />
+            </MudItem>
+            <MudItem xs="12" sm="6" md="4">
+                <MudDatePicker @ref="_picker" @bind-Date="@ProductResponse.AvailableFrom"
+                               Label="List From"
+                               ReadOnly="true"
+                               Variant="Variant.Outlined"
+                               Margin="Margin.Dense" />
+            </MudItem>
+            <MudItem xs="12" sm="6" md="4">
+                <MudDatePicker @ref="_picker" @bind-Date="@ProductResponse.AvailableTo"
+                               Label="List To"
+                               ReadOnly="true"
+                               Variant="Variant.Outlined"
+                               Margin="Margin.Dense" />
+            </MudItem>
+            <MudItem xs="12" sm="12" md="12">
+                <MudTextField @bind-Value="@ProductResponse.Description"
+                              Label="Description"
+                              ReadOnly="true"
+                              Lines="2"
+                              Variant="Variant.Outlined"
+                              Margin="Margin.Dense" />
+            </MudItem>
+            <MudItem xs="12" sm="6" md="2">
+                <MudCheckBox @bind-Checked="@ProductResponse.IsNew"
+                             Label="Is New" 
+                             Dense="false" 
+                              ReadOnly="true"
+                             Color="Color.Primary" />
+            </MudItem>
+            <MudItem xs="12" sm="6" md="2">
+                <MudCheckBox @bind-Checked="@ProductResponse.AllowReview"
+                             Label="Reviewable" 
+                             Dense="false" 
+                             ReadOnly="true"
+                             Color="Color.Primary" />
+            </MudItem>
+            <MudItem xs="12" sm="6" md="2">
+                <MudCheckBox @bind-Checked="@ProductResponse.IsActive"
+                             Label="Listed" 
+                             Dense="false"
+                              ReadOnly="true" 
+                             Color="Color.Primary" />
+            </MudItem>
+        </MudGrid>
+    </MudCardContent>
+</MudCard>
+
+<MudTabs Elevation="2" Rounded="false" Centered="false" Class="my-2">
+    <MudTabPanel Icon="@Icons.Material.Filled.Money" Text="Pricing" BadgeData='"!"' BadgeColor="Color.Error">
+        <AddEditProductPrice ProductId="ProductId"/>
+    </MudTabPanel>
+    <MudTabPanel Icon="@Icons.Material.Filled.Inventory" Text="Inventory" BadgeData="1" BadgeColor="Color.Primary">
+        
+    </MudTabPanel>
+    <MudTabPanel Icon="@Icons.Material.Filled.Image" Text="Pictures" BadgeData="0">
+        
+    </MudTabPanel>
+</MudTabs>

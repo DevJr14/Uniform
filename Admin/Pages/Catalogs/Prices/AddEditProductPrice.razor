@@ -1,0 +1,67 @@
+﻿@if (_isLoaded)
+{
+    <EditForm Model="@ProductPriceResponse" OnValidSubmit="SaveAsync">
+        <MudCard Elevation="25">
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h6">Product Pricing</MudText>
+                </CardHeaderContent>
+                <CardHeaderActions>
+                    <MudFab Color="Color.Success"
+                            Icon="@Icons.Material.Filled.Add"
+                            Size="Size.Small" IconSize="Size.Medium" Class="mr-2"
+                            DisableElevation="true" aria-label="add"
+                            ButtonType="ButtonType.Submit" />
+                </CardHeaderActions>
+            </MudCardHeader>
+            <MudCardContent>
+                <MudGrid>
+                    <MudItem xs="12" sm="6" md="3">
+                        <MudNumericField @bind-Value="ProductPriceResponse.Price"
+                                         Label="Price"
+                                         Variant="Variant.Outlined"
+                                         Adornment="Adornment.Start"
+                                         AdornmentIcon="@Icons.Material.Filled.AttachMoney"
+                                         HideSpinButtons="true"
+                                         Margin="Margin.Dense" />
+                    </MudItem>
+                    <MudItem xs="12" sm="6" md="3">
+                        <MudNumericField @bind-Value="ProductPriceResponse.OldPrice"
+                                         Label="Old Price"
+                                         Variant="Variant.Outlined"
+                                         Adornment="Adornment.Start"
+                                         AdornmentIcon="@Icons.Material.Filled.AttachMoney"
+                                         HideSpinButtons="true"
+                                         Margin="Margin.Dense" />
+                    </MudItem>
+                    <MudItem xs="12" sm="6" md="3">
+                        <MudNumericField @bind-Value="ProductPriceResponse.Cost"
+                                         Label="Cost"
+                                         Variant="Variant.Outlined"
+                                         Adornment="Adornment.Start"
+                                         AdornmentIcon="@Icons.Material.Filled.AttachMoney"
+                                         HideSpinButtons="true"
+                                         Margin="Margin.Dense" />
+                    </MudItem>
+                    <MudItem xs="12" sm="6" md="3">
+                        <MudSelect T="Guid?" Label="Discount" @bind-Value="@ProductPriceResponse.DiscountId"
+                                   Variant="Variant.Outlined"
+                                   Text="@DiscountName"
+                                   OffsetY="true"
+                                   Margin="Margin.Dense"
+                                   Dense="true">
+                            @foreach (var discount in Discounts)
+                            {
+                                <MudSelectItem T="Guid" Value="@(discount.Id)">@discount.Name</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </MudItem>
+                </MudGrid>
+            </MudCardContent>
+        </MudCard>
+    </EditForm>
+}
+else
+{
+    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+}

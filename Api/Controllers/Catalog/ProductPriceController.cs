@@ -25,6 +25,13 @@ namespace Api.Controllers.Catalog
             return Ok(await _mediator.Send(new GetProductPriceByIdQuery() { Id = id }));
         }
 
+        [Authorize(Policy = Permissions.ProductPrices.View)]
+        [HttpGet("catalog/[controller]/get-for-product")]
+        public async Task<IActionResult> GetForProduct(Guid productId)
+        {
+            return Ok(await _mediator.Send(new GetProductPriceByProductIdQuery() { ProductId = productId }));
+        }
+
         [Authorize(Policy = Permissions.ProductPrices.Create)]
         [HttpPost("catalog/[controller]/add-edit")]
         public async Task<IActionResult> AddOrEdit(ProductPriceRequest request)
