@@ -49,6 +49,7 @@ else
             <MudTh><MudTableSortLabel SortBy="new Func<ProductResponse, object>(x => x.AvailableTo)">List To</MudTableSortLabel></MudTh>
             <MudTh><MudTableSortLabel SortBy="new Func<ProductResponse, object>(x => x.AllowReview)">Revieweable</MudTableSortLabel></MudTh>
             <MudTh><MudTableSortLabel SortBy="new Func<ProductResponse, object>(x => x.IsNew)">New</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<ProductResponse, object>(x => x.IsActive)">Listed</MudTableSortLabel></MudTh>
             <MudTh Style="text-align:right">Actions</MudTh>
         </HeaderContent>
         <RowTemplate>
@@ -59,7 +60,7 @@ else
                     </MudLink>
                 </MudTooltip>
             </MudTd>
-            <MudTd DataLabel="BrandName">
+            <MudTd DataLabel="Brand">
                 <MudHighlighter Text="@context.Brand.Name" HighlightedText="@_searchString" />
             </MudTd>
             <MudTd DataLabel="Description">
@@ -68,13 +69,14 @@ else
             <MudTd DataLabel="Barcode">
                 <MudHighlighter Text="@context.Barcode" HighlightedText="@_searchString" />
             </MudTd>
-            <MudTd DataLabel="PartnerName">
+            <MudTd DataLabel="Partner">
                 <MudHighlighter Text="@context.Partner.Name" HighlightedText="@_searchString" />
             </MudTd>
-            <MudTd DataLabel="AvailableFrom">@context.AvailableFrom.Value.ToString("dd-MM-yyyy")</MudTd>
-            <MudTd DataLabel="AvailableTo">@context.AvailableTo.Value.ToString("dd-MM-yyyy")</MudTd>
-            <MudTd DataLabel="AllowReview"><MudCheckBox @bind-Checked="@context.AllowReview" Size="Size.Small" ReadOnly Color="Color.Secondary" /></MudTd>
+            <MudTd DataLabel="List From">@context.AvailableFrom.Value.ToString("dd-MM-yyyy")</MudTd>
+            <MudTd DataLabel="List To">@context.AvailableTo.Value.ToString("dd-MM-yyyy")</MudTd>
+            <MudTd DataLabel="Revieweable"><MudCheckBox @bind-Checked="@context.AllowReview" Size="Size.Small" ReadOnly Color="Color.Secondary" /></MudTd>
             <MudTd DataLabel="IsNew"><MudCheckBox @bind-Checked="@context.IsNew" Size="Size.Small" ReadOnly Color="Color.Secondary" /></MudTd>
+            <MudTd DataLabel="Listed"><MudCheckBox @bind-Checked="@context.IsActive" Size="Size.Small" ReadOnly Color="Color.Secondary" /></MudTd>
             <MudTd DataLabel="Actions" Style="text-align: right">
                 @if (_canEditProducts || _canDeleteProducts)
                     {
