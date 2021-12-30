@@ -40,18 +40,24 @@ else
             }
         </ToolBarContent>
         <HeaderContent>
+            <MudTh Style="text-align:left">Manage</MudTh>
             <MudTh><MudTableSortLabel SortBy="new Func<ProductResponse, object>(x => x.Name)">Name</MudTableSortLabel></MudTh>
             <MudTh><MudTableSortLabel SortBy="new Func<ProductResponse, object>(x => x.Brand.Name)">Brand</MudTableSortLabel></MudTh>
             <MudTh><MudTableSortLabel SortBy="new Func<ProductResponse, object>(x => x.Description)">Description</MudTableSortLabel></MudTh>
             <MudTh><MudTableSortLabel SortBy="new Func<ProductResponse, object>(x => x.Barcode)">Barcode</MudTableSortLabel></MudTh>
             <MudTh><MudTableSortLabel SortBy="new Func<ProductResponse, object>(x => x.Partner.Name)">Partner</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel SortBy="new Func<ProductResponse, object>(x => x.AllowReview)">Revieweable</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel SortBy="new Func<ProductResponse, object>(x => x.IsNew)">New</MudTableSortLabel></MudTh>
             <MudTh><MudTableSortLabel SortBy="new Func<ProductResponse, object>(x => x.AvailableFrom)">List From</MudTableSortLabel></MudTh>
             <MudTh><MudTableSortLabel SortBy="new Func<ProductResponse, object>(x => x.AvailableTo)">List To</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<ProductResponse, object>(x => x.AllowReview)">Revieweable</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<ProductResponse, object>(x => x.IsNew)">New</MudTableSortLabel></MudTh>
             <MudTh Style="text-align:right">Actions</MudTh>
         </HeaderContent>
         <RowTemplate>
+            <MudTd DataLabel="Manage">
+                <MudTooltip Text="View Details" Delay="0" Placement="Placement.Top">
+                    <MudButton Color="Color.Secondary" Variant="Variant.Text" EndIcon="@Icons.Material.Filled.Settings" OnClick="@(()=>GoToDetails(context.Id))" Size="Size.Small" Class="ma-2"> Manage Product</MudButton>
+                </MudTooltip>
+            </MudTd>
             <MudTd DataLabel="Name">
                 <MudHighlighter Text="@context.Name" HighlightedText="@_searchString" />
             </MudTd>
@@ -67,10 +73,10 @@ else
             <MudTd DataLabel="PartnerName">
                 <MudHighlighter Text="@context.Partner.Name" HighlightedText="@_searchString" />
             </MudTd>
+            <MudTd DataLabel="AvailableFrom">@context.AvailableFrom.Value.ToString("dd-MM-yyyy")</MudTd>
+            <MudTd DataLabel="AvailableTo">@context.AvailableTo.Value.ToString("dd-MM-yyyy")</MudTd>
             <MudTd DataLabel="AllowReview"><MudCheckBox @bind-Checked="@context.AllowReview" Size="Size.Small" ReadOnly Color="Color.Secondary" /></MudTd>
             <MudTd DataLabel="IsNew"><MudCheckBox @bind-Checked="@context.IsNew" Size="Size.Small" ReadOnly Color="Color.Secondary" /></MudTd>
-            <MudTd DataLabel="AvailableFrom">@context.AvailableFrom.Value.ToString("dd MMMM yyyy")</MudTd>
-            <MudTd DataLabel="AvailableTo">@context.AvailableTo.Value.ToString("dd MMMM yyyy")</MudTd>
             <MudTd DataLabel="Actions" Style="text-align: right">
                 @if (_canEditProducts || _canDeleteProducts)
                     {
