@@ -1,6 +1,4 @@
-﻿using Admin.Pages.Catalogs.Products;
-using Clients.Infrastructure.Managers.Catalogs.Products;
-using Clients.Infrastructure.Managers.Catalogs.Products;
+﻿using Clients.Infrastructure.Managers.Catalogs.Products;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
