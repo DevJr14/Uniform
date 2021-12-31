@@ -39,6 +39,7 @@ namespace Infrastructure.Context
         public DbSet<Tag> Tags { get; set; }
         public DbSet<ProductTag> ProductTags { get; set; }
         public DbSet<Discount> Discounts { get; set; }
+        public DbSet<Inventory> Inventories { get; set; }
 
         #endregion
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new()) 
@@ -153,6 +154,11 @@ namespace Infrastructure.Context
             builder.Entity<Discount>(entity =>
             {
                 entity.ToTable(name: "Discounts", "promotion");
+            });
+
+            builder.Entity<Inventory>(entity =>
+            {
+                entity.ToTable(name: "Inventories", "catalog");
             });
         }
     }
