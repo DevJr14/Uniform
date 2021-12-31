@@ -1,6 +1,8 @@
-﻿using Clients.Infrastructure.Managers.Catalogs.ProductImages;
+﻿using Admin.Pages.Catalogs.Products;
+using Clients.Infrastructure.Managers.Catalogs.ProductImages;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
+using MudBlazor;
 using Shared.Permission;
 using SharedR.Requests.Catalogs;
 using SharedR.Responses.Catalogs;
@@ -64,6 +66,32 @@ namespace Admin.Pages.Catalogs.Images
                 return true;
             }
             return false;
+        }
+
+        private async Task InvokeModal(Guid id)
+        {
+            var parameters = new DialogParameters();
+            if (id != Guid.Empty)
+            {
+                var productImage = ProductImageResponses.FirstOrDefault(c => c.Id == id);
+                if (productImage != null)
+                {
+                    parameters.Add(nameof(AddEditProductImage.ProductImageRequest), new ProductImageRequest
+                    {
+                        Id = productImage.Id,
+                        Title = productImage.Title,
+                        AltText = productImage.AltText,
+                        ImageDataURL = productImage.ImageDataURL
+                    });
+                }
+            }
+            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
+            var dialog = _dialogService.Show<AddEditProductImage>(id == Guid.Empty ? "Create" : "Edit", parameters, options);
+            var result = await dialog.Result;
+            if (!result.Cancelled)
+            {
+                await GetProductImages();
+            }
         }
 
     }
