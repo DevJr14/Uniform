@@ -1,0 +1,80 @@
+﻿@if (_isLoaded)
+{
+    <EditForm Model="@InventoryResponse" OnValidSubmit="SaveAsync">
+        <MudCard Elevation="25">
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText>Product Inventory</MudText>
+                </CardHeaderContent>
+                <CardHeaderActions>
+                    <MudFab Color="Color.Success"
+                            Icon="@Icons.Material.Filled.Add"
+                            Size="Size.Small" IconSize="Size.Medium" Class="mr-2"
+                            DisableElevation="true" aria-label="add"
+                            ButtonType="ButtonType.Submit" />
+                </CardHeaderActions>
+            </MudCardHeader>
+            <MudCardContent>
+                <MudGrid>
+                    <MudItem xs="12" sm="6" md="3">
+                        <MudNumericField @bind-Value="InventoryResponse.StockQty"
+                                         Label="Stock Qty"
+                                         Variant="Variant.Outlined"
+                                         Adornment="Adornment.Start"
+                                         AdornmentIcon="@Icons.Material.Filled.Inventory"
+                                         HideSpinButtons="true"
+                                         Margin="Margin.Dense" />
+                    </MudItem>
+                    <MudItem xs="12" sm="6" md="3">
+                        <MudNumericField @bind-Value="InventoryResponse.AvailableQty"
+                                         Label="Available Qty"
+                                         Variant="Variant.Outlined"
+                                         Adornment="Adornment.Start"
+                                         AdornmentIcon="@Icons.Material.Filled.Inventory"
+                                         HideSpinButtons="true"
+                                         Margin="Margin.Dense" />
+                    </MudItem>
+                    <MudItem xs="12" sm="6" md="3">
+                        <MudNumericField @bind-Value="InventoryResponse.MinCartQty"
+                                         Label="Minimum Cart Qty"
+                                         Variant="Variant.Outlined"
+                                         Adornment="Adornment.Start"
+                                         AdornmentIcon="@Icons.Material.Filled.Inventory"
+                                         HideSpinButtons="true"
+                                         Margin="Margin.Dense" />
+                    </MudItem>
+                    <MudItem xs="12" sm="6" md="3">
+                        <MudNumericField @bind-Value="InventoryResponse.MaxCartQty"
+                                         Label="Maximum Cart Qty"
+                                         Variant="Variant.Outlined"
+                                         Adornment="Adornment.Start"
+                                         AdornmentIcon="@Icons.Material.Filled.Inventory"
+                                         HideSpinButtons="true"
+                                         Margin="Margin.Dense" />
+                    </MudItem>
+                    <MudItem xs="12" sm="6" md="3">
+                        <MudNumericField @bind-Value="InventoryResponse.NotifyQtyBelow"
+                                         Label="Notify For Qty Below"
+                                         Variant="Variant.Outlined"
+                                         Adornment="Adornment.Start"
+                                         AdornmentIcon="@Icons.Material.Filled.Inventory"
+                                         HideSpinButtons="true"
+                                         Margin="Margin.Dense" />
+                    </MudItem>
+                    <MudItem xs="12" sm="6" md="2">
+                        <MudCheckBox @bind-Checked="@InventoryResponse.DisplayQty"
+                                     Label="Display Qty" Dense="false" Color="Color.Primary" />
+                    </MudItem>
+                    <MudItem xs="12" sm="6" md="2">
+                        <MudCheckBox @bind-Checked="@InventoryResponse.IsReturnable"
+                                     Label="Is Returnable" Dense="false" Color="Color.Primary" />
+                    </MudItem>
+                </MudGrid>
+            </MudCardContent>
+        </MudCard>
+    </EditForm>
+}
+else
+{
+    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+}
