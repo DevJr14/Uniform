@@ -56,6 +56,16 @@ namespace Shared.Permission
             public const string Search = "Permissions.ProductPrices.Search";
         }
 
+        public static class Inventories
+        {
+            public const string View = "Permissions.Inventories.View";
+            public const string Create = "Permissions.Inventories.Create";
+            public const string Edit = "Permissions.Inventories.Edit";
+            public const string Delete = "Permissions.Inventories.Delete";
+            public const string Export = "Permissions.Inventories.Export";
+            public const string Search = "Permissions.Inventories.Search";
+        }
+
         public static class Priorities
         {
             public const string View = "Permissions.Priorities.View";
