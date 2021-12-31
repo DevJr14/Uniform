@@ -6,7 +6,6 @@ using SharedR.Responses.Catalogs;
 using SharedR.Responses.Promotions;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Admin.Pages.Catalogs.Prices
