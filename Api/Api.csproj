@@ -31,4 +31,8 @@
     <ProjectReference Include="..\Shared\SharedR.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Files\" />
+  </ItemGroup>
+
 </Project>

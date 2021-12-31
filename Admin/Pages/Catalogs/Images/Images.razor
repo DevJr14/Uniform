@@ -1,0 +1,81 @@
+﻿@using SharedR.Responses.Catalogs
+<style>
+    .mud-table-container {
+        overflow: auto;
+    }
+</style>
+
+@if (!_loaded)
+{
+    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+}
+else
+{
+    <MudTable Hover="true" Elevation="25" Items="ProductImageResponses" Dense="true" Bordered="false" Striped="false" Filter="new Func<ProductImageResponse, bool>(Search)" @bind-productImage="ProductImage">
+        <ToolBarContent>
+            <div class="justify-center mud-text-align-center">
+                @if (_canCreateProductImages)
+                {
+                    <MudFab Color="Color.Success" Icon="@Icons.Material.Filled.Add" Size="Size.Small" IconSize="Size.Medium" Class="mr-2" DisableElevation="true" aria-label="add" />
+                    @if (_canExportProductImages)
+                    {
+                        <MudFab Color="Color.Secondary" Icon="@Icons.Material.Filled.Download" Size="Size.Small" IconSize="Size.Medium" DisableElevation="true" aria-label="export" />
+                    }
+                }
+                else
+                {
+                    @if (_canExportProductImages)
+                    {
+                        <MudFab Color="Color.Secondary" Icon="@Icons.Material.Filled.Download" Size="Size.Small" IconSize="Size.Medium" DisableElevation="true" aria-label="export" />
+                    }
+                }
+            </div>
+            <MudSpacer />
+            @if (_canSearchProductImages)
+            {
+                <MudTextField @bind-Value="_searchString" Immediate="true" Placeholder="Search for clients" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0 mb-3"></MudTextField>
+            }
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh><MudTableSortLabel SortBy="new Func<ProductImageResponse, object>(x => x.Title)">Title</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<ProductImageResponse, object>(x => x.AltText)">Description</MudTableSortLabel></MudTh>
+            <MudTh Style="text-align:right">Actions</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Name">
+                <MudHighlighter Text="@context.Title" HighlightedText="@_searchString" />
+            </MudTd>
+            <MudTd DataLabel="Description">
+                <MudHighlighter Text="@context.AltText" HighlightedText="@_searchString" />
+            </MudTd>
+            <MudTd DataLabel="Actions" Style="text-align: right">
+                @if (_canEditProductImages || _canDeleteProductImages)
+                    {
+                    <MudMenu DisableElevation="true" Dense="true" Icon="@Icons.Material.Filled.MoreVert" Color="Color.Default" Size="Size.Small" Direction="Direction.Left" OffsetX="true">
+                        @if (_canEditProductImages)
+                            {
+                            <MudMenuItem>Edit</MudMenuItem>
+                            }
+                        @if (_canDeleteProductImages)
+                            {
+                            <MudMenuItem >Delete</MudMenuItem>
+                            }
+                    </MudMenu>
+                    }
+                    else
+                    {
+                    <MudButton Variant="Variant.Filled"
+                               DisableElevation="true"
+                               StartIcon="@Icons.Material.Filled.DoNotTouch"
+                               IconColor="Color.Secondary"
+                               Size="Size.Small"
+                               Color="Color.Surface">
+                        No Allowed Actions
+                    </MudButton>
+                    }
+            </MudTd>
+        </RowTemplate>
+    </MudTable>
+}
+
+

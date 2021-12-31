@@ -1,4 +1,6 @@
-﻿namespace SharedR.Requests
+﻿using SharedR.Enums;
+
+namespace SharedR.Requests
 {
     public class UploadRequest
     {

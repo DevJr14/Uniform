@@ -1,10 +1,16 @@
 ﻿using System.ComponentModel;
 
-namespace SharedR.Requests
+namespace SharedR.Enums
 {
     public enum UploadType : byte
     {
+        [Description(@"Images\Products")]
+        Product,
+
         [Description(@"Images\ProfilePictures")]
         ProfilePicture,
+
+        [Description(@"Documents")]
+        Document
     }
 }
