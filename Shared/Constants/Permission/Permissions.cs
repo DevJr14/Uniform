@@ -65,6 +65,15 @@ namespace Shared.Permission
             public const string Export = "Permissions.Inventories.Export";
             public const string Search = "Permissions.Inventories.Search";
         }
+        public static class ProductImages
+        {
+            public const string View = "Permissions.ProductImages.View";
+            public const string Create = "Permissions.ProductImages.Create";
+            public const string Edit = "Permissions.ProductImages.Edit";
+            public const string Delete = "Permissions.ProductImages.Delete";
+            public const string Export = "Permissions.ProductImages.Export";
+            public const string Search = "Permissions.ProductImages.Search";
+        }
 
         public static class Priorities
         {
