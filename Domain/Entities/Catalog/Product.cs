@@ -23,6 +23,6 @@ namespace Domain.Entities.Catalog
         public List<ProductCategory> ProductCategories { get; set; }
         public List<ProductTag> ProductTags { get; set; }
         public List<ProductReview> ProductReviews { get; set; }
-
+        public List<ProductImage> Images { get; set; }
     }
 }
