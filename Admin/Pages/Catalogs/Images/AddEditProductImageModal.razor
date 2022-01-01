@@ -1,0 +1,87 @@
+﻿<EditForm Model="ProductImageRequest" OnValidSubmit="SaveAsync">
+    <MudDialog>
+        <TitleContent>
+            @{
+                if (ProductImageRequest.Id == Guid.Empty)
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.AddAPhoto" Class="mr-3 mb-n1" />
+                        Add Image
+                    </MudText>
+                }
+                else
+                {
+                    <MudText Typo="Typo.h6">
+                        <MudIcon Icon="@Icons.Material.Filled.Update" Class="mr-3 mb-n1" />
+                        Update Image
+                    </MudText>
+                }
+            }
+        </TitleContent>
+        <DialogContent>
+            <MudGrid>
+                <MudItem xs="12" sm="12" md="12">
+                    <MudTextField @bind-Value="@ProductImageRequest.Title"
+                                  Label="Name"
+                                  Variant="Variant.Outlined"
+                                  Margin="Margin.Dense" />
+                </MudItem>
+                <MudItem xs="12" sm="12" md="12">
+                    <MudTextField @bind-Value="@ProductImageRequest.AltText"
+                                  Label="Description"
+                                  Lines="3"
+                                  Variant="Variant.Outlined"
+                                  Margin="Margin.Dense" />
+                </MudItem>
+                <MudItem xs="12" md="12">
+                    <MudItem>
+                        <MudAvatar Image="@(ProductImageRequest.ImageDataURL)" Square="true" Style="height: auto; width: auto; max-height: 100%"> </MudAvatar>
+                    </MudItem>
+                    <MudItem>
+                        <InputFile id="fileInput" hidden OnChange="UploadImage" />
+                        <div>
+                            <MudButton HtmlTag="label"
+                                       Variant="Variant.Text"
+                                       Color="Color.Primary"
+                                       Size="Size.Small"
+                                       StartIcon="@Icons.Filled.CloudUpload"
+                                       for="fileInput">
+                                Upload
+                            </MudButton>
+                            @if (!string.IsNullOrEmpty(ProductImageRequest.ImageDataURL))
+                            {
+                                <MudButton Variant="Variant.Text"
+                                           Color="Color.Info"
+                                           StartIcon="@Icons.Filled.RemoveRedEye"
+                                           Size="Size.Small"
+                                           Link="@(ProductImageRequest.ImageDataURL)" Target="_blank">
+                                    View
+                                </MudButton>
+                                <MudButton Variant="Variant.Text"
+                                           Color="Color.Error"
+                                           StartIcon="@Icons.Filled.Delete"
+                                           Size="Size.Small"
+                                           OnClick="DeleteAsync">
+                                    Delete
+                                </MudButton>
+                            }
+                        </div>
+                    </MudItem>
+                </MudItem>
+            </MudGrid>
+        </DialogContent>
+        <DialogActions>
+            <MudButton DisableElevation Variant="Variant.Filled" OnClick="Cancel">Cancel</MudButton>
+            <MudSpacer />
+            @if (ProductImageRequest.Id != Guid.Empty)
+            {
+                <MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Secondary">Update</MudButton>
+            }
+            else
+            {
+                <MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Success">Save</MudButton>
+            }
+        </DialogActions>
+    </MudDialog>
+</EditForm>
+

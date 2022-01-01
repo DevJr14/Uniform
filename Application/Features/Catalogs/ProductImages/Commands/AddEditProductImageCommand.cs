@@ -33,7 +33,7 @@ namespace Application.Features.Catalogs.ProductImages.Commands
             var uploadRequest = command.ProductImageRequest.UploadRequest;
             if (uploadRequest != null)
             {
-                uploadRequest.FileName = $"{command.ProductImageRequest.Title?.Trim()}-{command.ProductImageRequest.ProductId}-{DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss")}";
+                uploadRequest.FileName = $"{command.ProductImageRequest.Title?.Trim()}-{command.ProductImageRequest.ProductId}-{DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss")}{command.ProductImageRequest.UploadRequest.Extension}";
             }
 
             if (command.ProductImageRequest.Id == Guid.Empty)
