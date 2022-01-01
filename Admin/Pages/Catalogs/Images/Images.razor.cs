@@ -1,5 +1,5 @@
-﻿using Admin.Pages.Catalogs.Products;
-using Clients.Infrastructure.Managers.Catalogs.ProductImages;
+﻿using Clients.Infrastructure.Managers.Catalogs.ProductImages;
+using Clients.Infrastructure.Managers.Catalogs.Products;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
@@ -76,21 +76,57 @@ namespace Admin.Pages.Catalogs.Images
                 var productImage = ProductImageResponses.FirstOrDefault(c => c.Id == id);
                 if (productImage != null)
                 {
-                    parameters.Add(nameof(AddEditProductImage.ProductImageRequest), new ProductImageRequest
+                    parameters.Add(nameof(AddEditProductImageModal.ProductImageRequest), new ProductImageRequest
                     {
                         Id = productImage.Id,
+                        ProductId = productImage.ProductId,
                         Title = productImage.Title,
                         AltText = productImage.AltText,
                         ImageDataURL = productImage.ImageDataURL
                     });
                 }
             }
-            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
-            var dialog = _dialogService.Show<AddEditProductImage>(id == Guid.Empty ? "Create" : "Edit", parameters, options);
+            else
+            {
+                parameters.Add(nameof(AddEditProductImageModal.ProductImageRequest), new ProductImageRequest
+                {
+                    ProductId = ProductId
+                });
+            }
+            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
+            var dialog = _dialogService.Show<AddEditProductImageModal>(id == Guid.Empty ? "Create" : "Edit", parameters, options);
             var result = await dialog.Result;
             if (!result.Cancelled)
             {
                 await GetProductImages();
+            }
+        }
+
+        private async Task Delete(Guid id)
+        {
+            string deleteContent = "Are you sure you want to delete product image?";
+            var parameters = new DialogParameters
+            {
+                {nameof(Shared.Dialogs.DeleteConfirmation.ContentText), string.Format(deleteContent, id)}
+            };
+            var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true, DisableBackdropClick = true };
+            var dialog = _dialogService.Show<Shared.Dialogs.DeleteConfirmation>("Delete", parameters, options);
+            var result = await dialog.Result;
+            if (!result.Cancelled)
+            {
+                var response = await ProductImageManager.Delete(id);
+                if (response.Succeeded)
+                {
+                    _snackBar.Add(response.Messages[0], Severity.Success);
+                    await GetProductImages();
+                }
+                else
+                {
+                    foreach (var message in response.Messages)
+                    {
+                        _snackBar.Add(message, Severity.Error);
+                    }
+                }
             }
         }
 

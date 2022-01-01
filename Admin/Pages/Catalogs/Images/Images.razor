@@ -16,49 +16,42 @@ else
             <div class="justify-center mud-text-align-center">
                 @if (_canCreateProductImages)
                 {
-                    <MudFab Color="Color.Success" Icon="@Icons.Material.Filled.Add" Size="Size.Small" IconSize="Size.Medium" Class="mr-2" DisableElevation="true" aria-label="add" />
-                    @if (_canExportProductImages)
-                    {
-                        <MudFab Color="Color.Secondary" Icon="@Icons.Material.Filled.Download" Size="Size.Small" IconSize="Size.Medium" DisableElevation="true" aria-label="export" />
-                    }
-                }
-                else
-                {
-                    @if (_canExportProductImages)
-                    {
-                        <MudFab Color="Color.Secondary" Icon="@Icons.Material.Filled.Download" Size="Size.Small" IconSize="Size.Medium" DisableElevation="true" aria-label="export" />
-                    }
+                    <MudFab Color="Color.Success" Icon="@Icons.Material.Filled.Add" Size="Size.Small" @onclick="@(() => InvokeModal(Guid.Empty))" IconSize="Size.Medium" Class="mr-2" DisableElevation="true" aria-label="add" />
                 }
             </div>
             <MudSpacer />
             @if (_canSearchProductImages)
             {
-                <MudTextField @bind-Value="_searchString" Immediate="true" Placeholder="Search for clients" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0 mb-3"></MudTextField>
+                <MudTextField @bind-Value="_searchString" Immediate="true" Placeholder="Search for images" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0 mb-3"></MudTextField>
             }
         </ToolBarContent>
         <HeaderContent>
+            <MudTh>Picture</MudTh>
             <MudTh><MudTableSortLabel SortBy="new Func<ProductImageResponse, object>(x => x.Title)">Title</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel SortBy="new Func<ProductImageResponse, object>(x => x.AltText)">Description</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<ProductImageResponse, object>(x => x.AltText)">Alternative Text</MudTableSortLabel></MudTh>
             <MudTh Style="text-align:right">Actions</MudTh>
         </HeaderContent>
         <RowTemplate>
+            <MudTd DataLabel="Picture">
+                <MudAvatar Image="@context.ImageDataURL" Size="Size.Large" Class="ma-1" />
+            </MudTd>
             <MudTd DataLabel="Name">
                 <MudHighlighter Text="@context.Title" HighlightedText="@_searchString" />
             </MudTd>
-            <MudTd DataLabel="Description">
+            <MudTd DataLabel="Alternative Text">
                 <MudHighlighter Text="@context.AltText" HighlightedText="@_searchString" />
             </MudTd>
             <MudTd DataLabel="Actions" Style="text-align: right">
                 @if (_canEditProductImages || _canDeleteProductImages)
                     {
-                    <MudMenu DisableElevation="true" Dense="true" Icon="@Icons.Material.Filled.MoreVert" Color="Color.Default" Size="Size.Small" Direction="Direction.Left" OffsetX="true">
+                    <MudMenu DisableElevation="true" Dense="true" Icon="@Icons.Material.Filled.MoreVert" Color="Color.Default" Size="Size.Medium" Direction="Direction.Left" OffsetX="true">
                         @if (_canEditProductImages)
                             {
-                            <MudMenuItem>Edit</MudMenuItem>
+                            <MudMenuItem @onclick="@(() => InvokeModal(context.Id))">Edit</MudMenuItem>
                             }
                         @if (_canDeleteProductImages)
                             {
-                            <MudMenuItem >Delete</MudMenuItem>
+                            <MudMenuItem @onclick="@(() => Delete(context.Id))">Delete</MudMenuItem>
                             }
                     </MudMenu>
                     }
