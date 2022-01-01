@@ -21,22 +21,27 @@ namespace Infrastructure.Services.Identity
                     Directory.CreateDirectory(pathToSave);
                 var fileName = request.FileName.Trim('"');
                 var fullPath = Path.Combine(pathToSave, fileName);
-                var dbPath = Path.Combine(folderName, fileName);
-                if (File.Exists(dbPath))
+                var localPath = Path.Combine(folderName, fileName);
+                if (File.Exists(localPath))
                 {
-                    dbPath = NextAvailableFilename(dbPath);
+                    localPath = NextAvailableFilename(localPath);
                     fullPath = NextAvailableFilename(fullPath);
                 }
                 using (var stream = new FileStream(fullPath, FileMode.Create))
                 {
                     streamData.CopyTo(stream);
                 }
-                return dbPath;
+                return Host(localPath);
             }
             else
             {
                 return string.Empty;
             }
+        }
+
+        private static string Host(string localPath)
+        {
+            return $"https://localhost:44387/{localPath}";
         }
 
         private static string numberPattern = " ({0})";
