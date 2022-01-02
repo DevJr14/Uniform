@@ -11,7 +11,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace Admin.Pages.Pages.Partnerships
+namespace Admin.Pages.Partnerships
 {
     public partial class Partners
     {

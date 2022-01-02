@@ -1,6 +1,4 @@
-﻿using Admin.Pages.Pages.Partnerships.Addresses;
-using Clients.Infrastructure.Managers.Partnerships.Address;
-using Clients.Infrastructure.Managers.Partnerships.BankAccount;
+﻿using Clients.Infrastructure.Managers.Partnerships.Address;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
@@ -13,15 +11,15 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace Admin.Pages.Pages.Partnerships.BankAccount
+namespace Admin.Pages.Partnerships.Addresses
 {
-    public partial class BankAccounts
+    public partial class Addresses
     {
-        [Inject] private IBankAccountManager BankAccountManager { get; set; }
+        [Inject] private IAddressManager AddressManager { get; set; }
         [Parameter] public Guid PartnerId { get; set; }
-        public List<BankAccountResponse> BankAccountResponses { get; set; } = new();
-        public BankAccountResponse BankAccount { get; set; } = new();
-        public BankAccountRequest BankAccountRequest { get; set; } = new();
+        public List<AddressResponse> AddressResponses { get; set; } = new();
+        public AddressResponse Address { get; set; } = new();
+        public AddressRequest AddressRequest { get; set; } = new();
 
         private ClaimsPrincipal _currentUser;
         private bool _canCreatePartners;
@@ -41,44 +39,54 @@ namespace Admin.Pages.Pages.Partnerships.BankAccount
             _canDeletePartners = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Partners.Delete)).Succeeded;
             _canExportPartners = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Partners.Export)).Succeeded;
             _canSearchPartners = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Partners.Search)).Succeeded;
-
-            await GetBankAccounts();
+           
+            await GetAddresses();
         }
 
-        private async Task GetBankAccounts()
+        private async Task GetAddresses()
         {
             if (PartnerId != Guid.Empty)
             {
-                var response = await BankAccountManager.GetForPartner(PartnerId);
+                var response = await AddressManager.GetForPartner(PartnerId);
                 _loaded = true;
                 if (response.Succeeded)
                 {
-                    BankAccountResponses = response.Data;
+                    AddressResponses = response.Data;
                 }
             }
         }
-
-        private bool Search(BankAccountResponse bank)
+        private bool Search(AddressResponse address)
         {
             if (string.IsNullOrWhiteSpace(_searchString)) return true;
-            if (bank.BankName?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
+            if (address.StreetName?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
             {
                 return true;
             }
-            if (bank.AccountType?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
+            if (address.Suburb?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
             {
                 return true;
             }
-            if (bank.AccountNo?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
+            if (address.City?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
+            {
+                return true;
+            }
+            if (address.Province?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
+            {
+                return true;
+            }
+            if (address.Country?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
+            {
+                return true;
+            }
+            if (address.PostalCode?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
             {
                 return true;
             }
             return false;
         }
-
         private async Task Delete(Guid id)
         {
-            string deleteContent = "Are you sure you want to delete banking details?";
+            string deleteContent = "Are you sure you want to delete address?";
             var parameters = new DialogParameters
             {
                 {nameof(Shared.Dialogs.DeleteConfirmation.ContentText), string.Format(deleteContent, id)}
@@ -88,11 +96,11 @@ namespace Admin.Pages.Pages.Partnerships.BankAccount
             var result = await dialog.Result;
             if (!result.Cancelled)
             {
-                var response = await BankAccountManager.Delete(id);
+                var response = await AddressManager.Delete(id);
                 if (response.Succeeded)
                 {
                     _snackBar.Add(response.Messages[0], Severity.Success);
-                    await GetBankAccounts();
+                    await GetAddresses();
                 }
                 else
                 {
@@ -103,34 +111,34 @@ namespace Admin.Pages.Pages.Partnerships.BankAccount
                 }
             }
         }
-
         private async Task InvokeModal(Guid id)
         {
             var parameters = new DialogParameters();
             if (id != Guid.Empty)
             {
-                var bank = BankAccountResponses.FirstOrDefault(c => c.Id == id);
-                if (bank != null)
+                var address = AddressResponses.FirstOrDefault(c => c.Id == id);
+                if (address != null)
                 {
-                    parameters.Add(nameof(AddEditBankAccountModal.BankAccountRequest), new BankAccountRequest
+                    parameters.Add(nameof(AddEditAddressModal.AddressRequest), new AddressRequest
                     {
-                        Id = bank.Id,
-                        PartnerId = bank.PartnerId,
-                        BankName = bank.BankName,
-                        AccountType = bank.AccountType,
-                        AccountNo = bank.AccountNo,
-                        ExpiryDate = bank.ExpiryDate,
-                        CVV = bank.CVV,
-                        IsActive = bank.IsActive
+                        Id = address.Id,
+                        PartnerId = address.PartnerId,
+                        StreetName = address.StreetName,
+                        Suburb = address.Suburb,
+                        City = address.City,
+                        Province = address.Province,
+                        Country = address.Country,
+                        PostalCode = address.PostalCode,
+                        IsActive = address.IsActive
                     });
                 }
             }
             var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
-            var dialog = _dialogService.Show<AddEditBankAccountModal>(id == Guid.Empty ? "Create" : "Edit", parameters, options);
+            var dialog = _dialogService.Show<AddEditAddressModal>(id == Guid.Empty ? "Create" : "Edit", parameters, options);
             var result = await dialog.Result;
             if (!result.Cancelled)
             {
-                await GetBankAccounts();
+                await GetAddresses();
             }
         }
     }

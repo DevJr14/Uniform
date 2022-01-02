@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Admin.Pages.Pages.Contents
+namespace Admin.Pages.Contents
 {
     public partial class GettingStarted
     {

@@ -1,23 +1,20 @@
-﻿using Clients.Infrastructure.Managers.Partnerships.Partner;
+﻿using Clients.Infrastructure.Managers.Partnerships.Contact;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using SharedR.Requests.Partners;
-using System;
 using System.Threading.Tasks;
 
-namespace Admin.Pages.Pages.Partnerships
+namespace Admin.Pages.Partnerships.Contacts
 {
-    public partial class AddEditPartnerModal
+    public partial class AddEditContactModal
     {
-        [Inject] private IPartnerManger PartnerManger { get; set; }
-        [Parameter] public PartnerRequest PartnerRequest { get; set; } = new();
+        [Inject] private IContactManager ContactManager { get; set; }
+        [Parameter] public ContactRequest ContactRequest { get; set; } = new();
         [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
-
-        MudDatePicker _picker;
 
         private async Task SaveAsync()
         {
-            var response = await PartnerManger.Save(PartnerRequest);
+            var response = await ContactManager.Save(ContactRequest);
             if (response.Succeeded)
             {
                 _snackBar.Add(response.Messages[0], Severity.Success);

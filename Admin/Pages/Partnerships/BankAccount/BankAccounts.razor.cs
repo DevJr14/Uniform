@@ -1,6 +1,6 @@
-﻿using Admin.Pages.Pages.Partnerships.Addresses;
+﻿using Admin.Pages.Partnerships.Addresses;
 using Clients.Infrastructure.Managers.Partnerships.Address;
-using Clients.Infrastructure.Managers.Partnerships.Contact;
+using Clients.Infrastructure.Managers.Partnerships.BankAccount;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
@@ -13,15 +13,16 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace Admin.Pages.Pages.Partnerships.Contacts
+namespace Admin.Pages.Partnerships.BankAccount
 {
-    public partial class Contacts
+    public partial class BankAccounts
     {
-        [Inject] private IContactManager ContactManager { get; set; }
+        [Inject] private IBankAccountManager BankAccountManager { get; set; }
         [Parameter] public Guid PartnerId { get; set; }
-        public ContactRequest ContactRequest { get; set; } = new();
-        public List<ContactResponse> ContactResponses { get; set; } = new();
-        public ContactResponse Contact { get; set; } = new();
+        public List<BankAccountResponse> BankAccountResponses { get; set; } = new();
+        public BankAccountResponse BankAccount { get; set; } = new();
+        public BankAccountRequest BankAccountRequest { get; set; } = new();
+
         private ClaimsPrincipal _currentUser;
         private bool _canCreatePartners;
         private bool _canEditPartners;
@@ -41,38 +42,34 @@ namespace Admin.Pages.Pages.Partnerships.Contacts
             _canExportPartners = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Partners.Export)).Succeeded;
             _canSearchPartners = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Partners.Search)).Succeeded;
 
-            await GetContacts();
+            await GetBankAccounts();
         }
 
-        private async Task GetContacts()
+        private async Task GetBankAccounts()
         {
             if (PartnerId != Guid.Empty)
             {
-                var response = await ContactManager.GetForPartner(PartnerId);
+                var response = await BankAccountManager.GetForPartner(PartnerId);
                 _loaded = true;
                 if (response.Succeeded)
                 {
-                    ContactResponses = response.Data;
+                    BankAccountResponses = response.Data;
                 }
             }
         }
 
-        private bool Search(ContactResponse contact)
+        private bool Search(BankAccountResponse bank)
         {
             if (string.IsNullOrWhiteSpace(_searchString)) return true;
-            if (contact.Title?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
+            if (bank.BankName?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
             {
                 return true;
             }
-            if (contact.CellphoneNo?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
+            if (bank.AccountType?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
             {
                 return true;
             }
-            if (contact.TelephoneNo?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
-            {
-                return true;
-            }
-            if (contact.Email?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
+            if (bank.AccountNo?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
             {
                 return true;
             }
@@ -81,7 +78,7 @@ namespace Admin.Pages.Pages.Partnerships.Contacts
 
         private async Task Delete(Guid id)
         {
-            string deleteContent = "Are you sure you want to delete contact?";
+            string deleteContent = "Are you sure you want to delete banking details?";
             var parameters = new DialogParameters
             {
                 {nameof(Shared.Dialogs.DeleteConfirmation.ContentText), string.Format(deleteContent, id)}
@@ -91,11 +88,11 @@ namespace Admin.Pages.Pages.Partnerships.Contacts
             var result = await dialog.Result;
             if (!result.Cancelled)
             {
-                var response = await ContactManager.Delete(id);
+                var response = await BankAccountManager.Delete(id);
                 if (response.Succeeded)
                 {
                     _snackBar.Add(response.Messages[0], Severity.Success);
-                    await GetContacts();
+                    await GetBankAccounts();
                 }
                 else
                 {
@@ -112,27 +109,28 @@ namespace Admin.Pages.Pages.Partnerships.Contacts
             var parameters = new DialogParameters();
             if (id != Guid.Empty)
             {
-                var contact = ContactResponses.FirstOrDefault(c => c.Id == id);
-                if (contact != null)
+                var bank = BankAccountResponses.FirstOrDefault(c => c.Id == id);
+                if (bank != null)
                 {
-                    parameters.Add(nameof(AddEditContactModal.ContactRequest), new ContactRequest
+                    parameters.Add(nameof(AddEditBankAccountModal.BankAccountRequest), new BankAccountRequest
                     {
-                        Id = contact.Id,
-                        PartnerId = contact.PartnerId,
-                        Title = contact.Title,
-                        CellphoneNo = contact.CellphoneNo,
-                        TelephoneNo = contact.TelephoneNo,
-                        Email = contact.Email,
-                        IsActive = contact.IsActive
+                        Id = bank.Id,
+                        PartnerId = bank.PartnerId,
+                        BankName = bank.BankName,
+                        AccountType = bank.AccountType,
+                        AccountNo = bank.AccountNo,
+                        ExpiryDate = bank.ExpiryDate,
+                        CVV = bank.CVV,
+                        IsActive = bank.IsActive
                     });
                 }
             }
             var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
-            var dialog = _dialogService.Show<AddEditContactModal>(id == Guid.Empty ? "Create" : "Edit", parameters, options);
+            var dialog = _dialogService.Show<AddEditBankAccountModal>(id == Guid.Empty ? "Create" : "Edit", parameters, options);
             var result = await dialog.Result;
             if (!result.Cancelled)
             {
-                await GetContacts();
+                await GetBankAccounts();
             }
         }
     }

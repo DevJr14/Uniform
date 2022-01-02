@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Admin.Pages.Pages.Partnerships
+namespace Admin.Pages.Partnerships
 {
     public partial class PartnerDetails
     {

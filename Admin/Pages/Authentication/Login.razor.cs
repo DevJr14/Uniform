@@ -7,7 +7,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace Admin.Pages.Pages.Authentication
+namespace Admin.Pages.Authentication
 {
     public partial class Login
     {

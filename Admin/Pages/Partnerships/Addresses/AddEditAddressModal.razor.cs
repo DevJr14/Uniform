@@ -1,20 +1,20 @@
-﻿using Clients.Infrastructure.Managers.Partnerships.Contact;
+﻿using Clients.Infrastructure.Managers.Partnerships.Address;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using SharedR.Requests.Partners;
 using System.Threading.Tasks;
 
-namespace Admin.Pages.Pages.Partnerships.Contacts
+namespace Admin.Pages.Partnerships.Addresses
 {
-    public partial class AddEditContactModal
+    public partial class AddEditAddressModal
     {
-        [Inject] private IContactManager ContactManager { get; set; }
-        [Parameter] public ContactRequest ContactRequest { get; set; } = new();
+        [Inject] private IAddressManager AddressManager { get; set; }
+        [Parameter] public AddressRequest AddressRequest { get; set; } = new();
         [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
 
         private async Task SaveAsync()
         {
-            var response = await ContactManager.Save(ContactRequest);
+            var response = await AddressManager.Save(AddressRequest);
             if (response.Succeeded)
             {
                 _snackBar.Add(response.Messages[0], Severity.Success);

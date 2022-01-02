@@ -2,23 +2,26 @@
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using SharedR.Requests.Partners;
+using System;
 using System.Threading.Tasks;
 
-namespace Admin.Pages.Pages.Partnerships.Addresses
+namespace Admin.Pages.Partnerships.Getting_Started
 {
-    public partial class AddEditAddressModal
+    public partial class AddAddress
     {
         [Inject] private IAddressManager AddressManager { get; set; }
-        [Parameter] public AddressRequest AddressRequest { get; set; } = new();
-        [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
+        [Parameter]
+        public Guid PartnerId { get; set; }
+        public AddressRequest AddressRequest { get; set; } = new();
 
         private async Task SaveAsync()
         {
+            AddressRequest.PartnerId = PartnerId;
             var response = await AddressManager.Save(AddressRequest);
             if (response.Succeeded)
             {
                 _snackBar.Add(response.Messages[0], Severity.Success);
-                MudDialog.Close();
+                Continue();
             }
             else
             {
@@ -28,10 +31,13 @@ namespace Admin.Pages.Pages.Partnerships.Addresses
                 }
             }
         }
-
-        public void Cancel()
+        private void Continue()
         {
-            MudDialog.Cancel();
+            _navigationManager.NavigateTo($"/partnership/add-contact/{PartnerId}");
+        }
+        private void Cancel()
+        {
+            _navigationManager.NavigateTo("/getting-started");
         }
     }
 }

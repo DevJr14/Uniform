@@ -1,4 +1,6 @@
-﻿using Clients.Infrastructure.Managers.Partnerships.Address;
+﻿using Admin.Pages.Partnerships.Addresses;
+using Clients.Infrastructure.Managers.Partnerships.Address;
+using Clients.Infrastructure.Managers.Partnerships.Contact;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
@@ -11,16 +13,15 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace Admin.Pages.Pages.Partnerships.Addresses
+namespace Admin.Pages.Partnerships.Contacts
 {
-    public partial class Addresses
+    public partial class Contacts
     {
-        [Inject] private IAddressManager AddressManager { get; set; }
+        [Inject] private IContactManager ContactManager { get; set; }
         [Parameter] public Guid PartnerId { get; set; }
-        public List<AddressResponse> AddressResponses { get; set; } = new();
-        public AddressResponse Address { get; set; } = new();
-        public AddressRequest AddressRequest { get; set; } = new();
-
+        public ContactRequest ContactRequest { get; set; } = new();
+        public List<ContactResponse> ContactResponses { get; set; } = new();
+        public ContactResponse Contact { get; set; } = new();
         private ClaimsPrincipal _currentUser;
         private bool _canCreatePartners;
         private bool _canEditPartners;
@@ -39,54 +40,48 @@ namespace Admin.Pages.Pages.Partnerships.Addresses
             _canDeletePartners = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Partners.Delete)).Succeeded;
             _canExportPartners = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Partners.Export)).Succeeded;
             _canSearchPartners = (await _authorizationService.AuthorizeAsync(_currentUser, Permissions.Partners.Search)).Succeeded;
-           
-            await GetAddresses();
+
+            await GetContacts();
         }
 
-        private async Task GetAddresses()
+        private async Task GetContacts()
         {
             if (PartnerId != Guid.Empty)
             {
-                var response = await AddressManager.GetForPartner(PartnerId);
+                var response = await ContactManager.GetForPartner(PartnerId);
                 _loaded = true;
                 if (response.Succeeded)
                 {
-                    AddressResponses = response.Data;
+                    ContactResponses = response.Data;
                 }
             }
         }
-        private bool Search(AddressResponse address)
+
+        private bool Search(ContactResponse contact)
         {
             if (string.IsNullOrWhiteSpace(_searchString)) return true;
-            if (address.StreetName?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
+            if (contact.Title?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
             {
                 return true;
             }
-            if (address.Suburb?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
+            if (contact.CellphoneNo?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
             {
                 return true;
             }
-            if (address.City?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
+            if (contact.TelephoneNo?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
             {
                 return true;
             }
-            if (address.Province?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
-            {
-                return true;
-            }
-            if (address.Country?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
-            {
-                return true;
-            }
-            if (address.PostalCode?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
+            if (contact.Email?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
             {
                 return true;
             }
             return false;
         }
+
         private async Task Delete(Guid id)
         {
-            string deleteContent = "Are you sure you want to delete address?";
+            string deleteContent = "Are you sure you want to delete contact?";
             var parameters = new DialogParameters
             {
                 {nameof(Shared.Dialogs.DeleteConfirmation.ContentText), string.Format(deleteContent, id)}
@@ -96,11 +91,11 @@ namespace Admin.Pages.Pages.Partnerships.Addresses
             var result = await dialog.Result;
             if (!result.Cancelled)
             {
-                var response = await AddressManager.Delete(id);
+                var response = await ContactManager.Delete(id);
                 if (response.Succeeded)
                 {
                     _snackBar.Add(response.Messages[0], Severity.Success);
-                    await GetAddresses();
+                    await GetContacts();
                 }
                 else
                 {
@@ -111,34 +106,33 @@ namespace Admin.Pages.Pages.Partnerships.Addresses
                 }
             }
         }
+
         private async Task InvokeModal(Guid id)
         {
             var parameters = new DialogParameters();
             if (id != Guid.Empty)
             {
-                var address = AddressResponses.FirstOrDefault(c => c.Id == id);
-                if (address != null)
+                var contact = ContactResponses.FirstOrDefault(c => c.Id == id);
+                if (contact != null)
                 {
-                    parameters.Add(nameof(AddEditAddressModal.AddressRequest), new AddressRequest
+                    parameters.Add(nameof(AddEditContactModal.ContactRequest), new ContactRequest
                     {
-                        Id = address.Id,
-                        PartnerId = address.PartnerId,
-                        StreetName = address.StreetName,
-                        Suburb = address.Suburb,
-                        City = address.City,
-                        Province = address.Province,
-                        Country = address.Country,
-                        PostalCode = address.PostalCode,
-                        IsActive = address.IsActive
+                        Id = contact.Id,
+                        PartnerId = contact.PartnerId,
+                        Title = contact.Title,
+                        CellphoneNo = contact.CellphoneNo,
+                        TelephoneNo = contact.TelephoneNo,
+                        Email = contact.Email,
+                        IsActive = contact.IsActive
                     });
                 }
             }
             var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Medium, FullWidth = true, DisableBackdropClick = true };
-            var dialog = _dialogService.Show<AddEditAddressModal>(id == Guid.Empty ? "Create" : "Edit", parameters, options);
+            var dialog = _dialogService.Show<AddEditContactModal>(id == Guid.Empty ? "Create" : "Edit", parameters, options);
             var result = await dialog.Result;
             if (!result.Cancelled)
             {
-                await GetAddresses();
+                await GetContacts();
             }
         }
     }

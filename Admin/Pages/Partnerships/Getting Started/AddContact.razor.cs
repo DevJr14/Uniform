@@ -1,27 +1,27 @@
-﻿using Clients.Infrastructure.Managers.Partnerships.Partner;
+﻿using Clients.Infrastructure.Managers.Partnerships.Contact;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using SharedR.Requests.Partners;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
-namespace Admin.Pages.Pages.Partnerships.Getting_Started
+namespace Admin.Pages.Partnerships.Getting_Started
 {
-    public partial class AddPartner
+    public partial class AddContact
     {
-        [Inject] private IPartnerManger PartnerManger { get; set; }
-        public PartnerRequest PartnerRequest { get; set; } = new();
-        MudDatePicker _picker;
+        [Inject] private IContactManager ContactManager { get; set; }
+        [Parameter]
+        public Guid PartnerId { get; set; }
+        public ContactRequest ContactRequest { get; set; } = new();
 
         private async Task SaveAsync()
         {
-            var response = await PartnerManger.Save(PartnerRequest);
+            ContactRequest.PartnerId = PartnerId;
+            var response = await ContactManager.Save(ContactRequest);
             if (response.Succeeded)
             {
                 _snackBar.Add(response.Messages[0], Severity.Success);
-                Continue(response.Data);
+                Continue();
             }
             else
             {
@@ -31,9 +31,9 @@ namespace Admin.Pages.Pages.Partnerships.Getting_Started
                 }
             }
         }
-        private void Continue(Guid partnerId)
+        private void Continue()
         {
-            _navigationManager.NavigateTo($"/partnership/add-address/{partnerId}");
+            _navigationManager.NavigateTo($"/partnership/add-banking-details/{PartnerId}");
         }
         private void Cancel()
         {
