@@ -82,5 +82,33 @@ namespace Api.Controllers.Identity
         {
             return Ok(await _mediator.Send(new ExportUsersQuery()));
         }
+
+        [Authorize(Policy = Permissions.Users.Edit)]
+        [HttpPost("identity/[controller]/update-profile")]
+        public async Task<IActionResult> UpdateProfile(UpdateProfileRequest request)
+        {
+            return Ok(await _mediator.Send(new UpdateUserProfileCommand() { UpdateProfileRequest = request }));
+        }
+
+        [Authorize(Policy = Permissions.Users.Edit)]
+        [HttpPost("identity/[controller]/update-profile-picture")]
+        public async Task<IActionResult> UpdateProfilePicture(UpdateProfilePictureRequest request)
+        {
+            return Ok(await _mediator.Send(new UpdateUserProfilePictureCommand() { UpdateProfilePictureRequest = request }));
+        }
+
+        [Authorize(Policy = Permissions.Users.Edit)]
+        [HttpPost("identity/[controller]/change-password")]
+        public async Task<IActionResult> ChangePassword(ChangePasswordRequest request)
+        {
+            return Ok(await _mediator.Send(new ChangePasswordCommand() { ChangePasswordRequest = request }));
+        }
+
+        [Authorize(Policy = Permissions.Users.Export)]
+        [HttpGet("identity/[controller]/get-profile-picture")]
+        public async Task<IActionResult> GetProfilePicture(string id)
+        {
+            return Ok(await _mediator.Send(new GetUserProfilePictureQuery() { UserId = id }));
+        }
     }
 }
