@@ -256,7 +256,8 @@ namespace Api.Extensions
                 .AddTransient<IRoleService, RoleService>()
                 .AddTransient<IUserService, UserService>()
                 .AddTransient<IExportService, ExportService>()
-                .AddTransient<IUploadService, UploadService>();
+                .AddTransient<IUploadService, UploadService>()
+                .AddTransient<IAccountService, AccountService>();
             return services;
         }
     }
