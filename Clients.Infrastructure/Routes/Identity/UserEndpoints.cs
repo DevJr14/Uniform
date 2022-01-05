@@ -2,7 +2,7 @@
 {
     public static class UserEndpoints
     {
-        public static string GetAll = "api/v1/identity/users";
+        public static string GetAll = "api/v1/identity/users/get-all";
         public static string Export = "api/v1/identity/users/export";
         public static string Register = "api/v1/identity/users";
         public static string ToggleUserStatus = "api/v1/identity/users/toggle-status";
