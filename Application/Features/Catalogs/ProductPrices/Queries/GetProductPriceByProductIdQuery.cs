@@ -3,7 +3,7 @@ using AutoMapper;
 using Domain.Entities.Catalog;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Shared.Wrapper;
+using SharedR.Wrapper;
 using SharedR.Responses.Catalogs;
 using System;
 using System.Linq;

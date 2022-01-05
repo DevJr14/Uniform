@@ -1,6 +1,6 @@
 ﻿using Application.Identity.Interfaces;
 using MediatR;
-using Shared.Wrapper;
+using SharedR.Wrapper;
 using SharedR.Requests.Identity;
 using System.Threading;
 using System.Threading.Tasks;

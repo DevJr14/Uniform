@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Shared.Wrapper
+namespace SharedR.Wrapper
 {
     public class PaginatedResult<T> : Result
     {

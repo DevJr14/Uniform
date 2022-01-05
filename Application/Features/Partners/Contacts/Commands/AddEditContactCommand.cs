@@ -3,7 +3,7 @@ using Application.Interfaces.Repositories;
 using AutoMapper;
 using Domain.Entities.Partners;
 using MediatR;
-using Shared.Wrapper;
+using SharedR.Wrapper;
 using SharedR.Requests.Partners;
 using System;
 using System.Linq;

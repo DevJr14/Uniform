@@ -3,7 +3,7 @@ using Application.Interfaces.Repositories;
 using Domain.Entities.Catalog;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Shared.Wrapper;
+using SharedR.Wrapper;
 using System;
 using System.Linq;
 using System.Threading;

@@ -7,11 +7,11 @@ using Infrastructure.Models.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
-using Shared.Constants.Role;
+using SharedR.Constants.Role;
 using SharedR.Requests;
 using SharedR.Requests.Identity;
 using SharedR.Responses.Identity;
-using Shared.Wrapper;
+using SharedR.Wrapper;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -19,7 +19,6 @@ using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using static Shared.Permission.Permissions;
 
 namespace Infrastructure.Services.Identity
 {

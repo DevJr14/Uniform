@@ -3,7 +3,7 @@ using Application.Interfaces.Services;
 using AutoMapper;
 using Domain.Entities.Catalog;
 using MediatR;
-using Shared.Wrapper;
+using SharedR.Wrapper;
 using SharedR.Requests.Catalogs;
 using System;
 using System.Threading;

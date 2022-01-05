@@ -5,7 +5,7 @@ using Domain.Entities.Catalog;
 using Domain.Entities.Partners;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Shared.Wrapper;
+using SharedR.Wrapper;
 using SharedR.Responses.Catalogs;
 using System;
 using System.Collections.Generic;

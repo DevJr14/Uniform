@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Reflection;
 
-namespace Shared.Permission
+namespace SharedR.Constants.Permission
 {
     public static class Permissions
     {

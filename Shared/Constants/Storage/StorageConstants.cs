@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shared.Constants.Storage
+namespace SharedR.Constants.Storage
 {
     public static class StorageConstants
     {

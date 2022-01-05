@@ -2,7 +2,7 @@
 using Application.Interfaces.Repositories;
 using Domain.Entities.Partners;
 using MediatR;
-using Shared.Wrapper;
+using SharedR.Wrapper;
 using System;
 using System.Threading;
 using System.Threading.Tasks;

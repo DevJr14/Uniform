@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Infrastructure.Models.Identity;
-using Shared.Permission;
+using SharedR.Constants.Permission;
 using SharedR.Responses.Identity;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,7 +1,7 @@
 ﻿using Clients.Infrastructure.Extensions;
 using Clients.Infrastructure.Routes.Partnership;
 using SharedR.Requests.Partners;
-using Shared.Wrapper;
+using SharedR.Wrapper;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;

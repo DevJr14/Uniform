@@ -1,5 +1,5 @@
 ﻿using Clients.Infrastructure.Extensions;
-using Shared.Wrapper;
+using SharedR.Wrapper;
 using SharedR.Requests.Identity;
 using SharedR.Responses.Identity;
 using System;

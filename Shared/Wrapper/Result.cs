@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Shared.Wrapper
+namespace SharedR.Wrapper
 {
     public class Result : IResult
     {

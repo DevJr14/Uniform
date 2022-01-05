@@ -1,4 +1,4 @@
-﻿namespace Shared.Constants.Role
+﻿namespace SharedR.Constants.Role
 {
     public static class RoleConstants
     {

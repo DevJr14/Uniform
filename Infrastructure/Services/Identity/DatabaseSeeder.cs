@@ -4,12 +4,11 @@ using Application.Identity.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Infrastructure.Models.Identity;
-using Shared.Constants.Role;
-using Shared.Constants.User;
-using Shared.Permission;
+using SharedR.Constants.User;
+using SharedR.Constants.Permission;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
+using SharedR.Constants.Role;
 
 namespace Infrastructure.Services.Identity
 {

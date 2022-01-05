@@ -3,7 +3,7 @@ using Application.Interfaces.Services;
 using Infrastructure.Models.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Shared.Wrapper;
+using SharedR.Wrapper;
 using SharedR.Requests.Identity;
 using System.Linq;
 using System.Threading.Tasks;

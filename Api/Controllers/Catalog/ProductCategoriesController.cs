@@ -2,7 +2,7 @@
 using Application.Features.Catalogs.ProductCategories.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Shared.Permission;
+using SharedR.Constants.Permission;
 using SharedR.Requests.Catalogs;
 using System;
 using System.Threading.Tasks;

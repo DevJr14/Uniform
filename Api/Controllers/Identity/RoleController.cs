@@ -2,7 +2,7 @@
 using Application.Identity.Queries.Role;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Shared.Permission;
+using SharedR.Constants.Permission;
 using SharedR.Requests.Identity;
 using System.Threading.Tasks;
 

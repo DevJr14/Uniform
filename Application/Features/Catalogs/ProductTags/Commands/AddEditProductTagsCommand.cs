@@ -3,7 +3,7 @@ using Application.Identity.Interfaces;
 using Application.Interfaces.Repositories;
 using Domain.Entities.Catalog;
 using MediatR;
-using Shared.Wrapper;
+using SharedR.Wrapper;
 using SharedR.Requests.Catalogs;
 using System;
 using System.Collections.Generic;

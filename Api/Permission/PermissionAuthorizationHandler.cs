@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using System.Linq;
 using System.Threading.Tasks;
-using Shared.Permission;
+using SharedR.Constants.Permission;
 
 namespace Permission
 {

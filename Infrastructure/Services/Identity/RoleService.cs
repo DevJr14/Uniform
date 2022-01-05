@@ -4,15 +4,15 @@ using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Infrastructure.Models.Identity;
-using Shared.Constants.Role;
-using Shared.Permission;
+using SharedR.Constants.Permission;
 using SharedR.Requests.Identity;
 using SharedR.Responses.Identity;
-using Shared.Wrapper;
+using SharedR.Wrapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SharedR.Constants.Role;
 
 namespace Infrastructure.Services.Identity
 {

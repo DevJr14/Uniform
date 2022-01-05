@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Shared.Wrapper
+namespace SharedR.Wrapper
 {
     public interface IResult
     {

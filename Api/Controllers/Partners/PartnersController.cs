@@ -2,7 +2,7 @@
 using Application.Features.Partners.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Shared.Permission;
+using SharedR.Constants.Permission;
 using SharedR.Requests.Partners;
 using System;
 using System.Threading.Tasks;

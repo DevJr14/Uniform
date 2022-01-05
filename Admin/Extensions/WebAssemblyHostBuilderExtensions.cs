@@ -16,7 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;
 using MudBlazor.Services;
-using Shared.Permission;
+using SharedR.Constants.Permission;
 using System;
 using System.Globalization;
 using System.Linq;

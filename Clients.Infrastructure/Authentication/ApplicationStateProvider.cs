@@ -1,7 +1,7 @@
 ﻿using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
-using Shared.Constants.Storage;
-using Shared.Permission;
+using SharedR.Constants.Storage;
+using SharedR.Constants.Permission;
 using System;
 using System.Collections.Generic;
 using System.Linq;

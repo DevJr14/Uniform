@@ -1,4 +1,4 @@
-﻿namespace Shared.Constants.User
+﻿namespace SharedR.Constants.User
 {
     public static class UserConstants
     {

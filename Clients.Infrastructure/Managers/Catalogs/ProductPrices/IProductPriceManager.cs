@@ -1,4 +1,4 @@
-﻿using Shared.Wrapper;
+﻿using SharedR.Wrapper;
 using SharedR.Requests.Catalogs;
 using SharedR.Responses.Catalogs;
 using System;

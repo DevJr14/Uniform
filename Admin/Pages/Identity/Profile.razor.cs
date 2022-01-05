@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
-using Shared.Constants.Storage;
+using SharedR.Constants.Storage;
 using SharedR.Enums;
 using SharedR.Requests.Identity;
 using System;

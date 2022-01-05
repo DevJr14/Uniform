@@ -1,4 +1,4 @@
-﻿namespace Shared.Permission
+﻿namespace SharedR.Constants.Permission
 {
     public static class ApplicationClaimTypes
     {

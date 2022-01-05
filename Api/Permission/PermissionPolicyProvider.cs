@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Options;
 using System;
 using System.Threading.Tasks;
-using Shared.Permission;
+using SharedR.Constants.Permission;
 
 namespace Permission
 {

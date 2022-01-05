@@ -1,7 +1,7 @@
 ﻿using Application.Interfaces.Repositories;
 using AutoMapper;
 using MediatR;
-using Shared.Wrapper;
+using SharedR.Wrapper;
 using System.Threading.Tasks;
 using System.Threading;
 using System;

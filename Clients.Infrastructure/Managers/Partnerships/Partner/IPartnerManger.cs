@@ -1,5 +1,5 @@
 ﻿using SharedR.Requests.Partners;
-using Shared.Wrapper;
+using SharedR.Wrapper;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

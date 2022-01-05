@@ -1,6 +1,6 @@
 ﻿using Clients.Infrastructure.Extensions;
 using Clients.Infrastructure.Routes.Partnership;
-using Shared.Wrapper;
+using SharedR.Wrapper;
 using SharedR.Requests.Partners;
 using SharedR.Responses.Partners;
 using System;

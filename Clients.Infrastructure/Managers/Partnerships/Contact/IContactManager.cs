@@ -1,4 +1,4 @@
-﻿using Shared.Wrapper;
+﻿using SharedR.Wrapper;
 using SharedR.Requests.Partners;
 using SharedR.Responses.Partners;
 using System;

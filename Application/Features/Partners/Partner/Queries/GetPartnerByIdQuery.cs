@@ -3,7 +3,7 @@ using AutoMapper;
 using Domain.Entities.Partners;
 using MediatR;
 using SharedR.Responses.Partners;
-using Shared.Wrapper;
+using SharedR.Wrapper;
 using System;
 using System.Threading;
 using System.Threading.Tasks;

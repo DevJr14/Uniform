@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using Shared.Permission;
+using SharedR.Constants.Permission;
 using SharedR.Requests.Partners;
 using SharedR.Responses.Partners;
 using System;

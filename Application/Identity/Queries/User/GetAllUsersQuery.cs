@@ -1,7 +1,7 @@
 ﻿using Application.Identity.Interfaces;
 using MediatR;
 using SharedR.Responses.Identity;
-using Shared.Wrapper;
+using SharedR.Wrapper;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;

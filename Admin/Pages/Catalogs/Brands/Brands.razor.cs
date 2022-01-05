@@ -4,7 +4,7 @@ using Clients.Infrastructure.Managers.Catalogs.Categories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using Shared.Permission;
+using SharedR.Constants.Permission;
 using SharedR.Requests.Catalogs;
 using SharedR.Responses.Catalogs;
 using System;
