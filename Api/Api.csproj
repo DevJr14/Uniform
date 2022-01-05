@@ -32,8 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Files\" />
-    <Folder Include="Files\" />
+    <Folder Include="Files\Images\ProfilePictures\" />
   </ItemGroup>
 
 </Project>

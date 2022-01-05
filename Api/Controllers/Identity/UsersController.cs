@@ -104,7 +104,7 @@ namespace Api.Controllers.Identity
             return Ok(await _mediator.Send(new ChangePasswordCommand() { ChangePasswordRequest = request }));
         }
 
-        [Authorize(Policy = Permissions.Users.Export)]
+        [Authorize(Policy = Permissions.Users.View)]
         [HttpGet("identity/[controller]/get-profile-picture")]
         public async Task<IActionResult> GetProfilePicture(string id)
         {
