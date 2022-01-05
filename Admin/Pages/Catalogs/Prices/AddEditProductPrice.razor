@@ -7,11 +7,13 @@
                     <MudText>Product Pricing</MudText>
                 </CardHeaderContent>
                 <CardHeaderActions>
-                    <MudFab Color="Color.Success"
-                            Icon="@Icons.Material.Filled.Add"
-                            Size="Size.Small" IconSize="Size.Medium" Class="mr-2"
-                            DisableElevation="true" aria-label="add"
-                            ButtonType="ButtonType.Submit" />
+                    <MudTooltip Text="Save" Delay="0" Placement="Placement.Start">
+                        <MudFab Color="Color.Success"
+                                Icon="@Icons.Material.Filled.Save"
+                                Size="Size.Small" IconSize="Size.Medium" Class="mr-2"
+                                DisableElevation="true" aria-label="add"
+                                ButtonType="ButtonType.Submit" />
+                    </MudTooltip>
                 </CardHeaderActions>
             </MudCardHeader>
             <MudCardContent>
