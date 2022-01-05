@@ -84,7 +84,7 @@ namespace Api.Controllers.Identity
         }
 
         [Authorize(Policy = Permissions.Users.Edit)]
-        [HttpPost("identity/[controller]/update-profile")]
+        [HttpPut("identity/[controller]/update-profile")]
         public async Task<IActionResult> UpdateProfile(UpdateProfileRequest request)
         {
             return Ok(await _mediator.Send(new UpdateUserProfileCommand() { UpdateProfileRequest = request }));
@@ -92,13 +92,13 @@ namespace Api.Controllers.Identity
 
         [Authorize(Policy = Permissions.Users.Edit)]
         [HttpPost("identity/[controller]/update-profile-picture")]
-        public async Task<IActionResult> UpdateProfilePicture(UpdateProfilePictureRequest request)
+        public async Task<IActionResult> UpdateProfilePicture(string userid, UpdateProfilePictureRequest request)
         {
-            return Ok(await _mediator.Send(new UpdateUserProfilePictureCommand() { UpdateProfilePictureRequest = request }));
+            return Ok(await _mediator.Send(new UpdateUserProfilePictureCommand() { UpdateProfilePictureRequest = request, UserId = userid }));
         }
 
         [Authorize(Policy = Permissions.Users.Edit)]
-        [HttpPost("identity/[controller]/change-password")]
+        [HttpPut("identity/[controller]/change-password")]
         public async Task<IActionResult> ChangePassword(ChangePasswordRequest request)
         {
             return Ok(await _mediator.Send(new ChangePasswordCommand() { ChangePasswordRequest = request }));
@@ -106,9 +106,9 @@ namespace Api.Controllers.Identity
 
         [Authorize(Policy = Permissions.Users.View)]
         [HttpGet("identity/[controller]/get-profile-picture")]
-        public async Task<IActionResult> GetProfilePicture(string id)
+        public async Task<IActionResult> GetProfilePicture([FromQuery] string userId)
         {
-            return Ok(await _mediator.Send(new GetUserProfilePictureQuery() { UserId = id }));
+            return Ok(await _mediator.Send(new GetUserProfilePictureQuery() { UserId = userId }));
         }
     }
 }
