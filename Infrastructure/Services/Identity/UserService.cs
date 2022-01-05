@@ -99,7 +99,7 @@ namespace Infrastructure.Services.Identity
             // visit https://go.microsoft.com/fwlink/?LinkID=532713
             var code = await _userManager.GeneratePasswordResetTokenAsync(user);
             code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-            var route = "account/reset-password";
+            var route = "pages/authentication/reset-password";
             var endpointUri = new Uri(string.Concat($"{origin}/", route));
             var passwordResetURL = QueryHelpers.AddQueryString(endpointUri.ToString(), "Token", code);
             var mailRequest = new MailRequest
