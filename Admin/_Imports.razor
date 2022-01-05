@@ -17,6 +17,7 @@
 @using Clients.Infrastructure.Managers.Interceptors
 @using Clients.Infrastructure.Managers.Identity.Authentication
 @using Clients.Infrastructure.Authentication
+@using Clients.Infrastructure.Managers.Identity.Identity.Users
 @using Admin.Pages.Authentication
 @using Admin.Pages.Partnerships.Addresses
 @using Admin.Pages.Partnerships.Contacts
@@ -32,6 +33,7 @@
 @inject NavigationManager _navigationManager
 @inject ApplicationStateProvider _stateProvider
 @inject IAuthorizationService _authorizationService
+@inject IUserManager _userManager
 @inject ISnackbar _snackBar
 @inject IDialogService _dialogService
 @inject HttpClient _httpClient
