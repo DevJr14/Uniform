@@ -21,7 +21,7 @@ else
                     <MudCardContent Class="pa-46" Style="padding:26px!important">
                         <MudGrid>
                             <MudCheckBox @bind-Checked="@_active" Label="Active?" Color="Color.Primary"></MudCheckBox>
-                            <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small" Class="ml-auto" OnClick="ToggleUserStatus" ButtonType="ButtonType.Submit">@(_active ? "Activate User": "De-Activate User")</MudButton>
+                            <MudButton DisableElevation Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small" Class="ml-auto" OnClick="ToggleUserStatus" ButtonType="ButtonType.Submit">@(_active ? "Activate User": "De-Activate User")</MudButton>
                         </MudGrid>
                     </MudCardContent>
                 </MudCard>

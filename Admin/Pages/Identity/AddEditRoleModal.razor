@@ -29,15 +29,15 @@
             </MudGrid>
         </DialogContent>
         <DialogActions>
-            <MudButton Variant="Variant.Filled" Class="mr-auto" OnClick="Cancel">Cancel</MudButton>
+            <MudButton DisableElevation Variant="Variant.Filled" Class="mr-auto" OnClick="Cancel">Cancel</MudButton>
             @{
                 if (RoleModel.Id == null)
                 {
-                    <MudButton Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Success">Save</MudButton>
+                    <MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Success">Save</MudButton>
                 }
                 else
                 {
-                    <MudButton Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Secondary">Update</MudButton>
+                    <MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Secondary">Update</MudButton>
                 }
             }
         </DialogActions>

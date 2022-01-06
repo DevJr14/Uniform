@@ -24,7 +24,7 @@ else
                     <MudFab Color="Color.Success" Icon="@Icons.Material.Filled.Add" Size="Size.Small" IconSize="Size.Medium" Class="mr-2" OnClick="(() => InvokeModal())" DisableElevation="true" aria-label="add" />
                 }
             </div>
-            <MudToolBarSpacer />
+            <MudSpacer />
             @if (_canSearchRoles)
             {
                 <MudTextField @bind-Value="_searchString" Immediate="true" FullWidth=false Placeholder="Search For Roles" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0 mb-3"></MudTextField>
