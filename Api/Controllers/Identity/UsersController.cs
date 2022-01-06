@@ -33,7 +33,7 @@ namespace Api.Controllers.Identity
         }
 
         [Authorize(Policy = Permissions.Users.Edit)]
-        [HttpPut("identity/[controller]/update-roles/{id}")]
+        [HttpPut("identity/[controller]/update-roles")]
         public async Task<IActionResult> UpdateUserRolesAsync(UpdateUserRolesRequest request)
         {
             return Ok(await _mediator.Send(new UpdateUserRolesCommand() { UpdateUserRolesRequest = request }));
