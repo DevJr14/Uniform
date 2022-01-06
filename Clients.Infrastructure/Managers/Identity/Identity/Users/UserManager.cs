@@ -53,7 +53,7 @@ namespace Clients.Infrastructure.Managers.Identity.Identity.Users
 
         public async Task<IResult> UpdateRolesAsync(UpdateUserRolesRequest request)
         {
-            var response = await _httpClient.PutAsJsonAsync(Routes.Identity.UserEndpoints.GetUserRoles(request.UserId), request);
+            var response = await _httpClient.PutAsJsonAsync(Routes.Identity.UserEndpoints.UpdateRoles, request);
             return await response.ToResult<UserRolesResponse>();
         }
 
