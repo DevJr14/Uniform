@@ -9,7 +9,7 @@ namespace Admin.Pages.Partnerships
 {
     public partial class AddEditPartnerModal
     {
-        [Inject] private IPartnerManger PartnerManger { get; set; }
+        [Inject] private IPartnerManager PartnerManger { get; set; }
         [Parameter] public PartnerRequest PartnerRequest { get; set; } = new();
         [CascadingParameter] private MudDialogInstance MudDialog { get; set; }
 

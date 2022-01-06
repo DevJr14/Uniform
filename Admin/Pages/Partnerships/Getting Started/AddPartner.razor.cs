@@ -11,7 +11,7 @@ namespace Admin.Pages.Partnerships.Getting_Started
 {
     public partial class AddPartner
     {
-        [Inject] private IPartnerManger PartnerManger { get; set; }
+        [Inject] private IPartnerManager PartnerManger { get; set; }
         public PartnerRequest PartnerRequest { get; set; } = new();
         MudDatePicker _picker;
 

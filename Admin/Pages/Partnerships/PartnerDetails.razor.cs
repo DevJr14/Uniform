@@ -11,7 +11,7 @@ namespace Admin.Pages.Partnerships
 {
     public partial class PartnerDetails
     {
-        [Inject] private IPartnerManger PartnerManager { get; set; }
+        [Inject] private IPartnerManager PartnerManager { get; set; }
         [Parameter]
         public Guid PartnerId { get; set; } 
         public PartnerResponse PartnerResponse { get; set; } = new();
