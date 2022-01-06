@@ -1,8 +1,5 @@
 ﻿using Admin.Extensions;
 using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Admin.Shared
@@ -15,6 +12,7 @@ namespace Admin.Shared
         private string SecondName { get; set; }
         private string Email { get; set; }
         private char FirstLetterOfName { get; set; }
+        private bool _isLoaded;
 
         [Parameter]
         public string ImageDataUrl { get; set; }
@@ -42,6 +40,7 @@ namespace Admin.Shared
             {
                 ImageDataUrl = imageResponse.Data;
             }
+            _isLoaded = true;
         }
     }
 }

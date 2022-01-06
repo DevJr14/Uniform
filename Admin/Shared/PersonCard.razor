@@ -1,20 +1,29 @@
 ﻿<MudCard Elevation="0" Square="true" Class="@Class" Style="@Style">
-    <MudCardHeader>
-        <CardHeaderAvatar>
-            @if (string.IsNullOrEmpty(ImageDataUrl))
-            {
-                <MudAvatar Color="Color.Secondary">@FirstLetterOfName</MudAvatar>
-            }
-            else
-            {
-                <MudAvatar Image="@ImageDataUrl" Style="height:50px; width:50px;"> </MudAvatar>
-            }
-        </CardHeaderAvatar>
-        <CardHeaderContent>
-            <MudText Typo="Typo.body2">@FirstName @SecondName</MudText>
-            <MudText Typo="Typo.caption">@Email</MudText>
-        </CardHeaderContent>
-    </MudCardHeader>
+    @if (!_isLoaded)
+    {
+        <MudCardContent>
+            <MudProgressCircular Color="Color.Primary" Size="Size.Medium" Indeterminate="true" />            
+        </MudCardContent>
+    }
+    else
+    {
+        <MudCardHeader>
+            <CardHeaderAvatar>
+                @if (string.IsNullOrEmpty(ImageDataUrl))
+                {
+                    <MudAvatar Color="Color.Secondary">@FirstLetterOfName</MudAvatar>
+                }
+                else
+                {
+                    <MudAvatar Image="@ImageDataUrl" Style="height:50px; width:50px;"> </MudAvatar>
+                }
+            </CardHeaderAvatar>
+            <CardHeaderContent>
+                <MudText Typo="Typo.body2">@FirstName @SecondName</MudText>
+                <MudText Typo="Typo.caption">@Email</MudText>
+            </CardHeaderContent>
+        </MudCardHeader>
+    }
 </MudCard>
 
 @code {
