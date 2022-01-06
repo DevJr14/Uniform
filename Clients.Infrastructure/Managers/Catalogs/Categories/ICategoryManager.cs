@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Clients.Infrastructure.Managers.Catalogs.Categories
 {
-    public interface ICategoryManager
+    public interface ICategoryManager : IManager
     {
         Task<IResult<List<CategoryResponse>>> GetAll();
         Task<IResult<List<CategoryResponse>>> GetForPartner();

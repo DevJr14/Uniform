@@ -7,7 +7,7 @@ using SharedR.Responses.Partners;
 
 namespace Clients.Infrastructure.Managers.Partnerships.Partner
 {
-    public interface IPartnerManger 
+    public interface IPartnerManager : IManager
     {
         Task<IResult<List<PartnerResponse>>> GetAll();
         Task<IResult<List<PartnerResponse>>> GetByVerification(bool isVerified);

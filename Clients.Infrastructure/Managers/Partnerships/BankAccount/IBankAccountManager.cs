@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Clients.Infrastructure.Managers.Partnerships.BankAccount
 {
-    public interface IBankAccountManager
+    public interface IBankAccountManager : IManager
     {
         Task<IResult<List<BankAccountResponse>>> GetAll();
         Task<IResult<List<BankAccountResponse>>> GetForPartner(Guid partnerId);

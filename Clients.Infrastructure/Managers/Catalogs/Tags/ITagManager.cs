@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Clients.Infrastructure.Managers.Catalogs.Tags
 {
-    public interface ITagManager
+    public interface ITagManager : IManager
     {
         Task<IResult<List<TagResponse>>> GetAll();
         Task<IResult<List<TagResponse>>> GetForPartner();

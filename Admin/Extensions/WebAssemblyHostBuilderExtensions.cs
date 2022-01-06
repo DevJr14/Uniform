@@ -69,14 +69,6 @@ namespace Admin.Extensions
                 })
                 .AddHttpMessageHandler<AuthenticationHeaderHandler>();
             builder.Services.AddHttpClientInterceptor();
-            builder.Services.AddTransient<IPartnerManger, PartnerManager>();
-            builder.Services.AddTransient<IAddressManager, AddressManager>();
-            builder.Services.AddTransient<IContactManager, ContactManager>();
-            builder.Services.AddTransient<IBankAccountManager, BankAccountManager>();
-            builder.Services.AddTransient<ITagManager, TagManager>();
-            builder.Services.AddTransient<ICategoryManager, CategoryManager>();
-            //builder.Services.AddTransient<IBrandManager, BrandManager>();
-            builder.Services.AddTransient<IProductManager, ProductManager>();
             return builder;
         }
 

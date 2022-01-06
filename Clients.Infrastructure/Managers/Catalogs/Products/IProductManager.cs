@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Clients.Infrastructure.Managers.Catalogs.Products
 {
-    public interface IProductManager
+    public interface IProductManager : IManager
     {
         Task<IResult<List<ProductResponse>>> GetAll();
         Task<IResult<List<ProductResponse>>> GetForPartner();

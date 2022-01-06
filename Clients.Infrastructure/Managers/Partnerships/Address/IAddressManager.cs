@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Clients.Infrastructure.Managers.Partnerships.Address
 {
-    public interface IAddressManager
+    public interface IAddressManager : IManager
     {
         Task<IResult<List<AddressResponse>>> GetAll();
         Task<IResult<List<AddressResponse>>> GetForPartner(Guid partnerId);

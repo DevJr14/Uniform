@@ -11,7 +11,7 @@ using SharedR.Responses.Partners;
 
 namespace Clients.Infrastructure.Managers.Partnerships.Partner
 {
-    public class PartnerManager : IPartnerManger
+    public class PartnerManager : IPartnerManager
     {
         private readonly HttpClient _httpClient;
 
