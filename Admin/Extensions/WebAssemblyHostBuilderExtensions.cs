@@ -53,6 +53,7 @@ namespace Admin.Extensions
                     configuration.SnackbarConfiguration.VisibleStateDuration = 6000;
                     configuration.SnackbarConfiguration.ShowCloseIcon = true;
                 })
+                .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())
                 .AddScoped<ApplicationStateProvider>()
                 .AddScoped<AuthenticationStateProvider, ApplicationStateProvider>()
                 .AddManagers()
