@@ -95,13 +95,13 @@ namespace Admin.Pages.Identity
 
         private void ViewProfile(string userId)
         {
-            _navigationManager.NavigateTo($"/user-profile/{userId}");
+            _navigationManager.NavigateTo($"/pages/identity/user-profile/{userId}");
         }
 
         private void ManageRoles(string userId, string email)
         {
             if (email == "junior@rus.com") _snackBar.Add("Not Allowed.", Severity.Error);
-            else _navigationManager.NavigateTo($"/identity/user-roles/{userId}");
+            else _navigationManager.NavigateTo($"/pages/identity/user-roles/{userId}");
         }
 
         private void Cancel()
