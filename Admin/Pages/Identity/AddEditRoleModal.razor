@@ -24,7 +24,7 @@
                     <MudTextField For="@(() => RoleModel.Name)" @bind-Value="RoleModel.Name" Margin="Margin.Dense" Variant="Variant.Outlined" Label="Role Name" />
                 </MudItem>
                 <MudItem xs="12">
-                    <MudTextField For="@(() => RoleModel.Description)" @bind-Value="RoleModel.Description" Margin="Margin.Dense" Variant="Variant.Outlined" Label="Description" />
+                    <MudTextField For="@(() => RoleModel.Description)" @bind-Value="RoleModel.Description" Lines="3" Margin="Margin.Dense" Variant="Variant.Outlined" Label="Description" />
                 </MudItem>
             </MudGrid>
         </DialogContent>
