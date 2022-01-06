@@ -10,15 +10,16 @@
         public static string ChangePassword = "api/v1/identity/users/change-password";
         public static string ResetPassword = "api/v1/identity/users/reset-password";
         public static string UpdateProfile = "api/v1/identity/users/update-profile";
+        public static string UpdateRoles = "api/v1/identity/users/update-roles";
 
         public static string Get(string userId)
         {
-            return $"api/v1/identity/users/{userId}";
+            return $"api/v1/identity/users/get-by/{userId}";
         }
 
         public static string GetUserRoles(string userId)
         {
-            return $"api/v1/identity/users/roles/{userId}";
+            return $"api/v1/identity/users/get-roles/{userId}";
         }
 
         public static string ExportFiltered(string searchString)
