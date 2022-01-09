@@ -71,6 +71,7 @@ namespace Infrastructure.Services.Identity
                 user.FirstName = request.FirstName;
                 user.LastName = request.LastName;
                 user.PhoneNumber = request.PhoneNumber;
+                user.IsPartner = request.IsPartner;
                 var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
                 if (request.PhoneNumber != phoneNumber)
                 {

@@ -182,6 +182,7 @@ namespace Infrastructure.Services.Identity
                 PhoneNumber = request.PhoneNumber,
                 IsActive = true,
                 IsApproved = false,
+                IsPartner = request.IsPartner,
                 EmailConfirmed = request.AutoConfirmEmail
             };
 
