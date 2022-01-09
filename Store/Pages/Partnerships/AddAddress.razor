@@ -1,0 +1,67 @@
+﻿@page "/partnership/add-address/{PartnerId:guid}"
+
+<Header OnClose="Cancel" Title="Partnership" Description="Add Address Details" />
+<MudTimeline TimelinePosition="TimelinePosition.Start" TimelineOrientation="TimelineOrientation.Horizontal">
+    <MudTimelineItem Color="Color.Success" Size="Size.Small">
+    </MudTimelineItem>
+    <MudTimelineItem Color="Color.Primary" Size="Size.Small">
+    </MudTimelineItem>
+    <MudTimelineItem Size="Size.Small">
+    </MudTimelineItem>
+    <MudTimelineItem Size="Size.Small">
+    </MudTimelineItem>
+</MudTimeline>
+<EditForm Model="AddressRequest" OnValidSubmit="SaveAsync">
+    <MudCard Elevation="25">
+        <MudCardContent>
+            <MudGrid>
+                <MudItem xs="12" sm="6" md="8">
+                    <MudTextField @bind-Value="@AddressRequest.StreetName"
+                                  Label="Street"
+                                  Variant="Variant.Outlined"
+                                  Margin="Margin.Dense" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudTextField @bind-Value="@AddressRequest.Suburb"
+                                  Label="Suburb"
+                                  Variant="Variant.Outlined"
+                                  Margin="Margin.Dense" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudTextField @bind-Value="@AddressRequest.City"
+                                  Label="City"
+                                  Variant="Variant.Outlined"
+                                  Margin="Margin.Dense" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudTextField @bind-Value="@AddressRequest.Province"
+                                  Label="Province"
+                                  Variant="Variant.Outlined"
+                                  Margin="Margin.Dense" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudTextField @bind-Value="@AddressRequest.Country"
+                                  Label="Country"
+                                  Variant="Variant.Outlined"
+                                  Margin="Margin.Dense" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="4">
+                    <MudTextField @bind-Value="@AddressRequest.PostalCode"
+                                  Label="Postal Code"
+                                  Variant="Variant.Outlined"
+                                  Margin="Margin.Dense" />
+                </MudItem>
+                <MudItem xs="12" sm="6" md="2">
+                    <MudCheckBox @bind-Checked="@AddressRequest.IsActive"
+                                 Label="Active" Dense="false" Color="Color.Primary" />
+                </MudItem>
+            </MudGrid>
+        </MudCardContent>
+        <MudCardActions Class="mx-2">
+            <MudButton DisableElevation Variant="Variant.Filled" OnClick="Cancel">Cancel</MudButton>
+            <MudSpacer />
+            <MudButton DisableElevation Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Success">Save And Continue</MudButton>
+        </MudCardActions>
+    </MudCard>
+
+</EditForm>
