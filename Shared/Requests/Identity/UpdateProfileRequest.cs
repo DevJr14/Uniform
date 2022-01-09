@@ -12,5 +12,6 @@ namespace SharedR.Requests.Identity
 
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
+        public bool IsPartner { get; set; }
     }
 }

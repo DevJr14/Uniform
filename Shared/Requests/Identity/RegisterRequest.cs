@@ -30,5 +30,6 @@ namespace SharedR.Requests.Identity
 
         public bool ActivateUser { get; set; } = false;
         public bool AutoConfirmEmail { get; set; } = false;
+        public bool IsPartner { get; set; } = false;
     }
 }
