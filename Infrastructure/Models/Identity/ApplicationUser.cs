@@ -21,6 +21,7 @@ namespace Infrastructure.Models.Identity
         public bool IsActive { get; set; }
         public bool IsApproved { get; set; }
         public string RefreshToken { get; set; }
+        public bool IsPartner { get; set; }
         public DateTime RefreshTokenExpiryTime { get; set; }
     }
 }
