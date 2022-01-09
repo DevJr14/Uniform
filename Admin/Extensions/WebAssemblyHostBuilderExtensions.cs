@@ -1,14 +1,6 @@
 ﻿using Blazored.LocalStorage;
 using Clients.Infrastructure.Authentication;
 using Clients.Infrastructure.Managers;
-using Clients.Infrastructure.Managers.Catalogs.Brands;
-using Clients.Infrastructure.Managers.Catalogs.Categories;
-using Clients.Infrastructure.Managers.Catalogs.Products;
-using Clients.Infrastructure.Managers.Catalogs.Tags;
-using Clients.Infrastructure.Managers.Partnerships.Address;
-using Clients.Infrastructure.Managers.Partnerships.BankAccount;
-using Clients.Infrastructure.Managers.Partnerships.Contact;
-using Clients.Infrastructure.Managers.Partnerships.Partner;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
