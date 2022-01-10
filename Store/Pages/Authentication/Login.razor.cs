@@ -23,7 +23,7 @@ namespace Store.Pages.Authentication
             var result = await _authenticationManager.Login(_tokenModel);
             if (result.Succeeded)
             {
-                _navigationManager.NavigateTo("/partnership/add-partner");
+                _navigationManager.NavigateTo("/");
                 _snackBar.Add(string.Format("Welcome {0}", _tokenModel.Email), Severity.Success);
             }
             else
