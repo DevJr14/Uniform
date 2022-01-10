@@ -11,6 +11,7 @@
 @using Store.Shared
 @using Microsoft.AspNetCore.Authorization
 @using Blazored.LocalStorage;
+@using Microsoft.AspNetCore.Components.Authorization
 
 @using Clients.Infrastructure.Managers.Interceptors
 @using Clients.Infrastructure.Managers.Identity.Authentication
@@ -18,6 +19,7 @@
 @using Clients.Infrastructure.Managers.Identity.Identity.Users
 
 @using Store.Shared.Components
+@using Store.Pages.Contents
 
 @attribute [Authorize]
 @inject IAuthenticationManager _authenticationManager
