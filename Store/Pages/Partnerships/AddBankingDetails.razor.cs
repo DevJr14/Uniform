@@ -39,7 +39,7 @@ namespace Store.Pages.Partnerships
         }
         private void Continue()
         {
-            _navigationManager.NavigateTo($"/personal/dashboard");
+            _navigationManager.NavigateTo($"/welcome");
         }
         private void Cancel()
         {
