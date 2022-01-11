@@ -12,11 +12,11 @@ namespace Store.Shared.Components
             var state = await _stateProvider.GetAuthenticationStateAsync();
             if (state != new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity())))
             {
-                RedirectUrl = "/pages/authentication/login";
+                RedirectUrl = "/getting-started";
             }
             else
             {
-                RedirectUrl = "/partnership/add-partner";
+                RedirectUrl = "/pages/authentication/login";
             }
         }
 
