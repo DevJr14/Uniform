@@ -34,7 +34,7 @@ namespace Application.Features.Partners.Addresses.Commands
             if(command.AddressRequest.Id == Guid.Empty)
             {
                 var partner = _unitOfWork.RepositoryFor<Partner>().Entities
-                    .Where(p => p.UserId == new Guid(_currentUser.UserId) && p.IsVerified)
+                    .Where(p => p.UserId == new Guid(_currentUser.UserId) && p.Id == command.AddressRequest.PartnerId)
                     .FirstOrDefault();
                 if (partner != null)
                 {
@@ -44,7 +44,7 @@ namespace Application.Features.Partners.Addresses.Commands
                     await _unitOfWork.Commit(cancellationToken);
                     return await Result<Guid>.SuccessAsync(address.Id, "Address Saved Successfully.");
                 }
-                return await Result<Guid>.FailAsync("Partner Profile Not Verified.");
+                return await Result<Guid>.FailAsync("No Partner Profile Found.");
             }
             else
             {

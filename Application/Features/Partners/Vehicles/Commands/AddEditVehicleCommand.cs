@@ -34,7 +34,7 @@ namespace Application.Features.Partners.Vehicles.Commands
             if (command.VehicleRequest.Id == Guid.Empty)
             {
                 var partner = _unitOfWork.RepositoryFor<Partner>().Entities
-                    .Where(p => p.UserId == new Guid(_currentUser.UserId) && p.IsVerified)
+                    .Where(p => p.UserId == new Guid(_currentUser.UserId) && p.Id == command.VehicleRequest.PartnerId)
                     .FirstOrDefault();
                 if (partner != null)
                 {
