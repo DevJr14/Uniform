@@ -1,0 +1,19 @@
+﻿@page "/welcome"
+
+<MudContainer>
+    <MudGrid>
+        <MudItem xs="12" sm="12" md="12">
+            <div class="d-flex justify-center mt-4">
+                <MudIcon Icon="@Icons.Material.Filled.Storefront" Color="Color.Primary" Style="width: 250px; height: 250px;" />
+            </div>
+        </MudItem>
+        <MudItem xs="12" sm="12" md="12">
+            <MudText Align="Align.Center" Typo="Typo.h2">Welcome To Uniform Partnership</MudText>
+            <MudText Align="Align.Center" Typo="Typo.h5" Class="smaller">Click the button below and access Partner Admin Portal.</MudText>
+            <div class="d-flex justify-center mt-4">
+                <MudButton StartIcon="@Icons.Material.Filled.ArrowRight" Variant="Variant.Filled" Size="Size.Large" Color="Color.Primary" Link="https://localhost:44398" Target="_blank">Go To Admin Protal</MudButton>
+            </div>
+        </MudItem>
+        <div style="margin:50px"></div>
+    </MudGrid>
+</MudContainer>
