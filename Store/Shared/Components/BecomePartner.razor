@@ -1,1 +1,6 @@
-﻿<MudButton OnClick="@RedirectTo" Variant="Variant.Text" Color="Color.Inherit" Class="mx-4">Become a Partner</MudButton>
+﻿<MudHidden Breakpoint="Breakpoint.Xs" Invert="true">
+    <MudFab OnClick="@RedirectTo" Icon="@Icons.Material.Filled.Storefront" Size="Size.Small" DisableElevation="true" Color="Color.Primary" Class="mx-4" />
+</MudHidden>
+<MudHidden Breakpoint="Breakpoint.SmAndUp" Invert="true">
+    <MudFab OnClick="@RedirectTo" Icon="@Icons.Material.Filled.Storefront" DisableElevation="true" Color="Color.Primary" Label="Become a Partner" Class="mx-4"/>
+</MudHidden>
