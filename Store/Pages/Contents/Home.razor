@@ -1,17 +1,13 @@
 ﻿@page "/home"
 @page "/"
 
-<MudContainer>
-    <MudGrid>
-        <MudItem xs="12" sm="12" md="12">
-            <div class="d-flex justify-center mt-4">
-                <MudIcon Icon="@Icons.Material.Filled.Storefront" Color="Color.Primary" Style="width: 250px; height: 250px;" />
-            </div>
-        </MudItem>
-        <MudItem xs="12" sm="12" md="12">
-            <MudText Align="Align.Center" Typo="Typo.h2">CadiahK Inc.</MudText>
-            <MudText Align="Align.Center" Typo="Typo.h5" Class="smaller">App build by CadiahK.</MudText>
-        </MudItem>
-        <div style="margin:50px"></div>
-    </MudGrid>
-</MudContainer>
+<MudCard Class="ma-2" Elevation="0">
+    <MudCardHeader>
+        <CardHeaderContent>
+            <MudText Align="Align.Center" Color="Color.Info" Typo="Typo.h4">Welcome to Uniform App</MudText>
+            <MudText Align="Align.Center" Typo="Typo.body1">Online shopping is the process consumers go through to purchase products or services over the Internet and we are here to help you do so.</MudText>
+        </CardHeaderContent>
+    </MudCardHeader>
+</MudCard>
+<Categories/>
+
