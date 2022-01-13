@@ -1,6 +1,6 @@
 ﻿@page "/application/chat"
-
-<div class="d-flex flex-grow-1 flex-row">
+<Header Title="School" OnClose="Cancel" Description="Collections for both Primary and Secondary schools."/>
+<div class="d-flex flex-grow-1 flex-row mt-6">
     <MudHidden Breakpoint="Breakpoint.SmAndDown">
         <MudPaper  Class="pa-3 mr-6" MinWidth="250px">
             <MudButton EndIcon="@Icons.Material.Filled.Add" Color="Color.Secondary" FullWidth="true">Create Channel</MudButton>
@@ -94,6 +94,11 @@
         new ChatMessage { UserName = "Flaflo", Message = "@Garderoben hey have you even started working on issue #294 on git?"},
         new ChatMessage { UserName = "Henon", Message = "Don't worry Flaflo, i took care of it."},
     };
+
+    private void Cancel()
+    {
+        _navigationManager.NavigateTo("/");
+    }
 
     public ChatUser GetUser(string username)
     {
