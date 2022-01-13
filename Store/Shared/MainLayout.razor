@@ -22,6 +22,7 @@
                     <MudText Typo="Typo.subtitle2">Uniform App</MudText>
                 </MudHidden>
                 <MudSpacer />
+                <BecomePartner/>
                 <MudMenu Icon="@Icons.Material.Outlined.Translate" Color="Color.Inherit" Direction="Direction.Bottom" OffsetY="true" Dense="true">
                     <MudMenuItem>English</MudMenuItem>
                     <MudMenuItem>IsiZulu</MudMenuItem>
@@ -41,17 +42,7 @@
                     </ChildContent>
                 </MudMenu>
             </MudAppBar>
-            <MudDrawer @bind-Open="_drawerOpen" Elevation="25" ClipMode="DrawerClipMode.Always">
-                <NavMenu />
-            </MudDrawer>
             <MudMainContent>
-                <MudHidden Breakpoint="Breakpoint.SmAndDown">
-                    <MudToolBar DisableGutters="true">
-                        <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" OnClick="@((e) => DrawerToggle())" Class="ml-3" />
-                        <MudSpacer/>
-                        <BecomePartner/>
-                    </MudToolBar>
-                </MudHidden>
                 <MudContainer MaxWidth="MaxWidth.False" Class="mt-4">
                     @Body
                 </MudContainer>
@@ -87,16 +78,7 @@
                     </ChildContent>
                 </MudMenu>
             </MudAppBar>
-            <MudDrawer @bind-Open="_drawerOpen" Elevation="25" ClipMode="DrawerClipMode.Always">
-                <NavMenu />
-            </MudDrawer>
             <MudMainContent>
-                <MudHidden Breakpoint="Breakpoint.SmAndDown">
-                    <MudToolBar DisableGutters="true">
-                        <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" OnClick="@((e) => DrawerToggle())" Class="ml-3" />
-                        <MudSpacer />
-                    </MudToolBar>
-                </MudHidden>
                 <MudContainer MaxWidth="MaxWidth.False" Class="mt-4">
                     @Body
                 </MudContainer>
