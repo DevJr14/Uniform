@@ -63,17 +63,12 @@
                     <MudMenuItem Link="https://mudblazor.com/">MudBlazor</MudMenuItem>
                     <MudMenuItem Link="https://github.com/DevJr14/Uniform">Source Code</MudMenuItem>
                 </MudMenu>
-                <MudMenu Color="Color.Inherit" Direction="Direction.Left" OffsetX="true" Dense="true" Class="mt-1 ml-4">
-                    <ActivatorContent>
-                        <MudAvatar Color="Color.Inherit">
-                            <MudIcon Icon="@Icons.Material.Filled.Settings" />
-                        </MudAvatar>
-                    </ActivatorContent>
+                <MudMenu Icon="@Icons.Material.Outlined.Settings" Color="Color.Inherit" Direction="Direction.Left" OffsetX="true" Dense="true" Class="mt-1 ml-4">                    
                     <ChildContent>
                         <PersonCard Class="mt-n2" />
                         <MudDivider Class="mb-2" />
                         <MudListItem Text="Account" Icon="@Icons.Material.Outlined.Person" Href="/personal/account" />
-                        <MudListItem Text="Logout" Icon="@Icons.Material.Outlined.Logout" OnClick="Logout"/>
+                        <MudListItem Text="Logout" Icon="@Icons.Material.Outlined.Logout" OnClick="Logout" />
                     </ChildContent>
                 </MudMenu>
             </MudAppBar>
@@ -85,9 +80,6 @@
             <MudToolBar DisableGutters="true">
                 <MudIconButton Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" OnClick="@((e) => DrawerToggle())" Class="ml-3" />
                 <MudBreadcrumbs Items="_items"></MudBreadcrumbs>
-                <MudSpacer />
-                <MudButton Variant="Variant.Text" Link="https://mudblazor.com/" Style="color:#594AE2;">MudBlazor</MudButton>
-                <MudButton Variant="Variant.Text" Link="https://github.com/DevJr14/Uniform" Style="color:#424242;" Class="mr-3">Source Code</MudButton>
             </MudToolBar>
         </MudHidden>
         <MudContainer MaxWidth="MaxWidth.False" Class="mt-1">
