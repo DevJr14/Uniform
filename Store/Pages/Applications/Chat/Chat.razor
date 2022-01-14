@@ -2,12 +2,12 @@
 <Header Title="School" OnClose="Cancel" Description="Collections for both Primary and Secondary schools."/>
 <div class="d-flex flex-grow-1 flex-row mt-6">
     <MudHidden Breakpoint="Breakpoint.SmAndDown">
-        <MudPaper  Class="pa-3 mr-6" MinWidth="250px">
-            <MudButton EndIcon="@Icons.Material.Filled.Add" Color="Color.Secondary" FullWidth="true">Create Channel</MudButton>
+        <MudPaper Elevation="25" Class="pa-3 mr-6" MinWidth="250px">
+            <MudButton EndIcon="@Icons.Material.Filled.Add" Color="Color.Secondary" FullWidth="true">Categories</MudButton>
             <ChatChannels />
         </MudPaper>
     </MudHidden>
-    <MudPaper  Class="py-4 flex-grow-1">
+    <MudPaper Elevation="25"  Class="py-4 flex-grow-1">
         <MudToolBar Dense="true">
             <MudHidden Breakpoint="Breakpoint.MdAndUp">
                 <MudIconButton OnClick="@(() => OpenDrawer(Anchor.Left))" Icon="@Icons.Material.Outlined.Menu" Color="Color.Inherit" Class="mr-2 ml-n2" />
@@ -27,7 +27,7 @@
                 <UserMessage UserName="@message.UserName" Message="@message.Message" ChatUser="@GetUser(message.UserName)" />
             }
         </div>
-        <MudPaper  Class="d-flex flex-row px-2 mx-4" Style="background-color: var(--mud-palette-background-grey);">
+        <MudPaper Elevation="25" Class="d-flex flex-row px-2 mx-4" Style="background-color: var(--mud-palette-background-grey);">
             <MudIconButton Icon="@Icons.Material.Filled.AddCircle"></MudIconButton>
             <MudTextField T="string" Placeholder="Message #chat" DisableUnderLine="true" Class="mt-n2 mx-4"></MudTextField>
             <MudIconButton Icon="@IconGift"></MudIconButton>
@@ -36,7 +36,7 @@
         </MudPaper>
     </MudPaper>
     <MudHidden Breakpoint="Breakpoint.SmAndDown">
-        <MudPaper  Class="pa-3 pb-16 ml-6" MinWidth="250px">
+        <MudPaper Elevation="25" Class="pa-3 pb-16 ml-6" MinWidth="250px">
             <ChatUsers chatUsers="chatUsers" />
         </MudPaper>
     </MudHidden>
