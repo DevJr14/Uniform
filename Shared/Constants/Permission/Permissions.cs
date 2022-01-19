@@ -135,14 +135,14 @@ namespace SharedR.Constants.Permission
             public const string Search = "Permissions.Tags.Search";
         }
 
-        public static class Teams
+        public static class Discounts
         {
-            public const string View = "Permissions.Tasks.View";
-            public const string Create = "Permissions.Tasks.Create";
-            public const string Edit = "Permissions.Tasks.Edit";
-            public const string Delete = "Permissions.Tasks.Delete";
-            public const string Export = "Permissions.Tasks.Export";
-            public const string Search = "Permissions.Tasks.Search";
+            public const string View = "Permissions.Discounts.View";
+            public const string Create = "Permissions.Discounts.Create";
+            public const string Edit = "Permissions.Discounts.Edit";
+            public const string Delete = "Permissions.Discounts.Delete";
+            public const string Export = "Permissions.Discounts.Export";
+            public const string Search = "Permissions.Discounts.Search";
         }
 
         public static class Discussions
