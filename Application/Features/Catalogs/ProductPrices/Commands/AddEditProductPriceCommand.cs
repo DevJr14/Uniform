@@ -13,6 +13,8 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Domain.Entities.Promotions;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Catalogs.ProductPrices.Commands
 {
@@ -33,8 +35,18 @@ namespace Application.Features.Catalogs.ProductPrices.Commands
 
         public async Task<Result<Guid>> Handle(AddEditProductPriceCommand command, CancellationToken cancellationToken)
         {
+            //Zero discount
+            if (command.ProductPriceRequest.DiscountId == Guid.Empty)
+            {
+                var zeroDiscountId = await _unitOfWork.RepositoryFor<Discount>().Entities
+                    .Where(d => d.Name == "Zero")
+                    .Select(d => d.Id)
+                    .FirstOrDefaultAsync();
+                command.ProductPriceRequest.DiscountId = zeroDiscountId;
+            }
+
             if (command.ProductPriceRequest.Id == Guid.Empty)
-            {  
+            {
                 var productPrice = _mapper.Map<ProductPrice>(command.ProductPriceRequest);
                 await _unitOfWork.RepositoryFor<ProductPrice>().AddAsync(productPrice);
                 await _unitOfWork.Commit(cancellationToken);
