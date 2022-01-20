@@ -47,10 +47,11 @@
                     </MudItem>
                     <MudItem xs="12" sm="6" md="3">
                         <MudSelect T="Guid" Clearable="true" Label="Discount" @bind-Value="_discountId"
-                                   Variant="Variant.Outlined"                                   
+                                   Variant="Variant.Outlined"
                                    OffsetY="true"
                                    Margin="Margin.Dense"
                                    Dense="true">
+                            <MudSelectItem Disabled="true" Value="@(new Guid())">Select Discount</MudSelectItem>
                             @foreach (var discount in Discounts)
                             {
                                 <MudSelectItem T="Guid" Value="@(discount.Id)">@discount.Name</MudSelectItem>
