@@ -4,14 +4,16 @@ using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220125090039_ShoppingCart Schema")]
+    partial class ShoppingCartSchema
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -785,13 +787,13 @@ namespace Infrastructure.Migrations
                     b.ToTable("Discounts", "promotion");
                 });
 
-            modelBuilder.Entity("Domain.Entities.ShoppingCarts.CartDetails", b =>
+            modelBuilder.Entity("Domain.Entities.ShoppingCard.CardDetails", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CartHeaderId")
+                    b.Property<Guid>("CardHeaderId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Count")
@@ -820,14 +822,14 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CartHeaderId");
+                    b.HasIndex("CardHeaderId");
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("CartDetails", "shoppingCart");
+                    b.ToTable("CardDetails", "shoppingCard");
                 });
 
-            modelBuilder.Entity("Domain.Entities.ShoppingCarts.CartHeader", b =>
+            modelBuilder.Entity("Domain.Entities.ShoppingCard.CardHeader", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -856,7 +858,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CartHeaders", "shoppingCart");
+                    b.ToTable("CardHeaders", "shoppingCard");
                 });
 
             modelBuilder.Entity("Infrastructure.Models.Audit.Audit", b =>
@@ -1361,11 +1363,11 @@ namespace Infrastructure.Migrations
                     b.Navigation("Partner");
                 });
 
-            modelBuilder.Entity("Domain.Entities.ShoppingCarts.CartDetails", b =>
+            modelBuilder.Entity("Domain.Entities.ShoppingCard.CardDetails", b =>
                 {
-                    b.HasOne("Domain.Entities.ShoppingCarts.CartHeader", "CartHeader")
+                    b.HasOne("Domain.Entities.ShoppingCard.CardHeader", "CardHeader")
                         .WithMany()
-                        .HasForeignKey("CartHeaderId")
+                        .HasForeignKey("CardHeaderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1375,7 +1377,7 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("CartHeader");
+                    b.Navigation("CardHeader");
 
                     b.Navigation("Product");
                 });
