@@ -14,6 +14,7 @@ using Domain.Entities.Promotions;
 using Infrastructure.Models.Audit;
 using SharedR.Enums;
 using System.Collections.Generic;
+using Domain.Entities.ShoppingCarts;
 
 namespace Infrastructure.Context
 {
@@ -45,6 +46,8 @@ namespace Infrastructure.Context
         public DbSet<Inventory> Inventories { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<Audit> AuditTrails { get; set; }
+        public DbSet<CartHeader> CartHeaders { get; set; }
+        public DbSet<CartDetails> CartDetails { get; set; } 
 
         #endregion
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new()) 
@@ -183,6 +186,15 @@ namespace Infrastructure.Context
             builder.Entity<ProductImage>(entity =>
             {
                 entity.ToTable(name: "ProductImages", "catalog");
+            });
+
+            builder.Entity<CartHeader>(entity =>
+            {
+                entity.ToTable(name: "CartHeaders", "shoppingCart");
+            });
+            builder.Entity<CartDetails>(entity =>
+            {
+                entity.ToTable(name: "CartDetails", "shoppingCart");
             });
 
             builder.Entity<Audit>(entity =>
