@@ -145,14 +145,14 @@ namespace SharedR.Constants.Permission
             public const string Search = "Permissions.Discounts.Search";
         }
 
-        public static class Discussions
+        public static class ShoppingCarts
         {
-            public const string View = "Permissions.Discussions.View";
-            public const string Create = "Permissions.Discussions.Create";
-            public const string Edit = "Permissions.Discussions.Edit";
-            public const string Delete = "Permissions.Discussions.Delete";
-            public const string Export = "Permissions.Discussions.Export";
-            public const string Search = "Permissions.Discussions.Search";
+            public const string View = "Permissions.ShoppingCarts.View";
+            public const string Create = "Permissions.ShoppingCarts.Create";
+            public const string Edit = "Permissions.ShoppingCarts.Edit";
+            public const string Delete = "Permissions.ShoppingCarts.Delete";
+            public const string Export = "Permissions.ShoppingCarts.Export";
+            public const string Search = "Permissions.ShoppingCarts.Search";
         }
 
         public static class Documents
