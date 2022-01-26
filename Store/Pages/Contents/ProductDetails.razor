@@ -1,0 +1,51 @@
+﻿@page "/product-details"
+@attribute [AllowAnonymous]
+
+<Header Title="Product" OnClose="Cancel" Description="Product details view" />
+<MudContainer MaxWidth="MaxWidth.ExtraLarge"Style="height: 50vh;" Class="mt-16">    
+        <MudPaper Elevation="0" Class="pa-4" Width="100%">
+            <MudCard Elevation="0" Style="height:auto">
+                <MudGrid Spacing="1">
+                    <MudItem xs="12" sm="3">
+                        <MudCard Elevation="0">
+                            <MudCardMedia Image="images/u1.jpg" Height="200" Style="width:100%;" />
+                        </MudCard>
+                    </MudItem>
+                    <MudItem xs="12" sm="9">
+                        <MudCard Elevation="0">
+                            <MudCardHeader>
+                                <CardHeaderContent>
+                                    <MudText Typo="Typo.h5">Product Name</MudText>
+                                </CardHeaderContent>
+                                <CardHeaderActions>
+                                    <MudText Typo="Typo.h5">R 267.00</MudText>
+                                </CardHeaderActions>
+                            </MudCardHeader>
+                            <MudCardContent>
+                                <MudText Typo="Typo.body2">Old paint found on a stone house door.</MudText>
+                                <MudText Typo="Typo.body2">This photo was taken in a small village in Istra Croatia.</MudText>
+                            </MudCardContent>
+                            <MudCardActions>
+                                <MudHidden Breakpoint="Breakpoint.Xs" Invert="true">
+                                    <MudButton DisableElevation="true" Class="ml-2" OnClick="Cancel" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.NavigateBefore" Color="Color.Primary"> Back</MudButton>
+                                    <MudButton DisableElevation="true" Class="ml-auto" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.AddShoppingCart" Color="Color.Success"> Add</MudButton>
+                                </MudHidden>
+                                <MudHidden Breakpoint="Breakpoint.SmAndUp" Invert="true">
+                                    <MudButton DisableElevation="true" Class="ml-2" OnClick="Cancel" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.NavigateBefore" Color="Color.Primary">Back To List</MudButton>
+                                    <MudButton DisableElevation="true" Class="ml-auto" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.AddShoppingCart" Color="Color.Success">Add To Cart</MudButton>
+                                </MudHidden>
+                            </MudCardActions>
+                        </MudCard>
+                    </MudItem>
+                </MudGrid>
+            </MudCard>
+        </MudPaper>
+</MudContainer>
+
+@code{
+
+    private void Cancel()
+    {
+        _navigationManager.NavigateTo("/shopping/product-listing");
+    }
+}
