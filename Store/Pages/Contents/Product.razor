@@ -1,4 +1,4 @@
-﻿<MudListItem Text="Inbox" OnClick="LogB">
+﻿<MudListItem OnClick="ProductDetails">
     <MudGrid Spacing="1">
         <MudItem xs="12" sm="2">
             <MudCard Elevation="0" Style="height:200px;">
@@ -12,7 +12,7 @@
                         <MudAvatar Color="Color.Secondary">I</MudAvatar>
                     </CardHeaderAvatar>
                     <CardHeaderContent>
-                        <MudLink Typo="Typo.body1" Href="@("/product-details")">Product Name Here</MudLink>
+                        <MudLink Typo="Typo.body1" Href="@($"/product-details/{ProductResponse.Id}")">@ProductResponse.Name</MudLink>
                     </CardHeaderContent>
                     <CardHeaderActions>
                         <MudTooltip Text="Add To Wish" Delay="0" Placement="Placement.Top">
@@ -21,23 +21,10 @@
                     </CardHeaderActions>
                 </MudCardHeader>
                 <MudCardContent>
-                    <MudText Typo="Typo.body2">Old paint found on a stone house door.</MudText>
-                    <MudText Typo="Typo.body2">This photo was taken in a small village in Istra Croatia.</MudText>
+                    <MudText Typo="Typo.body2">@ProductResponse.Brand.Name</MudText>
+                    <MudText Typo="Typo.body2">@ProductResponse.Description</MudText>
                 </MudCardContent>
             </MudCard>
         </MudItem>
     </MudGrid>
 </MudListItem>
-
-@code {
-
-    private void LogA()
-    {
-        Console.WriteLine("Add to Wish ....");
-    }
-    private void LogB()
-    {
-        Console.WriteLine("Go to details....");
-        _navigationManager.NavigateTo("/product-details");
-    }
-}
