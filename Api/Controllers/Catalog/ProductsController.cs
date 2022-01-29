@@ -11,7 +11,8 @@ namespace Api.Controllers.Catalog
 {
     public class ProductsController : BaseApiController<ProductsController>
     {
-        [Authorize(Policy = Permissions.Products.View)]
+        //[Authorize(Policy = Permissions.Products.View)]
+        [AllowAnonymous]
         [HttpGet("catalog/[controller]/get-all")]
         public async Task<IActionResult> GetAll()
         {
@@ -25,7 +26,8 @@ namespace Api.Controllers.Catalog
             return Ok(await _mediator.Send(new GetAllProductsForPartnerQuery()));
         }
 
-        [Authorize(Policy = Permissions.Products.View)]
+        //[Authorize(Policy = Permissions.Products.View)]
+        [AllowAnonymous]
         [HttpGet("catalog/[controller]/get-by-id")]
         public async Task<IActionResult> GetById(Guid id)
         {
