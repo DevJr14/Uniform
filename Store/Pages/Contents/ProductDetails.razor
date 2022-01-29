@@ -1,11 +1,16 @@
-﻿@page "/product-details"
+﻿@page "/product-details/{ProductId:guid}"
 @attribute [AllowAnonymous]
 
-<Header Title="Product" OnClose="Cancel" Description="Product details view" />
-<MudContainer MaxWidth="MaxWidth.ExtraLarge"Style="height: 50vh;" Class="mt-16">    
-        <MudPaper Elevation="0" Class="pa-4" Width="100%">
-            <MudCard Elevation="0" Style="height:auto">
-                <MudGrid Spacing="1">
+<MudContainer MaxWidth="MaxWidth.ExtraLarge" Style="height: 50vh;" Class="mt-16">
+    <MudPaper Elevation="0" Class="pa-4" Width="100%">
+        <MudCard Elevation="0" Style="height:auto">
+            <MudGrid Spacing="1">
+                @if (!_Loaded)
+                {
+                    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+                }
+                else
+                {
                     <MudItem xs="12" sm="3">
                         <MudCard Elevation="0">
                             <MudCardMedia Image="images/u1.jpg" Height="200" Style="width:100%;" />
@@ -15,15 +20,15 @@
                         <MudCard Elevation="0">
                             <MudCardHeader>
                                 <CardHeaderContent>
-                                    <MudText Typo="Typo.h5">Product Name</MudText>
+                                    <MudText Typo="Typo.h5">@ProductResponse.Name</MudText>
                                 </CardHeaderContent>
                                 <CardHeaderActions>
                                     <MudText Typo="Typo.h5">R 267.00</MudText>
                                 </CardHeaderActions>
                             </MudCardHeader>
                             <MudCardContent>
-                                <MudText Typo="Typo.body2">Old paint found on a stone house door.</MudText>
-                                <MudText Typo="Typo.body2">This photo was taken in a small village in Istra Croatia.</MudText>
+                                <MudText Typo="Typo.body2">@ProductResponse.Brand.Name</MudText>
+                                <MudText Typo="Typo.body2">@ProductResponse.Description</MudText>
                             </MudCardContent>
                             <MudCardActions>
                                 <MudHidden Breakpoint="Breakpoint.Xs" Invert="true">
@@ -37,15 +42,8 @@
                             </MudCardActions>
                         </MudCard>
                     </MudItem>
-                </MudGrid>
-            </MudCard>
-        </MudPaper>
+                }
+            </MudGrid>
+        </MudCard>
+    </MudPaper>
 </MudContainer>
-
-@code{
-
-    private void Cancel()
-    {
-        _navigationManager.NavigateTo("/shopping/product-listing");
-    }
-}
