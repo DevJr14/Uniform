@@ -1,12 +1,15 @@
 ﻿<MudList Clickable="true" Dense="true">
-    <Product />
-    <Product />
-    <Product />
-    <Product />
-    <Product />
-    <Product />
-    <Product />
-    <Product />
+    @if (_loaded)
+    {
+        foreach (var product in ProductResponses)
+        {
+            <Product ProductResponse="product" />
+        }
+    }
+    else
+    {
+        <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+    }
 </MudList>
 
 @code {
