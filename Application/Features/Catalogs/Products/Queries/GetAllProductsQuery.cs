@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Catalogs.Products.Queries
 {
@@ -30,7 +31,8 @@ namespace Application.Features.Catalogs.Products.Queries
         public async Task<Result<List<ProductResponse>>> Handle(GetAllProductsQuery query, CancellationToken cancellationToken)
         {
             var products = _unitOfWork.RepositoryFor<Product>().Entities
-                .Where(p => p.DeletedBy == null)
+                .Where(p => p.DeletedBy == null && p.IsActive)
+                .Include(p => p.Brand)
                 .ToList();
             if (products.Count > 0)
             {
