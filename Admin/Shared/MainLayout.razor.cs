@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Admin.Shared
 {
-    public partial class MainLayout
+    public partial class MainLayout : IDisposable
     {
         private MudBlazorAdminDashboard _theme = new();
 
@@ -19,6 +19,7 @@ namespace Admin.Shared
 
         protected override void OnInitialized()
         {
+            _interceptor.RegisterEvent();
             StateHasChanged();
         }
 
@@ -40,6 +41,11 @@ namespace Admin.Shared
             var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small, FullWidth = true };
 
             _dialogService.Show<Dialogs.Logout>("Logout", parameters, options);
+        }
+
+        public void Dispose()
+        {
+            _interceptor.DisposeEvent();
         }
     }
 }

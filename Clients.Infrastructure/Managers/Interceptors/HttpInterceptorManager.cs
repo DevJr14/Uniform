@@ -35,11 +35,12 @@ namespace Clients.Infrastructure.Managers.Interceptors
         public async Task InterceptBeforeHttpAsync(object sender, HttpClientInterceptorEventArgs e)
         {
             var absPath = e.Request.RequestUri.AbsolutePath;
-            if (!absPath.Contains("token") && !absPath.Contains("accounts"))
+            //To Do: User registration need to be bipassed as well. Update register route.
+            if (!absPath.Contains("auth") && !absPath.Contains("token"))
             {
                 try
                 {
-                    var token = await _authenticationManager.TryRefreshToken();
+                    var token = await _authenticationManager.TryForceRefreshToken();
                     if (!string.IsNullOrEmpty(token))
                     {
                         _snackBar.Add("Refreshed Token.", Severity.Success);
